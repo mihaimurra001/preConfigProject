@@ -730,6 +730,309 @@ function closeThemeSpecModal() {
   }
 }
 
+// Render Authentic Mini-Mockup of Page Elements for Each Brand
+function renderThemeMockup(theme) {
+  const { id, canvas, surface, border, text, accent } = theme;
+
+  // Font family and typography per brand design system
+  let fontCss = "font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;";
+  if (id === "linear" || id === "figma" || id === "raycast") {
+    fontCss = "font-family: 'Inter', -apple-system, sans-serif; letter-spacing: -0.02em;";
+  } else if (id === "vercel") {
+    fontCss = "font-family: 'JetBrains Mono', 'Geist Mono', monospace;";
+  } else if (id === "supabase") {
+    fontCss = "font-family: 'Fira Code', 'JetBrains Mono', monospace;";
+  } else if (id === "notion") {
+    fontCss = "font-family: 'Newsreader', Georgia, 'Times New Roman', serif;";
+  } else if (id === "apple") {
+    fontCss = "font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;";
+  } else if (id === "github") {
+    fontCss = "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;";
+  }
+
+  let mockupContent = "";
+
+  if (id === "linear") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-2 border-b" style="border-color: ${border}">
+        <span class="font-mono text-[9px] opacity-60">LIN-1048 • Cycle 42</span>
+        <span class="px-1.5 py-0.5 text-[9px] font-mono rounded" style="background: ${accent}25; color: #8b95f6; border: 1px solid ${accent}50">In Progress</span>
+      </div>
+      <div class="pt-2">
+        <h4 class="text-xs font-semibold tracking-tight leading-snug" style="color: ${text}">Migrate stream to ClickHouse</h4>
+        <p class="text-[10px] opacity-70 pt-0.5 truncate">Zero dropped events across 12 partitions</p>
+      </div>
+      <div class="p-2 rounded mt-2 text-[10px] flex items-center justify-between" style="background: ${surface}; border: 1px solid ${border}">
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full" style="background: #22c55e"></span>
+          <span class="font-mono text-[9px]">16/16 fixtures passed</span>
+        </div>
+        <span class="text-[9px] font-mono opacity-60">P1 ⚡</span>
+      </div>
+      <div class="flex items-center justify-between pt-2.5 mt-0.5">
+        <div class="flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-bold shadow-xs" style="background: ${accent}; color: #fff">AG</span>
+          <span class="text-[9px] opacity-70 font-mono">Assigned</span>
+        </div>
+        <div class="px-2.5 py-1 text-[10px] font-medium shadow-xs" style="background: ${accent}; color: #ffffff; border-radius: 6px;">
+          Update issue
+        </div>
+      </div>
+    `;
+  } else if (id === "apple") {
+    mockupContent = `
+      <div class="flex items-center justify-between pb-1.5 border-b" style="border-color: ${border}">
+        <div class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
+          <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
+          <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
+        </div>
+        <span class="text-[10px] font-medium opacity-60">AirPlay & Display</span>
+      </div>
+      <div class="p-2.5 rounded-xl mt-2 shadow-xs" style="background: ${surface}; border: 1px solid ${border}">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[11px] font-semibold tracking-tight" style="color: ${text}">Studio Display Pro</span>
+          <span class="w-4 h-4 rounded-full flex items-center justify-center text-[9px]" style="background: ${accent}15; color: ${accent}">
+            🔊
+          </span>
+        </div>
+        <div class="w-full h-2 bg-zinc-200/80 rounded-full overflow-hidden">
+          <div class="h-full rounded-full" style="width: 76%; background: ${accent}"></div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between pt-2">
+        <span class="text-[9px] opacity-70 font-medium">Spatial Audio: On</span>
+        <div class="px-3 py-1 text-[10px] font-semibold" style="background: ${accent}; color: #ffffff; border-radius: 9999px;">
+          Connect
+        </div>
+      </div>
+    `;
+  } else if (id === "stripe") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
+        <span class="font-medium opacity-60">Payments & Balances</span>
+        <span class="px-1.5 py-0.2 rounded font-semibold text-[9px]" style="background: #eef2ff; color: ${accent}">Live mode</span>
+      </div>
+      <div class="p-2.5 rounded-lg mt-2 shadow-xs" style="background: ${surface}; border: 1px solid ${border}; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 6px rgba(0,0,0,0.02);">
+        <span class="text-[9px] opacity-60 uppercase tracking-wider block font-semibold">Net volume</span>
+        <div class="flex items-baseline gap-2 mt-0.5">
+          <span class="text-sm font-bold tracking-tight" style="color: ${text}">$84,250.00</span>
+          <span class="text-[9px] font-bold text-emerald-600">+14.2%</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-between pt-2">
+        <div class="flex items-center gap-1.5 text-[10px]">
+          <span class="font-bold text-[9px] px-1 py-0.2 rounded bg-zinc-200/60 font-mono">VISA</span>
+          <span class="font-mono text-[9px] opacity-70">•••• 4242</span>
+        </div>
+        <div class="px-3 py-1 text-[10px] font-semibold shadow-xs" style="background: ${accent}; color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(99,91,255,0.25)">
+          Payout
+        </div>
+      </div>
+    `;
+  } else if (id === "vercel") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b font-mono" style="border-color: ${border}">
+        <span class="flex items-center gap-1.5 font-bold" style="color: ${text}">
+          <span>▲</span> my-next-app
+        </span>
+        <span class="text-[9px] text-emerald-400 font-mono">● Ready (420ms)</span>
+      </div>
+      <div class="p-2 rounded mt-2 font-mono text-[10px]" style="background: ${surface}; border: 1px solid ${border}">
+        <div class="text-zinc-500 text-[9px] font-mono">$ git push origin main</div>
+        <div class="text-white text-[10px] pt-1">▲ Deployment live at edge</div>
+        <div class="text-zinc-400 text-[8px] font-mono">commit: d7e8a9 (optimized-fonts)</div>
+      </div>
+      <div class="flex items-center justify-between pt-2 font-mono">
+        <span class="text-[8px] text-zinc-500">IAD1 • Production</span>
+        <div class="px-2.5 py-1 text-[10px] font-bold" style="background: #ffffff; color: #000000; border-radius: 6px;">
+          Visit Preview
+        </div>
+      </div>
+    `;
+  } else if (id === "github") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
+        <span class="font-mono text-[9px] opacity-70">PR #124 • main ← feat/api</span>
+        <span class="px-1.5 py-0.5 rounded text-[9px] font-bold font-mono" style="background: ${accent}25; color: #3fb950; border: 1px solid ${accent}60">✓ Passing</span>
+      </div>
+      <div class="pt-2">
+        <h4 class="text-xs font-semibold leading-snug" style="color: ${text}">Implement rate limiter & RBAC</h4>
+        <div class="flex items-center gap-2 pt-1 text-[10px] font-mono">
+          <span class="text-emerald-400 font-bold">+184</span>
+          <span class="text-rose-400 font-bold">-12</span>
+          <span class="opacity-60 text-[9px]">across 6 files</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-between pt-2.5 mt-0.5">
+        <span class="text-[9px] opacity-70 font-mono">1 review approved</span>
+        <div class="px-3 py-1 text-[10px] font-semibold" style="background: ${accent}; color: #ffffff; border-radius: 6px;">
+          Merge Pull Request
+        </div>
+      </div>
+    `;
+  } else if (id === "supabase") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b font-mono" style="border-color: ${border}">
+        <span class="opacity-70 text-[9px]">postgres-prod • eu-central</span>
+        <span class="px-1.5 py-0.2 rounded text-[9px] font-bold" style="background: ${accent}20; color: ${accent}; border: 1px solid ${accent}50">SQL Editor</span>
+      </div>
+      <div class="p-2 rounded mt-2 font-mono text-[10px] leading-relaxed" style="background: ${surface}; border: 1px solid ${border}">
+        <span style="color: ${accent}">SELECT</span> id, email, role<br>
+        <span style="color: ${accent}">FROM</span> auth.users <span style="color: ${accent}">LIMIT</span> 1;
+      </div>
+      <div class="flex items-center justify-between pt-2 font-mono">
+        <span class="text-[9px] opacity-60">1 row (2.4ms)</span>
+        <div class="px-3 py-1 text-[10px] font-bold" style="background: ${accent}; color: #171717; border-radius: 6px;">
+          Run (⌘↵)
+        </div>
+      </div>
+    `;
+  } else if (id === "raycast") {
+    mockupContent = `
+      <div class="p-2 rounded-md flex items-center gap-2" style="background: ${surface}; border: 1px solid ${border}">
+        <span style="color: ${accent}; font-size: 11px;">🔍</span>
+        <span class="text-[10px] opacity-60 flex-1">Search actions, scripts...</span>
+        <span class="px-1 py-0.5 rounded text-[8px] font-mono bg-zinc-800 text-zinc-300 border border-zinc-700">⌘K</span>
+      </div>
+      <div class="p-2 rounded-md mt-2 flex items-center justify-between text-[10px]" style="background: #1a1a1e; border: 1px solid ${border}">
+        <div class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full" style="background: ${accent}"></span>
+          <span style="color: ${text}" class="font-medium">Toggle Claude Agent</span>
+        </div>
+        <span class="text-[9px] font-mono opacity-50">Action</span>
+      </div>
+      <div class="flex items-center justify-between pt-2">
+        <span class="text-[9px] opacity-60 font-mono">120+ extensions</span>
+        <div class="px-3 py-1 text-[10px] font-medium" style="background: ${accent}; color: #ffffff; border-radius: 8px;">
+          Execute (↵)
+        </div>
+      </div>
+    `;
+  } else if (id === "tailwind") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
+        <span class="font-mono opacity-60 text-[9px]">Tailwind UI v4.0</span>
+        <span class="px-1.5 py-0.2 rounded text-[9px] font-bold" style="background: ${accent}20; color: ${accent}">Utility</span>
+      </div>
+      <div class="p-2.5 rounded-lg mt-2" style="background: ${surface}; border: 1px solid ${border}">
+        <div class="flex items-center gap-2">
+          <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold" style="background: ${accent}; color: #fff">flex</span>
+          <span class="text-xs font-semibold tracking-tight" style="color: ${text}">Modern Dashboard</span>
+        </div>
+        <p class="text-[9px] opacity-60 pt-1 font-mono">bg-slate-900 shadow-xl border</p>
+      </div>
+      <div class="flex items-center justify-between pt-2">
+        <span class="text-[9px] opacity-60 font-mono">scale: 4px</span>
+        <div class="px-3 py-1 text-[10px] font-semibold shadow-xs" style="background: ${accent}; color: #ffffff; border-radius: 8px;">
+          Build UI
+        </div>
+      </div>
+    `;
+  } else if (id === "notion") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-1 border-b" style="border-color: ${border}">
+        <div class="flex items-center gap-1 opacity-70 text-[9px]">
+          <span>📝</span>
+          <span>Docs / Product Spec</span>
+        </div>
+        <span class="text-[9px] opacity-50">Public</span>
+      </div>
+      <div class="pt-2">
+        <h4 class="text-xs font-semibold leading-snug" style="color: ${text}">Architecture RFC 2026</h4>
+        <div class="space-y-1 pt-1.5 text-[10px] opacity-80">
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-xs border border-zinc-400 flex items-center justify-center text-[8px] font-bold bg-white" style="color: #111">✓</span>
+            <span class="text-[9px]">Single source of truth in DESIGN.md</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-xs border border-zinc-300 bg-white"></span>
+            <span class="text-[9px]">Publish API documentation</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between pt-2.5 mt-0.5">
+        <span class="text-[9px] opacity-50">Edited 2m ago</span>
+        <div class="px-3 py-1 text-[10px] font-medium shadow-xs" style="background: #ffffff; color: ${text}; border: 1px solid ${border}; border-radius: 4px;">
+          + New Page
+        </div>
+      </div>
+    `;
+  } else if (id === "figma") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
+        <span class="text-[9px] font-mono opacity-60">Desktop / Frame 1440</span>
+        <span class="px-1.5 py-0.2 rounded text-[8px] font-bold" style="background: ${accent}25; color: ${accent}; border: 1px solid ${accent}50">Selected</span>
+      </div>
+      <div class="p-2 rounded mt-2 text-[10px]" style="background: ${surface}; border: 1px solid ${border}">
+        <div class="flex items-center justify-between text-[9px] font-mono opacity-70">
+          <span>X: 120  Y: 80</span>
+          <span style="color: ${accent}; font-weight: bold;">W: 1440  H: 900</span>
+        </div>
+        <div class="h-1.5 w-full bg-zinc-700/80 rounded-full mt-1.5 overflow-hidden">
+          <div class="h-full rounded-full" style="width: 65%; background: ${accent}"></div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between pt-2">
+        <span class="text-[9px] opacity-60 font-mono">Corner: 12px</span>
+        <div class="px-3 py-1 text-[10px] font-semibold" style="background: ${accent}; color: #ffffff; border-radius: 6px;">
+          Export SVG
+        </div>
+      </div>
+    `;
+  } else if (id === "openai") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
+        <span class="opacity-70 text-[9px]">GPT-4o • Code Reasoning</span>
+        <span class="px-1.5 py-0.2 rounded text-[8px] font-bold" style="background: ${accent}20; color: ${accent}">● Active</span>
+      </div>
+      <div class="p-2 rounded-xl mt-2 text-[10px]" style="background: ${surface}; border: 1px solid ${border}">
+        <div class="text-[9px] opacity-60">User: Build design tokens</div>
+        <div class="flex items-start gap-1.5 pt-1.5">
+          <span class="w-3.5 h-3.5 rounded-full flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5" style="background: ${accent}; color: #ffffff">AI</span>
+          <span class="text-[9px] leading-snug" style="color: ${text}">Configuring DESIGN.md with strict tokens.</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-between pt-2">
+        <span class="text-[9px] opacity-60 font-mono">Tokens: 148</span>
+        <div class="px-3 py-1 text-[10px] font-semibold" style="background: ${accent}; color: #ffffff; border-radius: 12px;">
+          Send (↵)
+        </div>
+      </div>
+    `;
+  } else if (id === "airbnb") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
+        <span class="px-1.5 py-0.5 rounded-full text-[8px] font-bold bg-white text-zinc-900 shadow-2xs border border-zinc-200">Guest favorite</span>
+        <span class="text-[10px] font-semibold text-zinc-800">★ 4.98</span>
+      </div>
+      <div class="p-2.5 rounded-xl mt-2 shadow-2xs" style="background: ${surface}; border: 1px solid ${border}">
+        <h4 class="text-xs font-semibold tracking-tight" style="color: ${text}">Modern Minimalist Loft</h4>
+        <div class="flex items-baseline gap-1 pt-1">
+          <span class="text-xs font-bold" style="color: ${text}">$195</span>
+          <span class="text-[9px] opacity-60">/ night</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-between pt-2">
+        <span class="text-[9px] opacity-60 font-medium">Free cancellation</span>
+        <div class="px-3 py-1 text-[10px] font-bold shadow-xs" style="background: ${accent}; color: #ffffff; border-radius: 12px; box-shadow: 0 2px 6px rgba(255,56,92,0.3)">
+          Reserve
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div 
+      class="theme-mockup-frame rounded-sm p-3 shadow-2xs select-none transition hover:shadow-md cursor-pointer group/mockup"
+      style="background-color: ${canvas}; color: ${text}; border: 1px solid ${border}; ${fontCss}"
+      title="Previzualizare UI live (${escapeHtml(theme.name)}) - Click pentru specificație Markdown"
+    >
+      ${mockupContent}
+    </div>
+  `;
+}
+
 function renderThemesGallery(filter = activeThemeFilter, query = activeThemeSearch) {
   if (!el.themesGridContainer) return;
 
@@ -823,6 +1126,18 @@ function renderThemesGallery(filter = activeThemeFilter, query = activeThemeSear
           </div>
         </div>
 
+        <!-- Live Design System Mockup Preview (Real Font, Colors & Page Elements) -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between text-[10px] text-zinc-500 font-mono">
+            <span class="flex items-center gap-1 font-semibold text-zinc-700">
+              <i data-lucide="layout" class="w-3 h-3 text-zinc-400"></i>
+              <span>Previzualizare Pagină (${escapeHtml(theme.name)})</span>
+            </span>
+            <span class="text-[9px] text-zinc-400 font-mono truncate max-w-[140px]">${escapeHtml(theme.font.split('/')[0])}</span>
+          </div>
+          ${renderThemeMockup(theme)}
+        </div>
+
         <!-- Color Palette Strip -->
         <div class="space-y-1">
           <div class="flex items-center justify-between text-[10px] text-zinc-500 font-mono">
@@ -904,6 +1219,13 @@ function renderThemesGallery(filter = activeThemeFilter, query = activeThemeSear
     const previewBtn = card.querySelector(".btn-card-preview");
     if (previewBtn) {
       previewBtn.addEventListener("click", () => {
+        openThemeSpecModal(theme.id);
+      });
+    }
+
+    const mockupFrame = card.querySelector(".theme-mockup-frame");
+    if (mockupFrame) {
+      mockupFrame.addEventListener("click", () => {
         openThemeSpecModal(theme.id);
       });
     }
