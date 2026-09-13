@@ -1303,37 +1303,19 @@ function renderThemesGallery(filter = activeThemeFilter, query = activeThemeSear
         </div>
       </div>
 
-      <!-- Bottom Actions -->
-      <div class="grid grid-cols-2 gap-2 pt-4 mt-3 border-t border-zinc-200">
+      <!-- Bottom Action -->
+      <div class="pt-4 mt-3 border-t border-zinc-200">
         <button 
           type="button" 
-          class="btn-card-preview px-2.5 py-1.5 bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300 rounded-sm text-xs font-medium transition flex items-center justify-center gap-1.5 cursor-pointer pointer-events-auto" 
-          data-theme-id="${theme.id}"
-          title="Deschide Studio de Previzualizare Complet (${escapeHtml(theme.name)})"
-        >
-          <i data-lucide="file-text" class="w-3.5 h-3.5 text-zinc-500 pointer-events-none"></i>
-          <span class="pointer-events-none">Previzualizează</span>
-        </button>
-        <button 
-          type="button" 
-          class="btn-card-activate px-2.5 py-1.5 ${isActive ? 'bg-emerald-700 text-white font-semibold' : 'bg-zinc-900 hover:bg-black text-white'} rounded-sm text-xs font-medium transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer pointer-events-auto" 
+          class="btn-card-activate w-full py-2 px-3 ${isActive ? 'bg-emerald-700 text-white font-semibold' : 'bg-zinc-900 hover:bg-black text-white'} rounded-sm text-xs font-medium transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer pointer-events-auto" 
           data-theme-id="${theme.id}"
           title="${isActive ? 'Tema este deja configurată în DESIGN.md' : 'Configurează ' + escapeHtml(theme.name) + ' ca DESIGN.md'}"
         >
           <i data-lucide="${isActive ? 'check-check' : 'check'}" class="w-3.5 h-3.5 pointer-events-none"></i>
-          <span class="pointer-events-none">${isActive ? 'Temă Activă' : 'Activează'}</span>
+          <span class="pointer-events-none">${isActive ? 'Temă Activă în Proiect' : 'Activează ca DESIGN.md'}</span>
         </button>
       </div>
     `;
-
-    const previewBtn = card.querySelector(".btn-card-preview");
-    if (previewBtn) {
-      previewBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        openThemeSpecModal(theme.id);
-      });
-    }
 
     const mockupFrame = card.querySelector(".theme-mockup-frame");
     if (mockupFrame) {
@@ -2368,12 +2350,12 @@ function setupEventListeners() {
   // Delegated Event Listener on Themes Grid Container (100% reliable across re-renders)
   if (el.themesGridContainer) {
     el.themesGridContainer.addEventListener("click", (e) => {
-      // 1. Preview button or mockup frame clicked
-      const previewTarget = e.target.closest(".btn-card-preview") || e.target.closest(".theme-mockup-frame");
-      if (previewTarget) {
+      // 1. Mockup frame clicked -> opens theme studio modal
+      const mockupTarget = e.target.closest(".theme-mockup-frame");
+      if (mockupTarget) {
         e.preventDefault();
         e.stopPropagation();
-        const tid = previewTarget.getAttribute("data-theme-id");
+        const tid = mockupTarget.getAttribute("data-theme-id");
         if (tid) openThemeSpecModal(tid);
         return;
       }
@@ -2386,19 +2368,6 @@ function setupEventListeners() {
         const tid = activateTarget.getAttribute("data-theme-id");
         if (tid) selectThemePreset(tid);
         return;
-      }
-    });
-  }
-
-  // Sidebar Preview Button (Under Brand DESIGN.md in left panel)
-  const btnPreviewCurrent = document.getElementById("btn-preview-current-theme");
-  if (btnPreviewCurrent) {
-    btnPreviewCurrent.addEventListener("click", () => {
-      const currentVal = el.designMdSelect ? el.designMdSelect.value : (state.designSuite.designMdPreset || "linear");
-      if (currentVal && currentVal !== "none") {
-        openThemeSpecModal(currentVal);
-      } else {
-        showToast("Selectați o temă validă pentru previzualizare", "error");
       }
     });
   }
