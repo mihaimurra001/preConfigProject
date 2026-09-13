@@ -463,12 +463,29 @@
               </div>
             </div>
             <select id="design-md-select" class="w-full bg-white border border-zinc-300 rounded-sm p-2.5 text-xs text-zinc-900 outline-none focus:border-zinc-900 font-mono">
-              <option value="linear" selected>linear.app (Near-black, lavender, high-density craft)</option>
+              <option value="linear" selected>linear.app (Near-black obsidian, lavender craft)</option>
               <option value="apple">apple.com (Content-first, SF Pro, fluid clarity)</option>
               <option value="stripe">stripe.com (High-trust fintech, vibrant indigo)</option>
               <option value="vercel">vercel.com (Geist typography, stark monochrome)</option>
+              <option value="github">github.com (Primer dev telemetry, green accent)</option>
+              <option value="supabase">supabase.com (Emerald backend, radiant dark SQL)</option>
+              <option value="raycast">raycast.com (Ruby red launcher, keyboard speed)</option>
+              <option value="tailwind">tailwindcss.com (Slate & sky blue, modern utility)</option>
+              <option value="notion">notion.so (Warm ivory paper, sepia editorial)</option>
+              <option value="figma">figma.com (Creative canvas, violet tool UI)</option>
+              <option value="openai">openai.com (Slate & mint green, chat clarity)</option>
+              <option value="airbnb">airbnb.com (Rausch coral, consumer friendly cards)</option>
               <option value="none">Fără fișier DESIGN.md</option>
             </select>
+            <button 
+              type="button" 
+              id="btn-open-themes-tab"
+              class="w-full mt-2.5 py-2 px-3 bg-zinc-900 hover:bg-black text-white text-xs font-semibold rounded-sm transition flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+            >
+              <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+              <span>Explorează Galeria de Teme (12 Branduri)</span>
+              <span class="text-[10px] bg-zinc-700 px-1.5 py-0.2 rounded-sm font-mono font-normal">Carduri 3 Rânduri</span>
+            </button>
           </div>
 
           <!-- Taste Three Dials Sliders -->
@@ -641,6 +658,11 @@
           <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2" data-tab="docs">
             <i data-lucide="book-open" class="w-4 h-4"></i>
             <span>Documentație</span>
+          </button>
+          <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2" data-tab="themes">
+            <i data-lucide="palette" class="w-4 h-4"></i>
+            <span>Galerie Teme DESIGN.md</span>
+            <span class="px-2 py-0.5 rounded-sm bg-zinc-200 text-[10px] font-mono text-zinc-800 font-bold">12 Teme</span>
           </button>
         </div>
 
@@ -1193,6 +1215,72 @@
 
       </div>
 
+      <!-- TAB CONTENT 4: AWESOME-DESIGN-MD THEMES GALLERY (3-Row Grid) -->
+      <div id="tab-themes" class="tab-panel hidden flex-1 flex flex-col space-y-4">
+        <!-- Gallery Header Banner -->
+        <div class="glass-card rounded-sm p-6 space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-200 pb-4">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2.5">
+                <div class="w-6 h-6 rounded-sm bg-zinc-900 text-white flex items-center justify-center">
+                  <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+                </div>
+                <h2 class="text-sm font-bold text-zinc-950 uppercase tracking-wide">Awesome-Design-MD: Catalog de Teme & Design Systems</h2>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-sm bg-zinc-100 border border-zinc-300 font-bold text-zinc-800">115k+ ⭐</span>
+              </div>
+              <p class="text-xs text-zinc-600 leading-relaxed max-w-2xl">
+                Specificații vizuale complete de design system pentru agenți AI de codare. Alege o temă pentru a genera automat fișierul <code class="text-zinc-900 font-mono font-semibold bg-zinc-100 px-1 rounded-sm">DESIGN.md</code> în rădăcina proiectului cu paleta, tipografia, bordurile și regulile de estetică ale brandului.
+              </p>
+            </div>
+
+            <!-- Active Theme Indicator Pill -->
+            <div class="flex items-center gap-2 px-3.5 py-2.5 rounded-sm bg-zinc-50 border border-zinc-300 shrink-0">
+              <div class="flex flex-col">
+                <span class="text-[9px] uppercase tracking-wider font-bold text-zinc-500">Temă Activă în Proiect:</span>
+                <span id="gallery-active-theme-badge" class="text-xs font-mono font-bold text-zinc-950 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                  Linear (Near-black obsidian)
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls: Category Filters & Real-Time Search -->
+          <div class="flex flex-col md:flex-row items-center justify-between gap-3 pt-1">
+            <div class="flex flex-wrap items-center gap-1.5">
+              <button type="button" class="theme-filter-btn active px-3 py-1.5 text-xs font-semibold rounded-sm bg-zinc-900 text-white border border-zinc-900 transition" data-filter="all">
+                Toate (12)
+              </button>
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition" data-filter="dark">
+                Dark Mode (8)
+              </button>
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition" data-filter="light">
+                Light & Editorial (4)
+              </button>
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition" data-filter="dev">
+                Dev & Fintech (4)
+              </button>
+            </div>
+
+            <!-- Search input -->
+            <div class="relative w-full md:w-72">
+              <i data-lucide="search" class="w-3.5 h-3.5 text-zinc-400 absolute left-2.5 top-1/2 -translate-y-1/2"></i>
+              <input 
+                type="text" 
+                id="themes-search-input" 
+                placeholder="Filtrează temă (ex: linear, stripe, emerald)..."
+                class="w-full bg-white border border-zinc-300 rounded-sm pl-8 pr-3 py-1.5 text-xs text-zinc-950 outline-none focus:border-zinc-900 font-mono transition"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- The 3-Row / 3-Column Card Grid Container -->
+        <div id="themes-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4.5">
+          <!-- Dynamically populated and filtered by app.js -->
+        </div>
+      </div>
+
     </div>
 
   </main>
@@ -1332,6 +1420,35 @@
             <span>Selectează Acest Folder</span>
           </button>
         </div>
+      </div>
+    </div>
+  <!-- MODAL: PREVIZUALIZARE TEMĂ DESIGN.MD -->
+  <div id="modal-theme-preview" class="fixed inset-0 z-50 bg-zinc-950/40 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-200 hidden">
+    <div class="bg-white border border-zinc-300 rounded-sm shadow-2xl max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden animate-fadeIn">
+      <div class="px-6 py-4 border-b border-zinc-200 flex items-center justify-between bg-zinc-50">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="file-code" class="w-4 h-4 text-zinc-900"></i>
+          <div>
+            <h3 id="modal-theme-title" class="text-sm font-bold text-zinc-950">Specificație DESIGN.md: Linear</h3>
+            <p class="text-[11px] text-zinc-500">Conținutul generat în rădăcina proiectului conform Awesome-Design-MD</p>
+          </div>
+        </div>
+        <button id="modal-theme-close" class="p-1 text-zinc-400 hover:text-zinc-800 rounded-sm transition cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="flex-1 bg-[#18181b] p-6 overflow-auto">
+        <pre id="modal-theme-code" class="text-xs font-mono text-zinc-200 leading-relaxed whitespace-pre"></pre>
+      </div>
+      <div class="px-6 py-3 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between">
+        <button id="modal-theme-copy" type="button" class="px-3 py-1.5 bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300 rounded-sm text-xs font-medium transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+          <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          <span>Copiază Markdown</span>
+        </button>
+        <button id="modal-theme-activate" type="button" class="btn-primary-gradient px-4 py-1.5 text-white rounded-sm text-xs font-semibold transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+          <i data-lucide="check" class="w-3.5 h-3.5"></i>
+          <span>Activează această Temă</span>
+        </button>
       </div>
     </div>
   </div>

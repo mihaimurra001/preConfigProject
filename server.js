@@ -30,7 +30,8 @@ import {
   CYBERSECURITY_RULES,
   HEADROOM_SKILL,
   HEADROOM_RULES,
-  HEADROOM_TEMPLATES
+  HEADROOM_TEMPLATES,
+  AWESOME_DESIGN_THEMES
 } from "./lib/skills-catalog.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -107,7 +108,9 @@ app.get("/api/skills-catalog", (req, res) => {
       },
       designSuite: {
         skills: DESIGN_SKILLS,
-        presets: Object.keys(DESIGN_MD_PRESETS)
+        presets: Object.keys(DESIGN_MD_PRESETS),
+        presetDocs: DESIGN_MD_PRESETS,
+        themes: AWESOME_DESIGN_THEMES
       },
       cybersecurity: {
         skills: CYBERSECURITY_SKILLS,

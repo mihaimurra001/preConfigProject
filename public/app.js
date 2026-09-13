@@ -245,12 +245,26 @@ const el = {
   fsBtnGo: document.getElementById("fs-btn-go"),
   fsDirsContainer: document.getElementById("fs-dirs-container"),
   fsSelectedHint: document.getElementById("fs-selected-hint"),
-  fsBtnConfirmSelect: document.getElementById("fs-btn-confirm-select")
+  fsBtnConfirmSelect: document.getElementById("fs-btn-confirm-select"),
+
+  // Awesome-Design-MD Themes Gallery Elements
+  btnOpenThemesTab: document.getElementById("btn-open-themes-tab"),
+  themesGridContainer: document.getElementById("themes-grid-container"),
+  themesSearchInput: document.getElementById("themes-search-input"),
+  galleryActiveThemeBadge: document.getElementById("gallery-active-theme-badge"),
+  themeFilterBtns: document.querySelectorAll(".theme-filter-btn"),
+  modalThemePreview: document.getElementById("modal-theme-preview"),
+  modalThemeTitle: document.getElementById("modal-theme-title"),
+  modalThemeCode: document.getElementById("modal-theme-code"),
+  modalThemeClose: document.getElementById("modal-theme-close"),
+  modalThemeCopy: document.getElementById("modal-theme-copy"),
+  modalThemeActivate: document.getElementById("modal-theme-activate")
 };
 
 // Initialize Application
 document.addEventListener("DOMContentLoaded", async () => {
   setupEventListeners();
+  renderThemesGallery();
   await loadEnvironment();
   await loadCatalog();
   await loadSavedProjects();
@@ -298,6 +312,7 @@ async function loadCatalog() {
     if (json.ok) {
       state.catalog = json.data;
       renderSkillsList();
+      renderThemesGallery();
     }
   } catch (err) {
     console.error("Failed to load catalog:", err);
@@ -405,6 +420,500 @@ function updatePresetButtonUI(preset) {
       btn.classList.add("bg-white", "text-zinc-700", "border-zinc-300");
     }
   });
+}
+
+// Awesome-Design-MD Themes State & Fallback Catalog (12 Top Tech Brands)
+let activeThemeFilter = "all";
+let activeThemeSearch = "";
+let modalCurrentThemeId = "linear";
+
+const DEFAULT_AWESOME_THEMES = [
+  {
+    id: "linear",
+    name: "Linear",
+    brand: "Linear.app",
+    tag: "Dark B2B Craft",
+    stars: "115k+ ⭐",
+    accent: "#5e6ad2",
+    canvas: "#010102",
+    surface: "#0f1011",
+    border: "#23252a",
+    text: "#f7f8f8",
+    font: "Inter / SF Pro Display (-0.02em)",
+    radius: "8px cards, 6px buttons",
+    description: "Near-black obsidian canvas cu margini subtile de 1px hairline, accente lavandă folosite cu rigoare și densitate extremă.",
+    principles: ["Zero drop-shadows grele", "Negative letter-spacing", "Micro-interacțiuni 150ms"],
+    icon: "sliders",
+    category: "dark dev"
+  },
+  {
+    id: "apple",
+    name: "Apple HIG",
+    brand: "Apple Inc.",
+    tag: "Content-First Clarity",
+    stars: "115k+ ⭐",
+    accent: "#0071e3",
+    canvas: "#f5f5f7",
+    surface: "#ffffff",
+    border: "#d2d2d7",
+    text: "#1d1d1f",
+    font: "SF Pro / -apple-system",
+    radius: "12px - 16px squircle",
+    description: "Claritate umanistă orientată pe conținut, margini rotunjite squircle, spațiere generoasă și fundaluri cu blur ultra-subțire.",
+    principles: ["Backdrop blur 20px", "Tipografie dinamică ierarhică", "Feedback haptic & tactil"],
+    icon: "command",
+    category: "light"
+  },
+  {
+    id: "stripe",
+    name: "Stripe",
+    brand: "Stripe.com",
+    tag: "Fintech Precision",
+    stars: "115k+ ⭐",
+    accent: "#635bff",
+    canvas: "#f8f9fa",
+    surface: "#ffffff",
+    border: "#e6ebf1",
+    text: "#0a2540",
+    font: "Söhne / Inter, 500-600 weight",
+    radius: "8px - 12px",
+    description: "Estetică fintech de maximă încredere, accente indigo vibrante, umbre stratificate matematice și carduri impecabile.",
+    principles: ["Umbre stratificate pe 2 nivele", "Contururi precise", "Albastru de siguranță financiară"],
+    icon: "credit-card",
+    category: "light dev"
+  },
+  {
+    id: "vercel",
+    name: "Vercel",
+    brand: "Vercel.com",
+    tag: "Stark Monochrome",
+    stars: "115k+ ⭐",
+    accent: "#0070f3",
+    canvas: "#000000",
+    surface: "#111111",
+    border: "#333333",
+    text: "#ffffff",
+    font: "Geist Sans & Geist Mono",
+    radius: "6px standard, 9999px pills",
+    description: "Contrast maxim alb-negru (monocrom pur), rigoare geometrică absolută, tipografie Geist tehnică și accente albastru electric.",
+    principles: ["Contrast WCAG AAA", "Grid tehnic strict", "Geist monospace integrat"],
+    icon: "triangle",
+    category: "dark dev"
+  },
+  {
+    id: "github",
+    name: "GitHub Primer",
+    brand: "GitHub.com",
+    tag: "Dev Telemetry",
+    stars: "115k+ ⭐",
+    accent: "#238636",
+    canvas: "#0d1117",
+    surface: "#161b22",
+    border: "#30363d",
+    text: "#e6edf3",
+    font: "-apple-system / Segoe UI",
+    radius: "6px standard, 3px badges",
+    description: "Sistemul Primer de la GitHub: optimizat pentru programatori, diferențiere vizuală a diff-urilor și culori semantice clare de status.",
+    principles: ["Status semantic verde/roșu/galben", "Fundaluri gri închis confortabile", "Tag-uri compacte"],
+    icon: "git-branch",
+    category: "dark dev"
+  },
+  {
+    id: "supabase",
+    name: "Supabase",
+    brand: "Supabase.com",
+    tag: "Emerald Backend",
+    stars: "115k+ ⭐",
+    accent: "#3ecf8e",
+    canvas: "#171717",
+    surface: "#1c1c1c",
+    border: "#2e2e2e",
+    text: "#ededed",
+    font: "Circular / Fira Code",
+    radius: "6px standard",
+    description: "Design întunecat pentru baze de date & SQL: verde smarald neon, suprafețe obsidian și editor monospace integrat.",
+    principles: ["Verde smarald radiant", "Tabele de date dense", "Contrast optim pentru cod"],
+    icon: "database",
+    category: "dark dev"
+  },
+  {
+    id: "raycast",
+    name: "Raycast",
+    brand: "Raycast.com",
+    tag: "Keyboard Launcher",
+    stars: "115k+ ⭐",
+    accent: "#ff6363",
+    canvas: "#141416",
+    surface: "#1f1f23",
+    border: "#2c2c32",
+    text: "#ffffff",
+    font: "Inter / JetBrains Mono",
+    radius: "8px - 10px",
+    description: "Viteză fulgerătoare și precizie: accente roșu rubin, indicatoare pentru scurtături de tastatură și sticlă mată întunecată.",
+    principles: ["Badge-uri Kbd de taste", "Focalizare rapidă", "Tranziții instant sub 100ms"],
+    icon: "zap",
+    category: "dark dev"
+  },
+  {
+    id: "tailwind",
+    name: "Tailwind CSS",
+    brand: "TailwindLabs",
+    tag: "Modern Utility Web",
+    stars: "115k+ ⭐",
+    accent: "#0ea5e9",
+    canvas: "#0f172a",
+    surface: "#1e293b",
+    border: "#334155",
+    text: "#f8fafc",
+    font: "Inter / system-ui",
+    radius: "8px rounded-md",
+    description: "Estetica oficială modernă Tailwind: nuanțe slate, accente cyan/sky, carduri echilibrate și spațiere modulară armonioasă.",
+    principles: ["Paletă Slate & Sky echilibrată", "Scală modulară 4px", "Componente aerisite"],
+    icon: "wind",
+    category: "dark dev"
+  },
+  {
+    id: "notion",
+    name: "Notion",
+    brand: "Notion.so",
+    tag: "Warm Editorial",
+    stars: "115k+ ⭐",
+    accent: "#2eaadc",
+    canvas: "#f7f6f3",
+    surface: "#ffffff",
+    border: "#e3e2de",
+    text: "#37352f",
+    font: "ui-sans-serif & Lyon Serif",
+    radius: "4px - 6px subtil",
+    description: "Spațiu editorial minimalist cu aromă de hârtie caldă, nuanțe sepia, contrast relaxant pentru ochi și tipografie literară.",
+    principles: ["Fundal cald ivory", "Linii subțiri sepia", "Fără distracții vizuale"],
+    icon: "book-open",
+    category: "light"
+  },
+  {
+    id: "figma",
+    name: "Figma",
+    brand: "Figma.com",
+    tag: "Creative Canvas",
+    stars: "115k+ ⭐",
+    accent: "#7b61ff",
+    canvas: "#1e1e1e",
+    surface: "#2c2c2c",
+    border: "#383838",
+    text: "#ffffff",
+    font: "Inter Display",
+    radius: "6px inspector panels",
+    description: "Interfață de unelte profesionale de creație: fundal gri neutru pentru a evidenția creația, accent violet și controale numerice precise.",
+    principles: ["Panouri flotante compacte", "Accent violet creator", "Feedback vizual la hover pe unelte"],
+    icon: "pen-tool",
+    category: "dark"
+  },
+  {
+    id: "openai",
+    name: "OpenAI ChatGPT",
+    brand: "OpenAI",
+    tag: "Conversational Slate",
+    stars: "115k+ ⭐",
+    accent: "#10a37f",
+    canvas: "#202123",
+    surface: "#343541",
+    border: "#4d4d4f",
+    text: "#ececf1",
+    font: "Söhne / system-ui",
+    radius: "8px - 12px pill",
+    description: "Design conversațional axat pe lizibilitate: nuanțe neutre de ardezie (slate), accente mint green și bule de text confortabile.",
+    principles: ["Lățime optimă de citire (max 768px)", "Accent verde mentă", "Bule chat fluide"],
+    icon: "bot",
+    category: "dark"
+  },
+  {
+    id: "airbnb",
+    name: "Airbnb",
+    brand: "Airbnb.com",
+    tag: "Consumer Trust",
+    stars: "115k+ ⭐",
+    accent: "#ff385c",
+    canvas: "#ffffff",
+    surface: "#f7f7f7",
+    border: "#dddddd",
+    text: "#222222",
+    font: "Circular / -apple-system",
+    radius: "12px - 16px rounded-xl",
+    description: "Estetică de consum prietenoasă cu încredere maximă: accent coral/rausch recunoscut mondial, carduri rotunjite și spațiere confortabilă.",
+    principles: ["Rausch Coral emblematic", "Umbre difuze mari", "Rază generoasă de 16px"],
+    icon: "home",
+    category: "light"
+  }
+];
+
+function updateActiveThemeBadge() {
+  if (!el.galleryActiveThemeBadge) return;
+  const currentId = state.designSuite.designMdPreset;
+  const themes = (state.catalog && state.catalog.designSuite && state.catalog.designSuite.themes) || DEFAULT_AWESOME_THEMES;
+  const currentTheme = themes.find(t => t.id === currentId);
+  if (currentTheme) {
+    el.galleryActiveThemeBadge.innerHTML = `
+      <span class="w-2 h-2 rounded-full inline-block shrink-0" style="background-color: ${currentTheme.accent}"></span>
+      <span class="truncate">${escapeHtml(currentTheme.name)} (${escapeHtml(currentTheme.tag)})</span>
+    `;
+  } else if (currentId === "none") {
+    el.galleryActiveThemeBadge.innerHTML = `
+      <span class="w-2 h-2 rounded-full bg-zinc-400 inline-block shrink-0"></span>
+      <span>Fără fișier DESIGN.md</span>
+    `;
+  } else {
+    el.galleryActiveThemeBadge.innerHTML = `
+      <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block shrink-0"></span>
+      <span>${escapeHtml(currentId)}</span>
+    `;
+  }
+}
+
+function selectThemePreset(themeId) {
+  state.designSuite.designMdPreset = themeId;
+  if (el.designMdSelect) {
+    el.designMdSelect.value = themeId;
+  }
+  updateActiveThemeBadge();
+  renderThemesGallery();
+  triggerPreview();
+  const themes = (state.catalog && state.catalog.designSuite && state.catalog.designSuite.themes) || DEFAULT_AWESOME_THEMES;
+  const t = themes.find(x => x.id === themeId);
+  showToast(`Tema ${t ? t.name : themeId} a fost activată în DESIGN.md!`, "success");
+}
+
+function openThemeSpecModal(themeId) {
+  modalCurrentThemeId = themeId;
+  const themes = (state.catalog && state.catalog.designSuite && state.catalog.designSuite.themes) || DEFAULT_AWESOME_THEMES;
+  const theme = themes.find(t => t.id === themeId) || { name: themeId, tag: "" };
+
+  if (el.modalThemeTitle) {
+    el.modalThemeTitle.textContent = `Specificație DESIGN.md: ${theme.name} (${theme.tag || theme.brand || ""})`;
+  }
+
+  let mdContent = "";
+  if (state.catalog && state.catalog.designSuite && state.catalog.designSuite.presetDocs && state.catalog.designSuite.presetDocs[themeId]) {
+    mdContent = state.catalog.designSuite.presetDocs[themeId];
+  } else {
+    mdContent = `# DESIGN.md - ${theme.name} Design System\n\n> Brand: ${theme.brand || theme.name}\n> Tag: ${theme.tag || ""}\n\n## Color Tokens\n- Accent: ${theme.accent}\n- Canvas: ${theme.canvas}\n- Surface: ${theme.surface}\n- Border: ${theme.border}\n- Text: ${theme.text}\n\n## Typography\n- Primary Font: ${theme.font}\n\n## Border Radius\n- Scale: ${theme.radius}\n\n## Core Principles\n${(theme.principles || []).map(p => `- ${p}`).join("\n")}`;
+  }
+
+  if (el.modalThemeCode) {
+    el.modalThemeCode.textContent = mdContent;
+  }
+
+  if (el.modalThemeActivate) {
+    if (state.designSuite.designMdPreset === themeId) {
+      el.modalThemeActivate.innerHTML = `<i data-lucide="check-check" class="w-3.5 h-3.5"></i><span>Temă Deja Activă</span>`;
+      el.modalThemeActivate.classList.add("opacity-80");
+    } else {
+      el.modalThemeActivate.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i><span>Activează această Temă</span>`;
+      el.modalThemeActivate.classList.remove("opacity-80");
+    }
+  }
+
+  if (el.modalThemePreview) {
+    el.modalThemePreview.classList.remove("hidden");
+  }
+
+  if (window.lucide) lucide.createIcons();
+}
+
+function closeThemeSpecModal() {
+  if (el.modalThemePreview) {
+    el.modalThemePreview.classList.add("hidden");
+  }
+}
+
+function renderThemesGallery(filter = activeThemeFilter, query = activeThemeSearch) {
+  if (!el.themesGridContainer) return;
+
+  activeThemeFilter = filter;
+  activeThemeSearch = query;
+  updateActiveThemeBadge();
+
+  const themesSource = (state.catalog && state.catalog.designSuite && state.catalog.designSuite.themes) || DEFAULT_AWESOME_THEMES;
+  
+  // Apply category filter
+  let filtered = themesSource.filter(theme => {
+    if (filter === "all") return true;
+    const cat = (theme.category || "").toLowerCase();
+    if (filter === "dark") {
+      return cat.includes("dark") || ["linear", "vercel", "github", "supabase", "raycast", "tailwind", "figma", "openai"].includes(theme.id);
+    }
+    if (filter === "light") {
+      return cat.includes("light") || ["apple", "stripe", "notion", "airbnb"].includes(theme.id);
+    }
+    if (filter === "dev") {
+      return cat.includes("dev") || ["linear", "stripe", "vercel", "github", "supabase", "raycast", "tailwind"].includes(theme.id);
+    }
+    return true;
+  });
+
+  // Apply search query filter
+  if (query && query.trim() !== "") {
+    const q = query.trim().toLowerCase();
+    filtered = filtered.filter(t => {
+      const searchTarget = `${t.name} ${t.brand} ${t.tag} ${t.description} ${(t.principles || []).join(" ")} ${t.font}`.toLowerCase();
+      return searchTarget.includes(q);
+    });
+  }
+
+  el.themesGridContainer.innerHTML = "";
+
+  if (filtered.length === 0) {
+    el.themesGridContainer.innerHTML = `
+      <div class="col-span-full py-12 text-center text-zinc-500 bg-white border border-dashed border-zinc-300 rounded-sm space-y-2">
+        <i data-lucide="search-x" class="w-8 h-8 mx-auto text-zinc-400"></i>
+        <p class="text-xs font-medium">Nicio temă găsită pentru termenul "${escapeHtml(query)}".</p>
+        <button type="button" id="btn-reset-themes-filter" class="text-xs font-semibold text-zinc-900 underline cursor-pointer hover:text-black">Resetează filtrele</button>
+      </div>
+    `;
+    const resetBtn = document.getElementById("btn-reset-themes-filter");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        if (el.themesSearchInput) el.themesSearchInput.value = "";
+        activeThemeSearch = "";
+        const allBtn = document.querySelector('.theme-filter-btn[data-filter="all"]');
+        if (allBtn) allBtn.click();
+        else renderThemesGallery("all", "");
+      });
+    }
+    if (window.lucide) lucide.createIcons();
+    return;
+  }
+
+  filtered.forEach(theme => {
+    const isActive = (state.designSuite.designMdPreset === theme.id);
+    const card = document.createElement("div");
+    card.className = `glass-card rounded-sm p-5 border ${
+      isActive ? "border-zinc-900 ring-1 ring-zinc-900 shadow-md" : "border-zinc-200 hover:border-zinc-400"
+    } flex flex-col justify-between transition group relative bg-white`;
+
+    card.innerHTML = `
+      <div class="space-y-3">
+        <!-- Brand Header & Active Status -->
+        <div class="flex items-start justify-between gap-2">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-8 h-8 rounded-sm flex items-center justify-center font-mono font-bold text-xs shrink-0 shadow-xs" style="background-color: ${theme.canvas}; color: ${theme.text}; border: 1px solid ${theme.border}">
+              <i data-lucide="${theme.icon || 'palette'}" class="w-4 h-4" style="color: ${theme.accent}"></i>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <h3 class="text-xs font-bold text-zinc-950">${escapeHtml(theme.name)}</h3>
+                <span class="text-[10px] text-zinc-400 font-mono">(${escapeHtml(theme.brand)})</span>
+              </div>
+              <span class="inline-block text-[10px] font-mono font-semibold text-zinc-600 truncate">${escapeHtml(theme.tag)}</span>
+            </div>
+          </div>
+          
+          <div class="flex flex-col items-end gap-1 shrink-0">
+            <span class="text-[10px] font-mono px-1.5 py-0.2 rounded-sm bg-zinc-100 text-zinc-600 border border-zinc-200">${escapeHtml(theme.stars || '115k+ ⭐')}</span>
+            ${isActive ? `
+              <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-sm bg-emerald-500/10 text-emerald-700 border border-emerald-500/30 text-[9px] font-mono font-bold uppercase tracking-wider">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                Activ
+              </span>
+            ` : ''}
+          </div>
+        </div>
+
+        <!-- Color Palette Strip -->
+        <div class="space-y-1">
+          <div class="flex items-center justify-between text-[10px] text-zinc-500 font-mono">
+            <span>Paletă culori</span>
+            <span class="font-bold" style="color: ${theme.accent}">${escapeHtml(theme.accent)}</span>
+          </div>
+          <div class="grid grid-cols-5 gap-1.5 p-1.5 bg-zinc-50 rounded-sm border border-zinc-200">
+            <div class="group/swatch relative flex flex-col items-center">
+              <div class="w-full h-5 rounded-xs border shadow-2xs" style="background-color: ${theme.accent}; border-color: ${theme.border};" title="Accent: ${theme.accent}"></div>
+              <span class="text-[8px] font-mono text-zinc-500 mt-0.5">accent</span>
+            </div>
+            <div class="group/swatch relative flex flex-col items-center">
+              <div class="w-full h-5 rounded-xs border shadow-2xs" style="background-color: ${theme.canvas}; border-color: ${theme.border};" title="Canvas: ${theme.canvas}"></div>
+              <span class="text-[8px] font-mono text-zinc-500 mt-0.5">canvas</span>
+            </div>
+            <div class="group/swatch relative flex flex-col items-center">
+              <div class="w-full h-5 rounded-xs border shadow-2xs" style="background-color: ${theme.surface}; border-color: ${theme.border};" title="Surface: ${theme.surface}"></div>
+              <span class="text-[8px] font-mono text-zinc-500 mt-0.5">surface</span>
+            </div>
+            <div class="group/swatch relative flex flex-col items-center">
+              <div class="w-full h-5 rounded-xs border shadow-2xs" style="background-color: ${theme.border}; border-color: #999;" title="Border: ${theme.border}"></div>
+              <span class="text-[8px] font-mono text-zinc-500 mt-0.5">border</span>
+            </div>
+            <div class="group/swatch relative flex flex-col items-center">
+              <div class="w-full h-5 rounded-xs border shadow-2xs" style="background-color: ${theme.text}; border-color: ${theme.border};" title="Text: ${theme.text}"></div>
+              <span class="text-[8px] font-mono text-zinc-500 mt-0.5">text</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p class="text-xs text-zinc-600 leading-relaxed line-clamp-2">
+          ${escapeHtml(theme.description)}
+        </p>
+
+        <!-- Typography & Radius Spec -->
+        <div class="grid grid-cols-2 gap-2 text-[10px] font-mono pt-1">
+          <div class="bg-zinc-50 p-1.5 rounded-sm border border-zinc-200 min-w-0">
+            <span class="text-zinc-400 block text-[9px] uppercase">Font:</span>
+            <span class="text-zinc-800 font-semibold truncate block" title="${escapeHtml(theme.font)}">${escapeHtml(theme.font)}</span>
+          </div>
+          <div class="bg-zinc-50 p-1.5 rounded-sm border border-zinc-200 min-w-0">
+            <span class="text-zinc-400 block text-[9px] uppercase">Radius:</span>
+            <span class="text-zinc-800 font-semibold truncate block" title="${escapeHtml(theme.radius)}">${escapeHtml(theme.radius)}</span>
+          </div>
+        </div>
+
+        <!-- Principles Badges -->
+        <div class="flex flex-wrap gap-1 pt-1">
+          ${theme.principles.map(p => `
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded-sm bg-zinc-100 text-zinc-700 border border-zinc-200">
+              • ${escapeHtml(p)}
+            </span>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- Bottom Actions -->
+      <div class="grid grid-cols-2 gap-2 pt-4 mt-3 border-t border-zinc-200">
+        <button 
+          type="button" 
+          class="btn-card-preview px-2.5 py-1.5 bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300 rounded-sm text-xs font-medium transition flex items-center justify-center gap-1.5 cursor-pointer" 
+          data-theme-id="${theme.id}"
+        >
+          <i data-lucide="file-text" class="w-3.5 h-3.5 text-zinc-500"></i>
+          <span>Previzualizează</span>
+        </button>
+        <button 
+          type="button" 
+          class="btn-card-activate px-2.5 py-1.5 ${isActive ? 'bg-emerald-700 text-white font-semibold' : 'bg-zinc-900 hover:bg-black text-white'} rounded-sm text-xs font-medium transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer" 
+          data-theme-id="${theme.id}"
+        >
+          <i data-lucide="${isActive ? 'check-check' : 'check'}" class="w-3.5 h-3.5"></i>
+          <span>${isActive ? 'Temă Activă' : 'Activează'}</span>
+        </button>
+      </div>
+    `;
+
+    const previewBtn = card.querySelector(".btn-card-preview");
+    if (previewBtn) {
+      previewBtn.addEventListener("click", () => {
+        openThemeSpecModal(theme.id);
+      });
+    }
+
+    const activateBtn = card.querySelector(".btn-card-activate");
+    if (activateBtn) {
+      activateBtn.addEventListener("click", () => {
+        selectThemePreset(theme.id);
+      });
+    }
+
+    el.themesGridContainer.appendChild(card);
+  });
+
+  if (window.lucide) lucide.createIcons();
 }
 
 // Trigger Live Preview
@@ -1198,6 +1707,8 @@ function setupEventListeners() {
 
   el.designMdSelect.addEventListener("change", () => {
     state.designSuite.designMdPreset = el.designMdSelect.value;
+    updateActiveThemeBadge();
+    renderThemesGallery();
     triggerPreview();
   });
 
@@ -1332,4 +1843,61 @@ function setupEventListeners() {
   el.btnClearTerminal.addEventListener("click", () => {
     el.terminalScreen.textContent = "Consolă curățată.\n";
   });
+
+  // Awesome-Design-MD Themes Gallery Events
+  if (el.btnOpenThemesTab) {
+    el.btnOpenThemesTab.addEventListener("click", () => {
+      const themesTabBtn = document.querySelector('.tab-btn[data-tab="themes"]');
+      if (themesTabBtn) themesTabBtn.click();
+    });
+  }
+
+  if (el.themeFilterBtns) {
+    el.themeFilterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        el.themeFilterBtns.forEach(b => {
+          b.classList.remove("active", "bg-zinc-900", "text-white", "border-zinc-900");
+          b.classList.add("bg-white", "text-zinc-700", "border-zinc-300");
+        });
+        btn.classList.add("active", "bg-zinc-900", "text-white", "border-zinc-900");
+        btn.classList.remove("bg-white", "text-zinc-700", "border-zinc-300");
+        activeThemeFilter = btn.dataset.filter || "all";
+        renderThemesGallery(activeThemeFilter, activeThemeSearch);
+      });
+    });
+  }
+
+  if (el.themesSearchInput) {
+    el.themesSearchInput.addEventListener("input", (e) => {
+      activeThemeSearch = e.target.value.trim().toLowerCase();
+      renderThemesGallery(activeThemeFilter, activeThemeSearch);
+    });
+  }
+
+  if (el.modalThemeClose) {
+    el.modalThemeClose.addEventListener("click", closeThemeSpecModal);
+  }
+
+  if (el.modalThemePreview) {
+    el.modalThemePreview.addEventListener("click", (e) => {
+      if (e.target === el.modalThemePreview) closeThemeSpecModal();
+    });
+  }
+
+  if (el.modalThemeCopy) {
+    el.modalThemeCopy.addEventListener("click", () => {
+      const code = el.modalThemeCode ? el.modalThemeCode.textContent : "";
+      if (code) {
+        navigator.clipboard.writeText(code);
+        showToast("Specificația Markdown DESIGN.md a fost copiată!", "success");
+      }
+    });
+  }
+
+  if (el.modalThemeActivate) {
+    el.modalThemeActivate.addEventListener("click", () => {
+      selectThemePreset(modalCurrentThemeId);
+      closeThemeSpecModal();
+    });
+  }
 }
