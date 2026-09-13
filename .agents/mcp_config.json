@@ -12,6 +12,13 @@
         "graphify.serve",
         "${workspace.path}/graphify-out/graph.json"
       ]
+    },
+    "headroom": {
+      "command": "uvx",
+      "args": [
+        "headroom-ai[all]",
+        "mcp"
+      ]
     }
   }
 }

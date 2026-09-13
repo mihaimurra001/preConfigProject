@@ -48,6 +48,13 @@ Rules:
 
 ---
 
+## Headroom Context & Token Compression Standards
+- **Manage Context Window Budget**: Large tool outputs, test logs, and massive JSON responses should be compressed using Headroom or summarized to avoid blowing the context window.
+- **Preserve Critical Diagnostics**: Always ensure error lines, stack traces, and fatal assertions are retained intact during compression.
+- **Retrieve on Demand**: When precise byte-level details of a compressed block are required, use `headroom_retrieve`.
+
+---
+
 # Graphify Architectural Guidance
 
 - Before performing deep exploration across multiple unfamiliar files, check if `graphify-out/graph.json` exists.
@@ -64,7 +71,7 @@ Rules:
 
 ## Frontend Taste & Anti-Slop (Taste-Skill)
 - Infer design direction first before generating UI.
-- Set the Three Dials: DESIGN_VARIANCE: 8, MOTION_INTENSITY: 6, VISUAL_DENSITY: 4.
+- Set the Three Dials: DESIGN_VARIANCE: 10, MOTION_INTENSITY: 10, VISUAL_DENSITY: 1.
 
 ---
 
@@ -72,3 +79,12 @@ Rules:
 - Never use `ease-in` for entering elements (use decelerating `ease-out`).
 - Animate only hardware-accelerated properties (`transform`, `opacity`).
 - Keep micro-interactions under 250ms.
+
+---
+
+## Cybersecurity & Defensive Security Standards (OWASP & MITRE)
+- **Input Validation & Sanitization**: Always validate and sanitize user input at the application boundary (Zod, Pydantic, schema validation). Never concatenate raw input into database queries or shell commands.
+- **Secrets Management**: Never hardcode credentials, private tokens, or secrets. Always read from environment variables or secure stores.
+- **Authorization & Access Control**: Enforce least privilege and verify permissions on every request (prevent IDOR / BOLA).
+- **Safe Dependencies**: Audit third-party libraries for CVEs and lock versions.
+- **Error Handling**: Never leak internal stack traces or database schema details in public API error responses.

@@ -1,21 +1,40 @@
 ---
 version: 1.0
-name: Apple-HIG-Design-System
-description: Clean, content-forward, humanist design with refined typography, tactile feedback, and subtle depth.
+name: AI-Agent-Configurator-Architectural-System
+description: Modern architectural light design system: pure white and deep charcoal with 2px sharp tactile edges, 40px grid matrix, Plus Jakarta Sans, and emerald status telemetry.
 ---
 
-# Design System: Apple Human Interface Guidelines
+# Design System: AI Agent Configurator (Architectural Light)
 
-## 1. Palette
-- **Light Background**: `#ffffff` / `#f5f5f7`
-- **Dark Background**: `#000000` / `#1c1c1e`
-- **Accent Blue**: `#0071e3`
-- **System Gray**: `#86868b`
-- **Card Surface**: Ultra-thin background blur (`backdrop-filter: blur(20px)`)
+## 1. Palette & Surface Depth
+- **Canvas / Background**: `#fbfbfd` (Airy architectural white with 40px hairline grid)
+- **Primary Card Surface**: `#ffffff` (Sharp glass card with 1px border)
+- **Subtle Surface**: `#f4f4f6`
+- **Surface Hover**: `#eaecee`
+- **Border Default**: `#dcdfe4` (Crisp hairline border)
+- **Border Hover**: `#9ca3af`
+- **Accent Primary**: `#18181b` / `#09090b` (Obsidian Charcoal)
+- **Accent Gradient**: `linear-gradient(135deg, #18181b 0%, #09090b 100%)`
+- **Telemetry Emerald**: `#10b981` (Active status dots & success badges)
+- **Text Primary**: `#09090b` (Deep Jet Black)
+- **Text Secondary**: `#4b5563` (Refined Slate Gray)
 
-## 2. Typography
-- Font Family: -apple-system, BlinkMacSystemFont, "SF Pro", sans-serif
-- Hierarchy: Large Title (34px bold), Title 1 (28px), Title 2 (22px), Body (17px regular)
+## 2. Typography Hierarchy
+- **Sans-Serif**: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+- **Monospace**: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace
+- Heading Scale:
+  - Page Title: 14px font-bold tracking-tight uppercase
+  - Section Header: 12px font-bold tracking-wider uppercase
+  - Body Text: 12px font-normal leading-relaxed
+  - Code / Telemetry: 11px font-mono font-semibold
 
-## 3. Principles
-- Fluidity, content-first clarity, generous breathing room, rounded corners (12px to 16px).
+## 3. Geometry & Border Radius
+- **Sharp Radius**: `2px` (rounded-sm) — no overly rounded bubbles or blobby corners
+- **Square Radius**: `0px` for tabs, badges, and technical chips
+- **Border**: Strictly `1px solid` hairline strokes; zero heavy dark borders
+
+## 4. Interaction & Motion (Emil Kowalski Physics)
+- Enter transitions: `cubic-bezier(0.16, 1, 0.3, 1)` (fast spring deceleration)
+- Duration: 150ms micro-interactions, max 220ms for cards
+- Never use `ease-in` on entering elements; always decelerate
+- Anti-Slop Discipline: Zero generic purple gradients, zero cards-inside-cards, strict visual density.
