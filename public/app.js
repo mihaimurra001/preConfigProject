@@ -427,12 +427,30 @@ function updatePresetButtonUI(preset) {
   });
 }
 
-// Awesome-Design-MD Themes State & Fallback Catalog (12 Top Tech Brands)
+// Awesome-Design-MD Themes State & Fallback Catalog (13 Top Tech Brands & Native)
 let activeThemeFilter = "all";
 let activeThemeSearch = "";
 let modalCurrentThemeId = "linear";
 
 const DEFAULT_AWESOME_THEMES = [
+  {
+    id: "configurator",
+    name: "Architectural Light",
+    brand: "Platforma Curentă",
+    tag: "Sharp Monochrome",
+    stars: "Craft Standard ⭐",
+    accent: "#18181b",
+    canvas: "#fbfbfd",
+    surface: "#ffffff",
+    border: "#dcdfe4",
+    text: "#09090b",
+    font: "Plus Jakarta Sans / JetBrains Mono",
+    radius: "2px sharp, 0px square",
+    description: "Design-ul nativ al acestei platforme: cărbune obsidian, carduri albe cu colțuri ascuțite la 2px, rețea tehnică de 40px și telemetrie emerald.",
+    principles: ["Muchii ascuțite (2px radius)", "Rețea arhitecturală 40px", "Fizică de resorturi Emil Kowalski"],
+    icon: "layers",
+    category: "light dev"
+  },
   {
     id: "linear",
     name: "Linear",
@@ -752,7 +770,33 @@ function renderThemeMockup(theme) {
 
   let mockupContent = "";
 
-  if (id === "linear") {
+  if (id === "configurator") {
+    mockupContent = `
+      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="font-mono text-[9px] font-semibold text-zinc-900">node: 20 • agy: 2.0 • claude: 1.0</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded text-[8px] font-mono font-bold bg-zinc-100 text-zinc-800 border border-zinc-300">v2.0</span>
+      </div>
+      <div class="p-2 rounded-sm mt-2 shadow-2xs" style="background: ${surface}; border: 1px solid ${border}">
+        <div class="flex items-center gap-1.5 text-[9px] font-mono text-zinc-500">
+          <span class="font-sans font-bold uppercase text-[8px] text-zinc-700">Omnibar:</span>
+          <span class="text-zinc-900 truncate">/home/oem/proiecte/preConfigProject</span>
+        </div>
+        <div class="flex items-center gap-1 mt-1.5">
+          <span class="px-1.5 py-0.5 rounded-xs text-[8px] font-mono font-bold bg-zinc-900 text-white">Unified [Ambele]</span>
+          <span class="px-1.5 py-0.5 rounded-xs text-[8px] font-mono bg-zinc-100 text-zinc-700 border border-zinc-200">Scope: Project</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-between pt-2">
+        <span class="text-[9px] font-mono text-zinc-500">Radius: 2px sharp</span>
+        <div class="btn-primary-gradient px-3 py-1 text-[10px] font-bold text-white shadow-xs rounded-xs">
+          Aplică în Proiect
+        </div>
+      </div>
+    `;
+  } else if (id === "linear") {
     mockupContent = `
       <div class="flex items-center justify-between text-[10px] pb-2 border-b" style="border-color: ${border}">
         <span class="font-mono text-[9px] opacity-60">LIN-1048 • Cycle 42</span>
@@ -1050,10 +1094,10 @@ function renderThemesGallery(filter = activeThemeFilter, query = activeThemeSear
       return cat.includes("dark") || ["linear", "vercel", "github", "supabase", "raycast", "tailwind", "figma", "openai"].includes(theme.id);
     }
     if (filter === "light") {
-      return cat.includes("light") || ["apple", "stripe", "notion", "airbnb"].includes(theme.id);
+      return cat.includes("light") || ["configurator", "apple", "stripe", "notion", "airbnb"].includes(theme.id);
     }
     if (filter === "dev") {
-      return cat.includes("dev") || ["linear", "stripe", "vercel", "github", "supabase", "raycast", "tailwind"].includes(theme.id);
+      return cat.includes("dev") || ["configurator", "linear", "stripe", "vercel", "github", "supabase", "raycast", "tailwind"].includes(theme.id);
     }
     return true;
   });
