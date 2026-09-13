@@ -487,8 +487,8 @@
               class="w-full mt-2.5 py-2 px-3 bg-zinc-900 hover:bg-black text-white text-xs font-semibold rounded-sm transition flex items-center justify-center gap-2 shadow-xs cursor-pointer"
             >
               <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
-              <span>Explorează Galeria de Teme (13 Teme)</span>
-              <span class="text-[10px] bg-zinc-700 px-1.5 py-0.2 rounded-sm font-mono font-normal">Carduri 3 Rânduri</span>
+              <span>Explorează Galeria de Teme (100 de Teme)</span>
+              <span class="text-[10px] bg-zinc-700 px-1.5 py-0.2 rounded-sm font-mono font-normal">100 Teme</span>
             </button>
           </div>
 
@@ -666,7 +666,7 @@
           <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2" data-tab="themes">
             <i data-lucide="palette" class="w-4 h-4"></i>
             <span>Galerie Teme DESIGN.md</span>
-            <span class="px-2 py-0.5 rounded-sm bg-zinc-200 text-[10px] font-mono text-zinc-800 font-bold">13 Teme</span>
+            <span class="px-2 py-0.5 rounded-sm bg-zinc-200 text-[10px] font-mono text-zinc-800 font-bold">100 Teme</span>
           </button>
         </div>
 
@@ -1263,29 +1263,44 @@
           </div>
 
           <!-- Controls: Category Filters & Real-Time Search -->
-          <div class="flex flex-col md:flex-row items-center justify-between gap-3 pt-1">
+          <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 pt-1">
             <div class="flex flex-wrap items-center gap-1.5">
-              <button type="button" class="theme-filter-btn active px-3 py-1.5 text-xs font-semibold rounded-sm bg-zinc-900 text-white border border-zinc-900 transition" data-filter="all">
-                Toate (13)
+              <button type="button" class="theme-filter-btn active px-3 py-1.5 text-xs font-semibold rounded-sm bg-zinc-900 text-white border border-zinc-900 transition cursor-pointer" data-filter="all">
+                Toate (100)
               </button>
-              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition" data-filter="dark">
-                Dark Mode (8)
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition cursor-pointer" data-filter="dark">
+                Dark Mode (54)
               </button>
-              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition" data-filter="light">
-                Light & Editorial (5)
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition cursor-pointer" data-filter="light">
+                Light Mode (46)
               </button>
-              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition" data-filter="dev">
-                Dev & Fintech (5)
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition cursor-pointer" data-filter="dev">
+                Dev & Cloud (25)
+              </button>
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition cursor-pointer" data-filter="fintech">
+                Fintech (15)
+              </button>
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition cursor-pointer" data-filter="ai">
+                AI & Creative (20)
+              </button>
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition cursor-pointer" data-filter="luxury">
+                Luxury & Fashion (20)
+              </button>
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition cursor-pointer" data-filter="editorial">
+                Editorial & Media (10)
+              </button>
+              <button type="button" class="theme-filter-btn px-3 py-1.5 text-xs font-semibold rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 transition cursor-pointer" data-filter="lifestyle">
+                Lifestyle & Social (10)
               </button>
             </div>
 
             <!-- Search input -->
-            <div class="relative w-full md:w-72">
+            <div class="relative w-full lg:w-80 shrink-0">
               <i data-lucide="search" class="w-3.5 h-3.5 text-zinc-400 absolute left-2.5 top-1/2 -translate-y-1/2"></i>
               <input 
                 type="text" 
                 id="themes-search-input" 
-                placeholder="Filtrează temă (ex: linear, stripe, emerald)..."
+                placeholder="Caută în cele 100 de teme (ex: Porsche, Rust, Stripe, Leica)..."
                 class="w-full bg-white border border-zinc-300 rounded-sm pl-8 pr-3 py-1.5 text-xs text-zinc-950 outline-none focus:border-zinc-900 font-mono transition"
               />
             </div>
@@ -1439,34 +1454,75 @@
         </div>
       </div>
     </div>
-  <!-- MODAL: PREVIZUALIZARE TEMĂ DESIGN.MD -->
-  <div id="modal-theme-preview" class="fixed inset-0 z-50 bg-zinc-950/40 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-200 hidden">
-    <div class="bg-white border border-zinc-300 rounded-sm shadow-2xl max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden animate-fadeIn">
-      <div class="px-6 py-4 border-b border-zinc-200 flex items-center justify-between bg-zinc-50">
-        <div class="flex items-center gap-2.5">
-          <i data-lucide="file-code" class="w-4 h-4 text-zinc-900"></i>
+  <!-- MODAL: STUDIO MARE PREVIZUALIZARE TEMĂ DESIGN.MD -->
+  <div id="modal-theme-preview" class="fixed inset-0 z-50 bg-zinc-950/60 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 transition-all duration-200 hidden">
+    <div class="bg-white border border-zinc-300 rounded-sm shadow-2xl max-w-6xl w-full max-h-[92vh] flex flex-col overflow-hidden animate-fadeIn">
+      
+      <!-- MODAL HEADER -->
+      <div class="px-6 py-4 border-b border-zinc-200 flex flex-wrap items-center justify-between gap-3 bg-zinc-50 shrink-0">
+        <div class="flex items-center gap-3">
+          <div id="modal-theme-icon-box" class="w-9 h-9 rounded-sm flex items-center justify-center text-white font-bold text-xs shadow-xs" style="background: #18181b">
+            <i id="modal-theme-icon" data-lucide="palette" class="w-5 h-5"></i>
+          </div>
           <div>
-            <h3 id="modal-theme-title" class="text-sm font-bold text-zinc-950">Specificație DESIGN.md: Linear</h3>
-            <p class="text-[11px] text-zinc-500">Conținutul generat în rădăcina proiectului conform Awesome-Design-MD</p>
+            <div class="flex items-center gap-2">
+              <h3 id="modal-theme-title" class="text-base font-bold text-zinc-950">Linear Design System</h3>
+              <span id="modal-theme-tag-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-zinc-200 text-zinc-800">Dark B2B Craft</span>
+              <span id="modal-theme-stars-badge" class="text-[11px] font-semibold text-amber-600">125k+ ⭐</span>
+            </div>
+            <p id="modal-theme-desc" class="text-xs text-zinc-500 line-clamp-1 mt-0.5">Near-black obsidian canvas cu margini subtile de 1px hairline.</p>
           </div>
         </div>
-        <button id="modal-theme-close" class="p-1 text-zinc-400 hover:text-zinc-800 rounded-sm transition cursor-pointer">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
+
+        <!-- MODAL TABS SWITCHER -->
+        <div class="flex items-center gap-2">
+          <div class="flex items-center bg-zinc-200/80 p-0.5 rounded-sm border border-zinc-300">
+            <button type="button" id="modal-tab-btn-studio" class="modal-tab-btn active px-3 py-1.5 text-xs font-bold rounded-xs bg-white text-zinc-950 shadow-xs transition flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="layout" class="w-3.5 h-3.5"></i>
+              <span>Studio UI Interactiv</span>
+            </button>
+            <button type="button" id="modal-tab-btn-markdown" class="modal-tab-btn px-3 py-1.5 text-xs font-semibold rounded-xs text-zinc-600 hover:text-zinc-950 transition flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="file-code" class="w-3.5 h-3.5"></i>
+              <span>Specificație Markdown</span>
+            </button>
+          </div>
+          <button id="modal-theme-close" class="p-1.5 text-zinc-400 hover:text-zinc-900 rounded-sm hover:bg-zinc-200/60 transition cursor-pointer ml-1">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
       </div>
-      <div class="flex-1 bg-[#18181b] p-6 overflow-auto">
-        <pre id="modal-theme-code" class="text-xs font-mono text-zinc-200 leading-relaxed whitespace-pre"></pre>
+
+      <!-- MODAL BODY 1: STUDIO UI INTERACTIV -->
+      <div id="modal-pane-studio" class="flex-1 p-6 overflow-y-auto space-y-6 bg-zinc-100/50">
+        <!-- Rendered dynamically by renderThemeStudio(theme) -->
       </div>
-      <div class="px-6 py-3 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between">
-        <button id="modal-theme-copy" type="button" class="px-3 py-1.5 bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300 rounded-sm text-xs font-medium transition flex items-center gap-1.5 shadow-sm cursor-pointer">
-          <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-          <span>Copiază Markdown</span>
-        </button>
-        <button id="modal-theme-activate" type="button" class="btn-primary-gradient px-4 py-1.5 text-white rounded-sm text-xs font-semibold transition flex items-center gap-1.5 shadow-sm cursor-pointer">
-          <i data-lucide="check" class="w-3.5 h-3.5"></i>
-          <span>Activează această Temă</span>
-        </button>
+
+      <!-- MODAL BODY 2: MARKDOWN SPECIFICATION -->
+      <div id="modal-pane-markdown" class="flex-1 bg-[#18181b] p-6 overflow-y-auto hidden">
+        <pre id="modal-theme-code" class="text-xs font-mono text-zinc-200 leading-relaxed whitespace-pre select-all"></pre>
       </div>
+
+      <!-- MODAL FOOTER -->
+      <div class="px-6 py-3.5 border-t border-zinc-200 bg-zinc-50 flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center gap-2">
+          <button id="modal-theme-copy-css" type="button" class="px-3 py-1.5 bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300 rounded-sm text-xs font-semibold transition flex items-center gap-1.5 shadow-2xs cursor-pointer">
+            <i data-lucide="code" class="w-3.5 h-3.5"></i>
+            <span>Copiază CSS (:root)</span>
+          </button>
+          <button id="modal-theme-copy" type="button" class="px-3 py-1.5 bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300 rounded-sm text-xs font-semibold transition flex items-center gap-1.5 shadow-2xs cursor-pointer">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <span>Copiază Markdown</span>
+          </button>
+        </div>
+        <div class="flex items-center gap-2.5">
+          <span id="modal-theme-status-note" class="text-[11px] font-mono text-zinc-500 hidden sm:inline">Gata pentru aplicare</span>
+          <button id="modal-theme-activate" type="button" class="btn-primary-gradient px-5 py-2 text-white rounded-sm text-xs font-bold transition flex items-center gap-2 shadow-xs cursor-pointer">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>Activează ca DESIGN.md în Proiect</span>
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1494,6 +1550,7 @@
     </div>
   </div>
 
+  <script src="themes-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

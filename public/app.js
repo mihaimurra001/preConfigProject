@@ -263,12 +263,24 @@ const el = {
   modalThemeCode: document.getElementById("modal-theme-code"),
   modalThemeClose: document.getElementById("modal-theme-close"),
   modalThemeCopy: document.getElementById("modal-theme-copy"),
-  modalThemeActivate: document.getElementById("modal-theme-activate")
+  modalThemeActivate: document.getElementById("modal-theme-activate"),
+  modalThemeDesc: document.getElementById("modal-theme-desc"),
+  modalThemeTagBadge: document.getElementById("modal-theme-tag-badge"),
+  modalThemeStarsBadge: document.getElementById("modal-theme-stars-badge"),
+  modalThemeIcon: document.getElementById("modal-theme-icon"),
+  modalThemeIconBox: document.getElementById("modal-theme-icon-box"),
+  modalTabBtnStudio: document.getElementById("modal-tab-btn-studio"),
+  modalTabBtnMarkdown: document.getElementById("modal-tab-btn-markdown"),
+  modalPaneStudio: document.getElementById("modal-pane-studio"),
+  modalPaneMarkdown: document.getElementById("modal-pane-markdown"),
+  modalThemeCopyCss: document.getElementById("modal-theme-copy-css"),
+  modalThemeStatusNote: document.getElementById("modal-theme-status-note")
 };
 
 // Initialize Application
 document.addEventListener("DOMContentLoaded", async () => {
   setupEventListeners();
+  populateDesignSelectOptions();
   renderThemesGallery();
   await loadEnvironment();
   await loadCatalog();
@@ -427,247 +439,25 @@ function updatePresetButtonUI(preset) {
   });
 }
 
-// Awesome-Design-MD Themes State & Fallback Catalog (13 Top Tech Brands & Native)
+// Awesome-Design-MD Themes State & Catalog (100 Top Brands & Curated Systems)
 let activeThemeFilter = "all";
 let activeThemeSearch = "";
-let modalCurrentThemeId = "linear";
+let modalCurrentThemeId = "configurator";
+let modalActiveTab = "studio"; // "studio" or "markdown"
 
-const DEFAULT_AWESOME_THEMES = [
-  {
-    id: "configurator",
-    name: "Architectural Light",
-    brand: "Platforma Curentă",
-    tag: "Sharp Monochrome",
-    stars: "Craft Standard ⭐",
-    accent: "#18181b",
-    canvas: "#fbfbfd",
-    surface: "#ffffff",
-    border: "#dcdfe4",
-    text: "#09090b",
-    font: "Plus Jakarta Sans / JetBrains Mono",
-    radius: "2px sharp, 0px square",
-    description: "Design-ul nativ al acestei platforme: cărbune obsidian, carduri albe cu colțuri ascuțite la 2px, rețea tehnică de 40px și telemetrie emerald.",
-    principles: ["Muchii ascuțite (2px radius)", "Rețea arhitecturală 40px", "Fizică de resorturi Emil Kowalski"],
-    icon: "layers",
-    category: "light dev"
-  },
-  {
-    id: "linear",
-    name: "Linear",
-    brand: "Linear.app",
-    tag: "Dark B2B Craft",
-    stars: "115k+ ⭐",
-    accent: "#5e6ad2",
-    canvas: "#010102",
-    surface: "#0f1011",
-    border: "#23252a",
-    text: "#f7f8f8",
-    font: "Inter / SF Pro Display (-0.02em)",
-    radius: "8px cards, 6px buttons",
-    description: "Near-black obsidian canvas cu margini subtile de 1px hairline, accente lavandă folosite cu rigoare și densitate extremă.",
-    principles: ["Zero drop-shadows grele", "Negative letter-spacing", "Micro-interacțiuni 150ms"],
-    icon: "sliders",
-    category: "dark dev"
-  },
-  {
-    id: "apple",
-    name: "Apple HIG",
-    brand: "Apple Inc.",
-    tag: "Content-First Clarity",
-    stars: "115k+ ⭐",
-    accent: "#0071e3",
-    canvas: "#f5f5f7",
-    surface: "#ffffff",
-    border: "#d2d2d7",
-    text: "#1d1d1f",
-    font: "SF Pro / -apple-system",
-    radius: "12px - 16px squircle",
-    description: "Claritate umanistă orientată pe conținut, margini rotunjite squircle, spațiere generoasă și fundaluri cu blur ultra-subțire.",
-    principles: ["Backdrop blur 20px", "Tipografie dinamică ierarhică", "Feedback haptic & tactil"],
-    icon: "command",
-    category: "light"
-  },
-  {
-    id: "stripe",
-    name: "Stripe",
-    brand: "Stripe.com",
-    tag: "Fintech Precision",
-    stars: "115k+ ⭐",
-    accent: "#635bff",
-    canvas: "#f8f9fa",
-    surface: "#ffffff",
-    border: "#e6ebf1",
-    text: "#0a2540",
-    font: "Söhne / Inter, 500-600 weight",
-    radius: "8px - 12px",
-    description: "Estetică fintech de maximă încredere, accente indigo vibrante, umbre stratificate matematice și carduri impecabile.",
-    principles: ["Umbre stratificate pe 2 nivele", "Contururi precise", "Albastru de siguranță financiară"],
-    icon: "credit-card",
-    category: "light dev"
-  },
-  {
-    id: "vercel",
-    name: "Vercel",
-    brand: "Vercel.com",
-    tag: "Stark Monochrome",
-    stars: "115k+ ⭐",
-    accent: "#0070f3",
-    canvas: "#000000",
-    surface: "#111111",
-    border: "#333333",
-    text: "#ffffff",
-    font: "Geist Sans & Geist Mono",
-    radius: "6px standard, 9999px pills",
-    description: "Contrast maxim alb-negru (monocrom pur), rigoare geometrică absolută, tipografie Geist tehnică și accente albastru electric.",
-    principles: ["Contrast WCAG AAA", "Grid tehnic strict", "Geist monospace integrat"],
-    icon: "triangle",
-    category: "dark dev"
-  },
-  {
-    id: "github",
-    name: "GitHub Primer",
-    brand: "GitHub.com",
-    tag: "Dev Telemetry",
-    stars: "115k+ ⭐",
-    accent: "#238636",
-    canvas: "#0d1117",
-    surface: "#161b22",
-    border: "#30363d",
-    text: "#e6edf3",
-    font: "-apple-system / Segoe UI",
-    radius: "6px standard, 3px badges",
-    description: "Sistemul Primer de la GitHub: optimizat pentru programatori, diferențiere vizuală a diff-urilor și culori semantice clare de status.",
-    principles: ["Status semantic verde/roșu/galben", "Fundaluri gri închis confortabile", "Tag-uri compacte"],
-    icon: "git-branch",
-    category: "dark dev"
-  },
-  {
-    id: "supabase",
-    name: "Supabase",
-    brand: "Supabase.com",
-    tag: "Emerald Backend",
-    stars: "115k+ ⭐",
-    accent: "#3ecf8e",
-    canvas: "#171717",
-    surface: "#1c1c1c",
-    border: "#2e2e2e",
-    text: "#ededed",
-    font: "Circular / Fira Code",
-    radius: "6px standard",
-    description: "Design întunecat pentru baze de date & SQL: verde smarald neon, suprafețe obsidian și editor monospace integrat.",
-    principles: ["Verde smarald radiant", "Tabele de date dense", "Contrast optim pentru cod"],
-    icon: "database",
-    category: "dark dev"
-  },
-  {
-    id: "raycast",
-    name: "Raycast",
-    brand: "Raycast.com",
-    tag: "Keyboard Launcher",
-    stars: "115k+ ⭐",
-    accent: "#ff6363",
-    canvas: "#141416",
-    surface: "#1f1f23",
-    border: "#2c2c32",
-    text: "#ffffff",
-    font: "Inter / JetBrains Mono",
-    radius: "8px - 10px",
-    description: "Viteză fulgerătoare și precizie: accente roșu rubin, indicatoare pentru scurtături de tastatură și sticlă mată întunecată.",
-    principles: ["Badge-uri Kbd de taste", "Focalizare rapidă", "Tranziții instant sub 100ms"],
-    icon: "zap",
-    category: "dark dev"
-  },
-  {
-    id: "tailwind",
-    name: "Tailwind CSS",
-    brand: "TailwindLabs",
-    tag: "Modern Utility Web",
-    stars: "115k+ ⭐",
-    accent: "#0ea5e9",
-    canvas: "#0f172a",
-    surface: "#1e293b",
-    border: "#334155",
-    text: "#f8fafc",
-    font: "Inter / system-ui",
-    radius: "8px rounded-md",
-    description: "Estetica oficială modernă Tailwind: nuanțe slate, accente cyan/sky, carduri echilibrate și spațiere modulară armonioasă.",
-    principles: ["Paletă Slate & Sky echilibrată", "Scală modulară 4px", "Componente aerisite"],
-    icon: "wind",
-    category: "dark dev"
-  },
-  {
-    id: "notion",
-    name: "Notion",
-    brand: "Notion.so",
-    tag: "Warm Editorial",
-    stars: "115k+ ⭐",
-    accent: "#2eaadc",
-    canvas: "#f7f6f3",
-    surface: "#ffffff",
-    border: "#e3e2de",
-    text: "#37352f",
-    font: "ui-sans-serif & Lyon Serif",
-    radius: "4px - 6px subtil",
-    description: "Spațiu editorial minimalist cu aromă de hârtie caldă, nuanțe sepia, contrast relaxant pentru ochi și tipografie literară.",
-    principles: ["Fundal cald ivory", "Linii subțiri sepia", "Fără distracții vizuale"],
-    icon: "book-open",
-    category: "light"
-  },
-  {
-    id: "figma",
-    name: "Figma",
-    brand: "Figma.com",
-    tag: "Creative Canvas",
-    stars: "115k+ ⭐",
-    accent: "#7b61ff",
-    canvas: "#1e1e1e",
-    surface: "#2c2c2c",
-    border: "#383838",
-    text: "#ffffff",
-    font: "Inter Display",
-    radius: "6px inspector panels",
-    description: "Interfață de unelte profesionale de creație: fundal gri neutru pentru a evidenția creația, accent violet și controale numerice precise.",
-    principles: ["Panouri flotante compacte", "Accent violet creator", "Feedback vizual la hover pe unelte"],
-    icon: "pen-tool",
-    category: "dark"
-  },
-  {
-    id: "openai",
-    name: "OpenAI ChatGPT",
-    brand: "OpenAI",
-    tag: "Conversational Slate",
-    stars: "115k+ ⭐",
-    accent: "#10a37f",
-    canvas: "#202123",
-    surface: "#343541",
-    border: "#4d4d4f",
-    text: "#ececf1",
-    font: "Söhne / system-ui",
-    radius: "8px - 12px pill",
-    description: "Design conversațional axat pe lizibilitate: nuanțe neutre de ardezie (slate), accente mint green și bule de text confortabile.",
-    principles: ["Lățime optimă de citire (max 768px)", "Accent verde mentă", "Bule chat fluide"],
-    icon: "bot",
-    category: "dark"
-  },
-  {
-    id: "airbnb",
-    name: "Airbnb",
-    brand: "Airbnb.com",
-    tag: "Consumer Trust",
-    stars: "115k+ ⭐",
-    accent: "#ff385c",
-    canvas: "#ffffff",
-    surface: "#f7f7f7",
-    border: "#dddddd",
-    text: "#222222",
-    font: "Circular / -apple-system",
-    radius: "12px - 16px rounded-xl",
-    description: "Estetică de consum prietenoasă cu încredere maximă: accent coral/rausch recunoscut mondial, carduri rotunjite și spațiere confortabilă.",
-    principles: ["Rausch Coral emblematic", "Umbre difuze mari", "Rază generoasă de 16px"],
-    icon: "home",
-    category: "light"
-  }
-];
+const DEFAULT_AWESOME_THEMES = (typeof window !== "undefined" && window.AWESOME_100_THEMES) || [];
+
+// Helper: Determine if a HEX color is light or dark for optimal text contrast
+function isColorLight(hex) {
+  if (!hex || typeof hex !== "string") return false;
+  let c = hex.replace("#", "").trim();
+  if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+  if (c.length !== 6) return false;
+  const r = parseInt(c.substr(0, 2), 16) || 0;
+  const g = parseInt(c.substr(2, 2), 16) || 0;
+  const b = parseInt(c.substr(4, 2), 16) || 0;
+  return (r * 299 + g * 587 + b * 114) / 1000 > 155;
+}
 
 function updateActiveThemeBadge() {
   if (!el.galleryActiveThemeBadge) return;
@@ -705,35 +495,150 @@ function selectThemePreset(themeId) {
   showToast(`Tema ${t ? t.name : themeId} a fost activată în DESIGN.md!`, "success");
 }
 
+function switchModalTab(tab) {
+  modalActiveTab = tab;
+  if (el.modalTabBtnStudio && el.modalTabBtnMarkdown && el.modalPaneStudio && el.modalPaneMarkdown) {
+    if (tab === "studio") {
+      el.modalTabBtnStudio.classList.add("active", "bg-white", "text-zinc-950", "shadow-xs");
+      el.modalTabBtnStudio.classList.remove("text-zinc-600");
+      el.modalTabBtnMarkdown.classList.remove("active", "bg-white", "text-zinc-950", "shadow-xs");
+      el.modalTabBtnMarkdown.classList.add("text-zinc-600");
+      el.modalPaneStudio.classList.remove("hidden");
+      el.modalPaneMarkdown.classList.add("hidden");
+    } else {
+      el.modalTabBtnMarkdown.classList.add("active", "bg-white", "text-zinc-950", "shadow-xs");
+      el.modalTabBtnMarkdown.classList.remove("text-zinc-600");
+      el.modalTabBtnStudio.classList.remove("active", "bg-white", "text-zinc-950", "shadow-xs");
+      el.modalTabBtnStudio.classList.add("text-zinc-600");
+      el.modalPaneMarkdown.classList.remove("hidden");
+      el.modalPaneStudio.classList.add("hidden");
+    }
+  }
+  if (window.lucide) lucide.createIcons();
+}
+
 function openThemeSpecModal(themeId) {
   modalCurrentThemeId = themeId;
   const themes = (state.catalog && state.catalog.designSuite && state.catalog.designSuite.themes) || DEFAULT_AWESOME_THEMES;
-  const theme = themes.find(t => t.id === themeId) || { name: themeId, tag: "" };
+  const theme = themes.find(t => t.id === themeId) || { 
+    id: themeId, 
+    name: themeId, 
+    brand: themeId, 
+    tag: "Design System",
+    stars: "Craft Standard ⭐",
+    accent: "#18181b",
+    canvas: "#ffffff",
+    surface: "#f8f9fa",
+    border: "#e5e7eb",
+    text: "#09090b",
+    textMuted: "#64748b",
+    font: "Inter",
+    fontFamily: "'Inter', sans-serif",
+    radius: "6px",
+    borderRadius: "6px",
+    description: "Design system modern.",
+    principles: ["Minimalism", "Accesibilitate", "Performanță"]
+  };
 
+  // 1. Update Modal Header
   if (el.modalThemeTitle) {
-    el.modalThemeTitle.textContent = `Specificație DESIGN.md: ${theme.name} (${theme.tag || theme.brand || ""})`;
+    el.modalThemeTitle.textContent = `${theme.name} (${theme.brand})`;
+  }
+  if (el.modalThemeDesc) {
+    el.modalThemeDesc.textContent = theme.description;
+  }
+  if (el.modalThemeTagBadge) {
+    el.modalThemeTagBadge.textContent = theme.tag;
+  }
+  if (el.modalThemeStarsBadge) {
+    el.modalThemeStarsBadge.textContent = theme.stars || "Craft Standard ⭐";
+  }
+  if (el.modalThemeIconBox) {
+    el.modalThemeIconBox.style.backgroundColor = theme.accent;
   }
 
+  // 2. Render Markdown Tab
   let mdContent = "";
   if (state.catalog && state.catalog.designSuite && state.catalog.designSuite.presetDocs && state.catalog.designSuite.presetDocs[themeId]) {
     mdContent = state.catalog.designSuite.presetDocs[themeId];
-  } else {
-    mdContent = `# DESIGN.md - ${theme.name} Design System\n\n> Brand: ${theme.brand || theme.name}\n> Tag: ${theme.tag || ""}\n\n## Color Tokens\n- Accent: ${theme.accent}\n- Canvas: ${theme.canvas}\n- Surface: ${theme.surface}\n- Border: ${theme.border}\n- Text: ${theme.text}\n\n## Typography\n- Primary Font: ${theme.font}\n\n## Border Radius\n- Scale: ${theme.radius}\n\n## Core Principles\n${(theme.principles || []).map(p => `- ${p}`).join("\n")}`;
+    mdContent = [
+      "---",
+      "version: 1.0",
+      `name: ${theme.id}-design-system`,
+      `brand: ${theme.brand}`,
+      `tag: ${theme.tag}`,
+      `category: ${theme.category}`,
+      "---",
+      "",
+      `# Design System: ${theme.name} (${theme.brand})`,
+      "",
+      `> **Tagline**: ${theme.tag}`,
+      `> **Category**: ${theme.category}`,
+      `> **Standard**: ${theme.stars || "Craft Standard ⭐"}`,
+      "",
+      "## 1. Palette & Surface Tokens",
+      `- **Canvas (Background)**: \`${theme.canvas}\``,
+      `- **Surface (Card / Panel)**: \`${theme.surface}\``,
+      `- **Hairline Border**: \`${theme.border}\``,
+      `- **Primary Accent**: \`${theme.accent}\``,
+      `- **Text Primary**: \`${theme.text}\``,
+      `- **Text Muted**: \`${theme.textMuted || "#8a8f98"}\``,
+      "",
+      "## 2. Typography Hierarchy",
+      `- **Font Scale**: ${theme.font}`,
+      `- **Primary CSS Family**: ${theme.fontFamily || "'Inter', sans-serif"}`,
+      "- Display: 28px - 36px font-bold tracking-tight",
+      "- Heading 1: 20px - 24px font-semibold",
+      "- Body Text: 14px font-normal leading-relaxed",
+      "- Monospace / Code: 12px font-mono",
+      "",
+      "## 3. Geometry & Radii",
+      `- **Border Radius**: ${theme.radius}`,
+      `- **Base CSS Radius**: ${theme.borderRadius || "6px"}`,
+      `- **Border Width**: Strictly 1px crisp hairline stroke (\`${theme.border}\`)`,
+      "",
+      "## 4. Core Craft Principles",
+      ...(theme.principles || []).map(p => `- ${p}`),
+      "",
+      "## 5. CSS Custom Properties (:root)",
+      "```css",
+      ":root {",
+      `  --canvas: ${theme.canvas};`,
+      `  --surface: ${theme.surface};`,
+      `  --border: ${theme.border};`,
+      `  --accent: ${theme.accent};`,
+      `  --text-primary: ${theme.text};`,
+      `  --text-muted: ${theme.textMuted || "#8a8f98"};`,
+      `  --font-family: ${theme.fontFamily || "'Inter', sans-serif"};`,
+      `  --radius: ${theme.borderRadius || "6px"};`,
+      "}",
+      "```"
+    ].join("\n");
   }
 
   if (el.modalThemeCode) {
     el.modalThemeCode.textContent = mdContent;
   }
 
+  // 3. Render Large Studio UI Tab
+  if (el.modalPaneStudio) {
+    el.modalPaneStudio.innerHTML = renderThemeStudio(theme);
+    bindStudioInteractiveEvents(theme);
+  }
+
+  // 4. Update Activate Button
   if (el.modalThemeActivate) {
     if (state.designSuite.designMdPreset === themeId) {
-      el.modalThemeActivate.innerHTML = `<i data-lucide="check-check" class="w-3.5 h-3.5"></i><span>Temă Deja Activă</span>`;
+      el.modalThemeActivate.innerHTML = `<i data-lucide="check-check" class="w-4 h-4"></i><span>Temă Deja Activă</span>`;
       el.modalThemeActivate.classList.add("opacity-80");
     } else {
-      el.modalThemeActivate.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i><span>Activează această Temă</span>`;
+      el.modalThemeActivate.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>Activează ca DESIGN.md în Proiect</span>`;
       el.modalThemeActivate.classList.remove("opacity-80");
     }
   }
+
+  // Switch to studio tab by default
+  switchModalTab("studio");
 
   if (el.modalThemePreview) {
     el.modalThemePreview.classList.remove("hidden");
@@ -748,333 +653,483 @@ function closeThemeSpecModal() {
   }
 }
 
-// Render Authentic Mini-Mockup of Page Elements for Each Brand
+// Binds live copy and toggle interactions inside the large Studio preview modal
+function bindStudioInteractiveEvents(theme) {
+  // Swatch copy buttons
+  document.querySelectorAll(".btn-copy-hex").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const hex = btn.getAttribute("data-hex");
+      if (hex) {
+        navigator.clipboard.writeText(hex);
+        showToast(`Cod HEX ${hex} copiat în clipboard!`, "success");
+      }
+    });
+  });
+
+  // Interactive toggle switch demo
+  const switchDemo = document.getElementById("studio-switch-demo");
+  if (switchDemo) {
+    switchDemo.addEventListener("click", () => {
+      const knob = switchDemo.querySelector(".switch-knob");
+      const isChecked = switchDemo.getAttribute("data-checked") === "true";
+      if (isChecked) {
+        switchDemo.setAttribute("data-checked", "false");
+        switchDemo.style.backgroundColor = theme.border;
+        if (knob) knob.style.transform = "translateX(0px)";
+      } else {
+        switchDemo.setAttribute("data-checked", "true");
+        switchDemo.style.backgroundColor = theme.accent;
+        if (knob) knob.style.transform = "translateX(16px)";
+      }
+    });
+  }
+}
+
+// Render Consistent, Rich Card Mini-Mockup for EVERY Brand Theme
 function renderThemeMockup(theme) {
-  const { id, canvas, surface, border, text, accent } = theme;
+  const { id, canvas, surface, border, text, textMuted, accent, radius, borderRadius, font, fontFamily } = theme;
 
-  // Font family and typography per brand design system
-  let fontCss = "font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;";
-  if (id === "linear" || id === "figma" || id === "raycast") {
-    fontCss = "font-family: 'Inter', -apple-system, sans-serif; letter-spacing: -0.02em;";
-  } else if (id === "vercel") {
-    fontCss = "font-family: 'JetBrains Mono', 'Geist Mono', monospace;";
-  } else if (id === "supabase") {
-    fontCss = "font-family: 'Fira Code', 'JetBrains Mono', monospace;";
-  } else if (id === "notion") {
-    fontCss = "font-family: 'Newsreader', Georgia, 'Times New Roman', serif;";
-  } else if (id === "apple") {
-    fontCss = "font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;";
-  } else if (id === "github") {
-    fontCss = "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;";
-  }
+  const fontCss = `font-family: ${fontFamily || "'Plus Jakarta Sans', sans-serif"};`;
+  const muted = textMuted || "#71717a";
+  const bRadius = borderRadius || "4px";
 
-  let mockupContent = "";
-
-  if (id === "configurator") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
-        <div class="flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="font-mono text-[9px] font-semibold text-zinc-900">node: 20 • agy: 2.0 • claude: 1.0</span>
-        </div>
-        <span class="px-1.5 py-0.2 rounded text-[8px] font-mono font-bold bg-zinc-100 text-zinc-800 border border-zinc-300">v2.0</span>
-      </div>
-      <div class="p-2 rounded-sm mt-2 shadow-2xs" style="background: ${surface}; border: 1px solid ${border}">
-        <div class="flex items-center gap-1.5 text-[9px] font-mono text-zinc-500">
-          <span class="font-sans font-bold uppercase text-[8px] text-zinc-700">Omnibar:</span>
-          <span class="text-zinc-900 truncate">/home/oem/proiecte/preConfigProject</span>
-        </div>
-        <div class="flex items-center gap-1 mt-1.5">
-          <span class="px-1.5 py-0.5 rounded-xs text-[8px] font-mono font-bold bg-zinc-900 text-white">Unified [Ambele]</span>
-          <span class="px-1.5 py-0.5 rounded-xs text-[8px] font-mono bg-zinc-100 text-zinc-700 border border-zinc-200">Scope: Project</span>
-        </div>
-      </div>
-      <div class="flex items-center justify-between pt-2">
-        <span class="text-[9px] font-mono text-zinc-500">Radius: 2px sharp</span>
-        <div class="btn-primary-gradient px-3 py-1 text-[10px] font-bold text-white shadow-xs rounded-xs">
-          Aplică în Proiect
-        </div>
-      </div>
-    `;
-  } else if (id === "linear") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-2 border-b" style="border-color: ${border}">
-        <span class="font-mono text-[9px] opacity-60">LIN-1048 • Cycle 42</span>
-        <span class="px-1.5 py-0.5 text-[9px] font-mono rounded" style="background: ${accent}25; color: #8b95f6; border: 1px solid ${accent}50">In Progress</span>
-      </div>
-      <div class="pt-2">
-        <h4 class="text-xs font-semibold tracking-tight leading-snug" style="color: ${text}">Migrate stream to ClickHouse</h4>
-        <p class="text-[10px] opacity-70 pt-0.5 truncate">Zero dropped events across 12 partitions</p>
-      </div>
-      <div class="p-2 rounded mt-2 text-[10px] flex items-center justify-between" style="background: ${surface}; border: 1px solid ${border}">
-        <div class="flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full" style="background: #22c55e"></span>
-          <span class="font-mono text-[9px]">16/16 fixtures passed</span>
-        </div>
-        <span class="text-[9px] font-mono opacity-60">P1 ⚡</span>
-      </div>
-      <div class="flex items-center justify-between pt-2.5 mt-0.5">
-        <div class="flex items-center gap-1.5">
-          <span class="w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-bold shadow-xs" style="background: ${accent}; color: #fff">AG</span>
-          <span class="text-[9px] opacity-70 font-mono">Assigned</span>
-        </div>
-        <div class="px-2.5 py-1 text-[10px] font-medium shadow-xs" style="background: ${accent}; color: #ffffff; border-radius: 6px;">
-          Update issue
-        </div>
-      </div>
-    `;
-  } else if (id === "apple") {
-    mockupContent = `
-      <div class="flex items-center justify-between pb-1.5 border-b" style="border-color: ${border}">
-        <div class="flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
-          <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
-          <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
-        </div>
-        <span class="text-[10px] font-medium opacity-60">AirPlay & Display</span>
-      </div>
-      <div class="p-2.5 rounded-xl mt-2 shadow-xs" style="background: ${surface}; border: 1px solid ${border}">
-        <div class="flex items-center justify-between mb-1.5">
-          <span class="text-[11px] font-semibold tracking-tight" style="color: ${text}">Studio Display Pro</span>
-          <span class="w-4 h-4 rounded-full flex items-center justify-center text-[9px]" style="background: ${accent}15; color: ${accent}">
-            🔊
-          </span>
-        </div>
-        <div class="w-full h-2 bg-zinc-200/80 rounded-full overflow-hidden">
-          <div class="h-full rounded-full" style="width: 76%; background: ${accent}"></div>
-        </div>
-      </div>
-      <div class="flex items-center justify-between pt-2">
-        <span class="text-[9px] opacity-70 font-medium">Spatial Audio: On</span>
-        <div class="px-3 py-1 text-[10px] font-semibold" style="background: ${accent}; color: #ffffff; border-radius: 9999px;">
-          Connect
-        </div>
-      </div>
-    `;
-  } else if (id === "stripe") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
-        <span class="font-medium opacity-60">Payments & Balances</span>
-        <span class="px-1.5 py-0.2 rounded font-semibold text-[9px]" style="background: #eef2ff; color: ${accent}">Live mode</span>
-      </div>
-      <div class="p-2.5 rounded-lg mt-2 shadow-xs" style="background: ${surface}; border: 1px solid ${border}; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 6px rgba(0,0,0,0.02);">
-        <span class="text-[9px] opacity-60 uppercase tracking-wider block font-semibold">Net volume</span>
-        <div class="flex items-baseline gap-2 mt-0.5">
-          <span class="text-sm font-bold tracking-tight" style="color: ${text}">$84,250.00</span>
-          <span class="text-[9px] font-bold text-emerald-600">+14.2%</span>
-        </div>
-      </div>
-      <div class="flex items-center justify-between pt-2">
-        <div class="flex items-center gap-1.5 text-[10px]">
-          <span class="font-bold text-[9px] px-1 py-0.2 rounded bg-zinc-200/60 font-mono">VISA</span>
-          <span class="font-mono text-[9px] opacity-70">•••• 4242</span>
-        </div>
-        <div class="px-3 py-1 text-[10px] font-semibold shadow-xs" style="background: ${accent}; color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(99,91,255,0.25)">
-          Payout
-        </div>
-      </div>
-    `;
-  } else if (id === "vercel") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b font-mono" style="border-color: ${border}">
-        <span class="flex items-center gap-1.5 font-bold" style="color: ${text}">
-          <span>▲</span> my-next-app
-        </span>
-        <span class="text-[9px] text-emerald-400 font-mono">● Ready (420ms)</span>
-      </div>
-      <div class="p-2 rounded mt-2 font-mono text-[10px]" style="background: ${surface}; border: 1px solid ${border}">
-        <div class="text-zinc-500 text-[9px] font-mono">$ git push origin main</div>
-        <div class="text-white text-[10px] pt-1">▲ Deployment live at edge</div>
-        <div class="text-zinc-400 text-[8px] font-mono">commit: d7e8a9 (optimized-fonts)</div>
-      </div>
-      <div class="flex items-center justify-between pt-2 font-mono">
-        <span class="text-[8px] text-zinc-500">IAD1 • Production</span>
-        <div class="px-2.5 py-1 text-[10px] font-bold" style="background: #ffffff; color: #000000; border-radius: 6px;">
-          Visit Preview
-        </div>
-      </div>
-    `;
-  } else if (id === "github") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
-        <span class="font-mono text-[9px] opacity-70">PR #124 • main ← feat/api</span>
-        <span class="px-1.5 py-0.5 rounded text-[9px] font-bold font-mono" style="background: ${accent}25; color: #3fb950; border: 1px solid ${accent}60">✓ Passing</span>
-      </div>
-      <div class="pt-2">
-        <h4 class="text-xs font-semibold leading-snug" style="color: ${text}">Implement rate limiter & RBAC</h4>
-        <div class="flex items-center gap-2 pt-1 text-[10px] font-mono">
-          <span class="text-emerald-400 font-bold">+184</span>
-          <span class="text-rose-400 font-bold">-12</span>
-          <span class="opacity-60 text-[9px]">across 6 files</span>
-        </div>
-      </div>
-      <div class="flex items-center justify-between pt-2.5 mt-0.5">
-        <span class="text-[9px] opacity-70 font-mono">1 review approved</span>
-        <div class="px-3 py-1 text-[10px] font-semibold" style="background: ${accent}; color: #ffffff; border-radius: 6px;">
-          Merge Pull Request
-        </div>
-      </div>
-    `;
-  } else if (id === "supabase") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b font-mono" style="border-color: ${border}">
-        <span class="opacity-70 text-[9px]">postgres-prod • eu-central</span>
-        <span class="px-1.5 py-0.2 rounded text-[9px] font-bold" style="background: ${accent}20; color: ${accent}; border: 1px solid ${accent}50">SQL Editor</span>
-      </div>
-      <div class="p-2 rounded mt-2 font-mono text-[10px] leading-relaxed" style="background: ${surface}; border: 1px solid ${border}">
-        <span style="color: ${accent}">SELECT</span> id, email, role<br>
-        <span style="color: ${accent}">FROM</span> auth.users <span style="color: ${accent}">LIMIT</span> 1;
-      </div>
-      <div class="flex items-center justify-between pt-2 font-mono">
-        <span class="text-[9px] opacity-60">1 row (2.4ms)</span>
-        <div class="px-3 py-1 text-[10px] font-bold" style="background: ${accent}; color: #171717; border-radius: 6px;">
-          Run (⌘↵)
-        </div>
-      </div>
-    `;
-  } else if (id === "raycast") {
-    mockupContent = `
-      <div class="p-2 rounded-md flex items-center gap-2" style="background: ${surface}; border: 1px solid ${border}">
-        <span style="color: ${accent}; font-size: 11px;">🔍</span>
-        <span class="text-[10px] opacity-60 flex-1">Search actions, scripts...</span>
-        <span class="px-1 py-0.5 rounded text-[8px] font-mono bg-zinc-800 text-zinc-300 border border-zinc-700">⌘K</span>
-      </div>
-      <div class="p-2 rounded-md mt-2 flex items-center justify-between text-[10px]" style="background: #1a1a1e; border: 1px solid ${border}">
-        <div class="flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full" style="background: ${accent}"></span>
-          <span style="color: ${text}" class="font-medium">Toggle Claude Agent</span>
-        </div>
-        <span class="text-[9px] font-mono opacity-50">Action</span>
-      </div>
-      <div class="flex items-center justify-between pt-2">
-        <span class="text-[9px] opacity-60 font-mono">120+ extensions</span>
-        <div class="px-3 py-1 text-[10px] font-medium" style="background: ${accent}; color: #ffffff; border-radius: 8px;">
-          Execute (↵)
-        </div>
-      </div>
-    `;
-  } else if (id === "tailwind") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
-        <span class="font-mono opacity-60 text-[9px]">Tailwind UI v4.0</span>
-        <span class="px-1.5 py-0.2 rounded text-[9px] font-bold" style="background: ${accent}20; color: ${accent}">Utility</span>
-      </div>
-      <div class="p-2.5 rounded-lg mt-2" style="background: ${surface}; border: 1px solid ${border}">
-        <div class="flex items-center gap-2">
-          <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold" style="background: ${accent}; color: #fff">flex</span>
-          <span class="text-xs font-semibold tracking-tight" style="color: ${text}">Modern Dashboard</span>
-        </div>
-        <p class="text-[9px] opacity-60 pt-1 font-mono">bg-slate-900 shadow-xl border</p>
-      </div>
-      <div class="flex items-center justify-between pt-2">
-        <span class="text-[9px] opacity-60 font-mono">scale: 4px</span>
-        <div class="px-3 py-1 text-[10px] font-semibold shadow-xs" style="background: ${accent}; color: #ffffff; border-radius: 8px;">
-          Build UI
-        </div>
-      </div>
-    `;
-  } else if (id === "notion") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-1 border-b" style="border-color: ${border}">
-        <div class="flex items-center gap-1 opacity-70 text-[9px]">
-          <span>📝</span>
-          <span>Docs / Product Spec</span>
-        </div>
-        <span class="text-[9px] opacity-50">Public</span>
-      </div>
-      <div class="pt-2">
-        <h4 class="text-xs font-semibold leading-snug" style="color: ${text}">Architecture RFC 2026</h4>
-        <div class="space-y-1 pt-1.5 text-[10px] opacity-80">
-          <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded-xs border border-zinc-400 flex items-center justify-center text-[8px] font-bold bg-white" style="color: #111">✓</span>
-            <span class="text-[9px]">Single source of truth in DESIGN.md</span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded-xs border border-zinc-300 bg-white"></span>
-            <span class="text-[9px]">Publish API documentation</span>
-          </div>
-        </div>
-      </div>
-      <div class="flex items-center justify-between pt-2.5 mt-0.5">
-        <span class="text-[9px] opacity-50">Edited 2m ago</span>
-        <div class="px-3 py-1 text-[10px] font-medium shadow-xs" style="background: #ffffff; color: ${text}; border: 1px solid ${border}; border-radius: 4px;">
-          + New Page
-        </div>
-      </div>
-    `;
-  } else if (id === "figma") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
-        <span class="text-[9px] font-mono opacity-60">Desktop / Frame 1440</span>
-        <span class="px-1.5 py-0.2 rounded text-[8px] font-bold" style="background: ${accent}25; color: ${accent}; border: 1px solid ${accent}50">Selected</span>
-      </div>
-      <div class="p-2 rounded mt-2 text-[10px]" style="background: ${surface}; border: 1px solid ${border}">
-        <div class="flex items-center justify-between text-[9px] font-mono opacity-70">
-          <span>X: 120  Y: 80</span>
-          <span style="color: ${accent}; font-weight: bold;">W: 1440  H: 900</span>
-        </div>
-        <div class="h-1.5 w-full bg-zinc-700/80 rounded-full mt-1.5 overflow-hidden">
-          <div class="h-full rounded-full" style="width: 65%; background: ${accent}"></div>
-        </div>
-      </div>
-      <div class="flex items-center justify-between pt-2">
-        <span class="text-[9px] opacity-60 font-mono">Corner: 12px</span>
-        <div class="px-3 py-1 text-[10px] font-semibold" style="background: ${accent}; color: #ffffff; border-radius: 6px;">
-          Export SVG
-        </div>
-      </div>
-    `;
-  } else if (id === "openai") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
-        <span class="opacity-70 text-[9px]">GPT-4o • Code Reasoning</span>
-        <span class="px-1.5 py-0.2 rounded text-[8px] font-bold" style="background: ${accent}20; color: ${accent}">● Active</span>
-      </div>
-      <div class="p-2 rounded-xl mt-2 text-[10px]" style="background: ${surface}; border: 1px solid ${border}">
-        <div class="text-[9px] opacity-60">User: Build design tokens</div>
-        <div class="flex items-start gap-1.5 pt-1.5">
-          <span class="w-3.5 h-3.5 rounded-full flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5" style="background: ${accent}; color: #ffffff">AI</span>
-          <span class="text-[9px] leading-snug" style="color: ${text}">Configuring DESIGN.md with strict tokens.</span>
-        </div>
-      </div>
-      <div class="flex items-center justify-between pt-2">
-        <span class="text-[9px] opacity-60 font-mono">Tokens: 148</span>
-        <div class="px-3 py-1 text-[10px] font-semibold" style="background: ${accent}; color: #ffffff; border-radius: 12px;">
-          Send (↵)
-        </div>
-      </div>
-    `;
-  } else if (id === "airbnb") {
-    mockupContent = `
-      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
-        <span class="px-1.5 py-0.5 rounded-full text-[8px] font-bold bg-white text-zinc-900 shadow-2xs border border-zinc-200">Guest favorite</span>
-        <span class="text-[10px] font-semibold text-zinc-800">★ 4.98</span>
-      </div>
-      <div class="p-2.5 rounded-xl mt-2 shadow-2xs" style="background: ${surface}; border: 1px solid ${border}">
-        <h4 class="text-xs font-semibold tracking-tight" style="color: ${text}">Modern Minimalist Loft</h4>
-        <div class="flex items-baseline gap-1 pt-1">
-          <span class="text-xs font-bold" style="color: ${text}">$195</span>
-          <span class="text-[9px] opacity-60">/ night</span>
-        </div>
-      </div>
-      <div class="flex items-center justify-between pt-2">
-        <span class="text-[9px] opacity-60 font-medium">Free cancellation</span>
-        <div class="px-3 py-1 text-[10px] font-bold shadow-xs" style="background: ${accent}; color: #ffffff; border-radius: 12px; box-shadow: 0 2px 6px rgba(255,56,92,0.3)">
-          Reserve
-        </div>
-      </div>
-    `;
-  }
+  const isAccentLight = isColorLight(accent);
+  const accentTextColor = isAccentLight ? "#09090b" : "#ffffff";
 
   return `
     <div 
-      class="theme-mockup-frame rounded-sm p-3 shadow-2xs select-none transition hover:shadow-md cursor-pointer group/mockup"
+      class="theme-mockup-frame rounded-sm p-3 select-none transition-all duration-200 hover:shadow-md cursor-pointer group/mockup space-y-2.5"
       style="background-color: ${canvas}; color: ${text}; border: 1px solid ${border}; ${fontCss}"
-      title="Previzualizare UI live (${escapeHtml(theme.name)}) - Click pentru specificație Markdown"
+      title="Click pentru Studio de Previzualizare Complet (${escapeHtml(theme.name)})"
+      data-theme-id="${theme.id}"
     >
-      ${mockupContent}
+      <!-- 1. Top Bar: Beacon, Command Pill, Status -->
+      <div class="flex items-center justify-between text-[10px] pb-1.5 border-b" style="border-color: ${border}">
+        <div class="flex items-center gap-1.5 min-w-0">
+          <span class="w-2 h-2 rounded-full shrink-0 animate-pulse" style="background-color: ${accent}"></span>
+          <span class="font-bold tracking-tight truncate text-[10px]" style="color: ${text}">${escapeHtml(theme.name)}</span>
+          <span class="text-[8px] font-mono opacity-60">● Live</span>
+        </div>
+        <div class="flex items-center gap-1 shrink-0">
+          <span class="px-1.5 py-0.2 text-[8px] font-mono rounded" style="background-color: ${surface}; border: 1px solid ${border}; color: ${text}">⌘K</span>
+          <span class="px-1.5 py-0.2 text-[8px] font-mono font-bold rounded" style="background: ${accent}25; color: ${accent}; border: 1px solid ${accent}40">PRO</span>
+        </div>
+      </div>
+
+      <!-- 2. Typography Headline & Metric Container -->
+      <div class="p-2.5 rounded shadow-2xs space-y-1.5" style="background-color: ${surface}; border: 1px solid ${border}; border-radius: ${bRadius};">
+        <div class="flex items-center justify-between">
+          <span class="text-[9px] uppercase tracking-wider font-semibold opacity-70" style="color: ${muted}">Active Metric</span>
+          <span class="text-[9px] font-bold font-mono px-1 py-0.2 rounded" style="background: ${accent}15; color: ${accent}">+24.8% ↗</span>
+        </div>
+        <div class="flex items-baseline justify-between">
+          <span class="text-xs font-bold tracking-tight" style="color: ${text}">99.98% SLA</span>
+          <span class="text-[8px] font-mono opacity-60">14.2ms latency</span>
+        </div>
+        <!-- Progress track -->
+        <div class="w-full h-1.5 rounded-full overflow-hidden" style="background-color: ${border}">
+          <div class="h-full rounded-full" style="width: 76%; background-color: ${accent}"></div>
+        </div>
+      </div>
+
+      <!-- 3. Form & Interactive Controls Row -->
+      <div class="flex items-center justify-between gap-2 text-[9px] font-mono">
+        <!-- Mini Segmented Control -->
+        <div class="flex items-center p-0.5 rounded border" style="background: ${canvas}; border-color: ${border}; border-radius: ${bRadius}">
+          <span class="px-1.5 py-0.5 font-bold shadow-2xs" style="background: ${accent}; color: ${accentTextColor}; border-radius: ${bRadius}">Tab A</span>
+          <span class="px-1.5 py-0.5 opacity-60" style="color: ${text}">Tab B</span>
+        </div>
+
+        <!-- Mini Toggle Switch Indicator -->
+        <div class="flex items-center gap-1.5">
+          <span class="text-[8px] opacity-70">Sync</span>
+          <div class="w-6 h-3 rounded-full relative p-0.5 flex items-center shadow-inner" style="background-color: ${accent}">
+            <div class="w-2 h-2 rounded-full bg-white ml-auto shadow-xs"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Action Buttons -->
+      <div class="flex items-center justify-between gap-1.5 pt-0.5">
+        <div class="flex-1 py-1 text-center text-[9px] font-bold shadow-xs transition hover:opacity-90" style="background-color: ${accent}; color: ${accentTextColor}; border-radius: ${bRadius}">
+          Deploy
+        </div>
+        <div class="px-2 py-1 text-[9px] font-medium border text-center opacity-80 shadow-2xs" style="border-color: ${border}; color: ${text}; border-radius: ${bRadius}">
+          Inspect
+        </div>
+      </div>
+
+      <!-- 5. 5-Color Swatch Strip -->
+      <div class="flex items-center justify-between pt-1 border-t" style="border-color: ${border}">
+        <span class="text-[8px] font-mono opacity-50">Radius: ${escapeHtml(radius.split(' ')[0])}</span>
+        <div class="flex items-center gap-1">
+          <span class="w-2.5 h-2.5 rounded-xs border shadow-2xs" style="background-color: ${canvas}; border-color: ${border}" title="Canvas: ${canvas}"></span>
+          <span class="w-2.5 h-2.5 rounded-xs border shadow-2xs" style="background-color: ${surface}; border-color: ${border}" title="Surface: ${surface}"></span>
+          <span class="w-2.5 h-2.5 rounded-xs border shadow-2xs" style="background-color: ${border}; border-color: #999" title="Border: ${border}"></span>
+          <span class="w-2.5 h-2.5 rounded-xs border shadow-2xs" style="background-color: ${text}; border-color: ${border}" title="Text: ${text}"></span>
+          <span class="w-2.5 h-2.5 rounded-xs border shadow-2xs" style="background-color: ${accent}; border-color: ${border}" title="Accent: ${accent}"></span>
+        </div>
+      </div>
     </div>
   `;
+}
+
+// Render the Full-Featured Studio Showcase UI inside the Large Modal
+function renderThemeStudio(theme) {
+  const { id, canvas, surface, border, text, textMuted, accent, radius, borderRadius, font, fontFamily, principles, description } = theme;
+  const muted = textMuted || "#71717a";
+  const bRadius = borderRadius || "6px";
+  const fontCss = `font-family: ${fontFamily || "'Plus Jakarta Sans', sans-serif"};`;
+  const isAccentLight = isColorLight(accent);
+  const accentTextColor = isAccentLight ? "#09090b" : "#ffffff";
+
+  // Swatches list
+  const swatches = [
+    { name: "Canvas (Bg)", hex: canvas },
+    { name: "Surface (Card)", hex: surface },
+    { name: "Hairline Border", hex: border },
+    { name: "Primary Accent", hex: accent },
+    { name: "Text Primary", hex: text },
+    { name: "Text Muted", hex: muted },
+    { name: "Success / Live", hex: "#10b981" },
+    { name: "Warning / Alert", hex: "#f59e0b" }
+  ];
+
+  return `
+    <div class="space-y-6" style="${fontCss}">
+      
+      <!-- 1. LIVE APP SIMULATION WINDOW -->
+      <div class="rounded-sm border shadow-md overflow-hidden" style="background-color: ${canvas}; border-color: ${border}; color: ${text};">
+        
+        <!-- Window Titlebar -->
+        <div class="px-4 py-3 border-b flex items-center justify-between gap-3" style="border-color: ${border}; background-color: ${surface};">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+            <span class="text-xs font-mono font-semibold ml-2 opacity-70">${escapeHtml(theme.brand)} App Studio</span>
+          </div>
+
+          <!-- Omnibar -->
+          <div class="flex-1 max-w-md hidden sm:flex items-center gap-2 px-3 py-1 rounded border text-xs font-mono" style="background-color: ${canvas}; border-color: ${border}; color: ${muted}; border-radius: ${bRadius}">
+            <i data-lucide="search" class="w-3.5 h-3.5 opacity-60"></i>
+            <span class="truncate">/home/oem/proiecte/preConfigProject</span>
+            <span class="ml-auto text-[9px] px-1.5 py-0.2 rounded font-bold" style="background-color: ${surface}; border: 1px solid ${border};">⌘K</span>
+          </div>
+
+          <!-- Status badge -->
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: ${accent}"></span>
+            <span class="text-xs font-bold font-mono" style="color: ${accent}">Online</span>
+          </div>
+        </div>
+
+        <!-- Window Body Content -->
+        <div class="p-6 space-y-6">
+          
+          <!-- Hero Section inside App Window -->
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b" style="border-color: ${border}">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider" style="background: ${accent}20; color: ${accent}; border: 1px solid ${accent}40;">
+                  ${escapeHtml(theme.tag)}
+                </span>
+                <span class="text-xs font-mono opacity-60">${escapeHtml(theme.stars)}</span>
+              </div>
+              <h2 class="text-2xl font-bold tracking-tight" style="color: ${text}">${escapeHtml(theme.name)} Design System</h2>
+              <p class="text-xs leading-relaxed max-w-2xl mt-1" style="color: ${muted}">${escapeHtml(description)}</p>
+            </div>
+
+            <div class="flex items-center gap-2 shrink-0">
+              <button type="button" class="px-4 py-2 text-xs font-bold shadow-sm transition hover:opacity-90 cursor-pointer" style="background-color: ${accent}; color: ${accentTextColor}; border-radius: ${bRadius}">
+                Lansează Modul
+              </button>
+              <button type="button" class="px-3.5 py-2 text-xs font-semibold border shadow-2xs cursor-pointer" style="border-color: ${border}; color: ${text}; background-color: ${surface}; border-radius: ${bRadius}">
+                Documentație
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Metrics Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-4 rounded border shadow-2xs space-y-1.5" style="background-color: ${surface}; border-color: ${border}; border-radius: ${bRadius}">
+              <div class="flex items-center justify-between text-xs font-mono" style="color: ${muted}">
+                <span>Throughput Mediu</span>
+                <span class="text-[10px] font-bold px-1.5 py-0.2 rounded" style="background: ${accent}20; color: ${accent}">+34.2% ↗</span>
+              </div>
+              <div class="text-2xl font-bold tracking-tight" style="color: ${text}">148.2 k/s</div>
+              <div class="w-full h-1.5 rounded-full overflow-hidden" style="background-color: ${border}">
+                <div class="h-full rounded-full" style="width: 82%; background-color: ${accent}"></div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded border shadow-2xs space-y-1.5" style="background-color: ${surface}; border-color: ${border}; border-radius: ${bRadius}">
+              <div class="flex items-center justify-between text-xs font-mono" style="color: ${muted}">
+                <span>Latență Execuție</span>
+                <span class="text-[10px] font-bold text-emerald-500">Optim (0 dropped)</span>
+              </div>
+              <div class="text-2xl font-bold tracking-tight" style="color: ${text}">4.18 ms</div>
+              <div class="w-full h-1.5 rounded-full overflow-hidden" style="background-color: ${border}">
+                <div class="h-full rounded-full bg-emerald-500" style="width: 95%;"></div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded border shadow-2xs space-y-1.5" style="background-color: ${surface}; border-color: ${border}; border-radius: ${bRadius}">
+              <div class="flex items-center justify-between text-xs font-mono" style="color: ${muted}">
+                <span>Securitate & OWASP</span>
+                <span class="text-[10px] font-bold px-1.5 py-0.2 rounded font-mono" style="background-color: ${canvas}; border: 1px solid ${border}; color: ${text}">Grade AAA</span>
+              </div>
+              <div class="text-2xl font-bold tracking-tight" style="color: ${text}">100% Pass</div>
+              <div class="w-full h-1.5 rounded-full overflow-hidden" style="background-color: ${border}">
+                <div class="h-full rounded-full" style="width: 100%; background-color: ${accent}"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Component Playground Matrix -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
+            
+            <!-- Left: Form Controls & Inputs -->
+            <div class="p-5 rounded border space-y-4" style="background-color: ${surface}; border-color: ${border}; border-radius: ${bRadius}">
+              <h4 class="text-xs font-bold uppercase tracking-wider font-mono opacity-80" style="color: ${text}">Form & Input Controls</h4>
+              
+              <div class="space-y-1.5">
+                <label class="text-xs font-medium block" style="color: ${text}">Target Omnibar Input</label>
+                <div class="flex items-center gap-2 px-3 py-2 rounded border" style="background-color: ${canvas}; border-color: ${border}; border-radius: ${bRadius}">
+                  <i data-lucide="terminal" class="w-4 h-4 opacity-50"></i>
+                  <input type="text" value="git commit -m 'feat: architectural luxury'" readonly class="bg-transparent text-xs w-full outline-none font-mono" style="color: ${text}">
+                </div>
+              </div>
+
+              <!-- Interactive Controls Row -->
+              <div class="flex flex-wrap items-center justify-between gap-4 pt-1">
+                <!-- Interactive Toggle -->
+                <div class="flex items-center gap-2 cursor-pointer select-none" id="studio-switch-demo" data-checked="true" style="background-color: transparent">
+                  <div class="w-10 h-5 rounded-full p-0.5 transition-colors shadow-inner flex items-center" style="background-color: ${accent};">
+                    <div class="switch-knob w-4 h-4 rounded-full bg-white shadow-xs transition-transform transform translate-x-4"></div>
+                  </div>
+                  <span class="text-xs font-medium" style="color: ${text}">Auto-Sync Telemetry</span>
+                </div>
+
+                <!-- Checkbox -->
+                <label class="flex items-center gap-2 text-xs font-medium cursor-pointer" style="color: ${text}">
+                  <span class="w-4 h-4 rounded flex items-center justify-center text-[10px] font-bold text-white shadow-xs" style="background-color: ${accent}; border-radius: 2px;">✓</span>
+                  <span>Strict Type Checking</span>
+                </label>
+              </div>
+
+              <!-- Slider control -->
+              <div class="space-y-1 pt-1">
+                <div class="flex items-center justify-between text-xs font-mono" style="color: ${muted}">
+                  <span>Intensity Scale</span>
+                  <span class="font-bold" style="color: ${text}">85%</span>
+                </div>
+                <div class="w-full h-2 rounded-full relative flex items-center" style="background-color: ${canvas}; border: 1px solid ${border}">
+                  <div class="h-full rounded-full" style="width: 85%; background-color: ${accent}"></div>
+                  <div class="w-3.5 h-3.5 rounded-full bg-white border shadow-xs absolute -translate-x-1/2" style="left: 85%; border-color: ${border}"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Interactive Buttons & Badges -->
+            <div class="p-5 rounded border space-y-4" style="background-color: ${surface}; border-color: ${border}; border-radius: ${bRadius}">
+              <h4 class="text-xs font-bold uppercase tracking-wider font-mono opacity-80" style="color: ${text}">Button Hierarchy & Pills</h4>
+              
+              <div class="flex flex-wrap items-center gap-2">
+                <button type="button" class="px-4 py-2 text-xs font-bold shadow-xs transition hover:opacity-90" style="background-color: ${accent}; color: ${accentTextColor}; border-radius: ${bRadius}">
+                  Primary Button
+                </button>
+                <button type="button" class="px-4 py-2 text-xs font-semibold border shadow-2xs" style="border-color: ${border}; color: ${text}; background-color: ${canvas}; border-radius: ${bRadius}">
+                  Secondary Outline
+                </button>
+                <button type="button" class="px-3 py-2 text-xs font-medium opacity-80 hover:opacity-100" style="color: ${text}">
+                  Ghost Action
+                </button>
+                <button type="button" class="px-4 py-1.5 text-xs font-bold rounded-full shadow-xs" style="background-color: ${accent}; color: ${accentTextColor}">
+                  Pill Badge
+                </button>
+              </div>
+
+              <!-- Alert Banner inside theme -->
+              <div class="p-3 rounded border flex items-center gap-3 text-xs" style="background-color: ${canvas}; border-color: ${border}; border-radius: ${bRadius}">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+                <span class="font-mono text-[11px]" style="color: ${text}">Ready: Sistemul respectă rigoarea ${escapeHtml(theme.name)}.</span>
+              </div>
+
+              <!-- Segmented Control Bar -->
+              <div class="flex items-center p-1 rounded border text-xs font-mono" style="background-color: ${canvas}; border-color: ${border}; border-radius: ${bRadius}">
+                <button type="button" class="flex-1 py-1 text-center font-bold shadow-xs" style="background-color: ${accent}; color: ${accentTextColor}; border-radius: ${bRadius}">
+                  Overview
+                </button>
+                <button type="button" class="flex-1 py-1 text-center opacity-70" style="color: ${text}">
+                  Tokens
+                </button>
+                <button type="button" class="flex-1 py-1 text-center opacity-70" style="color: ${text}">
+                  Components
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 2. COLOR PALETTE MATRIX & TOKEN SWATCHES -->
+      <div class="bg-white p-5 rounded-sm border border-zinc-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i data-lucide="palette" class="w-4 h-4 text-zinc-800"></i>
+            <h3 class="text-xs font-bold text-zinc-950 uppercase tracking-wider font-mono">Paletă de Culori & Tokeni Live</h3>
+          </div>
+          <span class="text-[11px] font-mono text-zinc-500">Click pe swatch pentru a copia HEX-ul</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 pt-1">
+          ${swatches.map(s => `
+            <div 
+              class="btn-copy-hex group relative flex flex-col p-2 rounded-sm border border-zinc-200 hover:border-zinc-400 bg-zinc-50 transition cursor-pointer"
+              data-hex="${s.hex}"
+              title="Click pentru a copia ${s.hex}"
+            >
+              <div class="w-full h-10 rounded-xs border shadow-2xs mb-1.5 transition group-hover:scale-105" style="background-color: ${s.hex}; border-color: rgba(0,0,0,0.1)"></div>
+              <span class="text-[10px] font-bold text-zinc-900 truncate leading-tight">${escapeHtml(s.name)}</span>
+              <span class="text-[10px] font-mono text-zinc-500 uppercase mt-0.5">${escapeHtml(s.hex)}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- 3. TYPOGRAPHY & GEOMETRY LADDER -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- Typography Scale -->
+        <div class="bg-white p-5 rounded-sm border border-zinc-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between border-b border-zinc-100 pb-2">
+            <div class="flex items-center gap-2">
+              <i data-lucide="type" class="w-4 h-4 text-zinc-800"></i>
+              <h3 class="text-xs font-bold text-zinc-950 uppercase tracking-wider font-mono">Scara Tipografică</h3>
+            </div>
+            <span class="text-[11px] font-mono text-zinc-500">${escapeHtml(font)}</span>
+          </div>
+
+          <div class="space-y-3 pt-1" style="${fontCss}">
+            <div>
+              <span class="text-[9px] font-mono text-zinc-400 uppercase block">Display / Hero (26px)</span>
+              <div class="text-xl font-bold tracking-tight text-zinc-950">Agile Engineering Craft</div>
+            </div>
+            <div>
+              <span class="text-[9px] font-mono text-zinc-400 uppercase block">Heading 1 (18px)</span>
+              <div class="text-base font-semibold text-zinc-900">Configurarea Sistemului Arhitectural</div>
+            </div>
+            <div>
+              <span class="text-[9px] font-mono text-zinc-400 uppercase block">Body Regular (13px)</span>
+              <p class="text-xs text-zinc-600 leading-relaxed">
+                Fiecare componentă este calibrată conform standardelor de design ${escapeHtml(theme.name)}. Contrastul respectă cerințele WCAG, iar tranzițiile urmează curbele fizice naturale.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Geometry, Radii & Principles -->
+        <div class="bg-white p-5 rounded-sm border border-zinc-200 shadow-xs space-y-3 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between border-b border-zinc-100 pb-2 mb-3">
+              <div class="flex items-center gap-2">
+                <i data-lucide="maximize" class="w-4 h-4 text-zinc-800"></i>
+                <h3 class="text-xs font-bold text-zinc-950 uppercase tracking-wider font-mono">Raze de Colț & Principii</h3>
+              </div>
+              <span class="text-[11px] font-mono font-semibold text-zinc-800">${escapeHtml(radius)}</span>
+            </div>
+
+            <!-- Radii Ladder comparison -->
+            <div class="space-y-1.5">
+              <span class="text-[10px] font-mono text-zinc-400 uppercase block">Comparație Raze de Colț:</span>
+              <div class="grid grid-cols-4 gap-2 text-center text-[10px] font-mono">
+                <div class="p-2 border ${borderRadius === '0px' ? 'border-zinc-950 bg-zinc-900 text-white font-bold ring-2 ring-zinc-950' : 'border-zinc-300 bg-zinc-50 text-zinc-700'}" style="border-radius: 0px">0px Sharp</div>
+                <div class="p-2 border ${borderRadius === '2px' ? 'border-zinc-950 bg-zinc-900 text-white font-bold ring-2 ring-zinc-950' : 'border-zinc-300 bg-zinc-50 text-zinc-700'}" style="border-radius: 2px">2px Crisp</div>
+                <div class="p-2 border ${borderRadius === '6px' || borderRadius === '8px' ? 'border-zinc-950 bg-zinc-900 text-white font-bold ring-2 ring-zinc-950' : 'border-zinc-300 bg-zinc-50 text-zinc-700'}" style="border-radius: 8px">8px Card</div>
+                <div class="p-2 border ${borderRadius === '12px' || borderRadius === '14px' || borderRadius === '16px' ? 'border-zinc-950 bg-zinc-900 text-white font-bold ring-2 ring-zinc-950' : 'border-zinc-300 bg-zinc-50 text-zinc-700'}" style="border-radius: 16px">16px Squircle</div>
+              </div>
+            </div>
+
+            <!-- Principles list -->
+            <div class="space-y-1.5 pt-3">
+              <span class="text-[10px] font-mono text-zinc-400 uppercase block">Principii de Bază (${escapeHtml(theme.brand)}):</span>
+              <div class="space-y-1">
+                ${principles.map(p => `
+                  <div class="flex items-center gap-2 text-xs text-zinc-700 font-mono">
+                    <span class="w-1.5 h-1.5 rounded-full bg-zinc-900 shrink-0"></span>
+                    <span>${escapeHtml(p)}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-zinc-100 flex items-center justify-between text-xs font-mono text-zinc-500">
+            <span>Categoria: <strong class="text-zinc-900">${escapeHtml(theme.category)}</strong></span>
+            <span>Standard: <strong class="text-zinc-900">${escapeHtml(theme.stars || '115k+ ⭐')}</strong></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function populateDesignSelectOptions() {
+  if (!el.designMdSelect) return;
+  const themes = (state.catalog && state.catalog.designSuite && state.catalog.designSuite.themes) || DEFAULT_AWESOME_THEMES;
+  if (!themes || themes.length === 0) return;
+
+  const currentVal = state.designSuite.designMdPreset || el.designMdSelect.value;
+  
+  const groups = {
+    "Platforma Curentă & Craft": [],
+    "Developer & Cloud": [],
+    "Fintech & Enterprise": [],
+    "AI & Creative Design": [],
+    "Luxury & High Fashion": [],
+    "Editorial & Media": [],
+    "Consumer & Lifestyle": []
+  };
+
+  themes.forEach(t => {
+    const cat = (t.category || "").toLowerCase();
+    if (t.id === "configurator" || t.id === "linear") {
+      groups["Platforma Curentă & Craft"].push(t);
+    } else if (cat.includes("dev")) {
+      groups["Developer & Cloud"].push(t);
+    } else if (cat.includes("fintech")) {
+      groups["Fintech & Enterprise"].push(t);
+    } else if (cat.includes("ai") || cat.includes("creative")) {
+      groups["AI & Creative Design"].push(t);
+    } else if (cat.includes("luxury")) {
+      groups["Luxury & High Fashion"].push(t);
+    } else if (cat.includes("editorial")) {
+      groups["Editorial & Media"].push(t);
+    } else {
+      groups["Consumer & Lifestyle"].push(t);
+    }
+  });
+
+  let html = "";
+  for (const [groupName, groupThemes] of Object.entries(groups)) {
+    if (groupThemes.length > 0) {
+      html += `<optgroup label="${groupName}">`;
+      for (const t of groupThemes) {
+        const isSel = (t.id === currentVal) ? "selected" : "";
+        html += `<option value="${t.id}" ${isSel}>${escapeHtml(t.name)} (${escapeHtml(t.tag)})</option>`;
+      }
+      html += `</optgroup>`;
+    }
+  }
+
+  el.designMdSelect.innerHTML = html;
+  el.designMdSelect.value = currentVal;
 }
 
 function renderThemesGallery(filter = activeThemeFilter, query = activeThemeSearch) {
@@ -1090,15 +1145,14 @@ function renderThemesGallery(filter = activeThemeFilter, query = activeThemeSear
   let filtered = themesSource.filter(theme => {
     if (filter === "all") return true;
     const cat = (theme.category || "").toLowerCase();
-    if (filter === "dark") {
-      return cat.includes("dark") || ["linear", "vercel", "github", "supabase", "raycast", "tailwind", "figma", "openai"].includes(theme.id);
-    }
-    if (filter === "light") {
-      return cat.includes("light") || ["configurator", "apple", "stripe", "notion", "airbnb"].includes(theme.id);
-    }
-    if (filter === "dev") {
-      return cat.includes("dev") || ["configurator", "linear", "stripe", "vercel", "github", "supabase", "raycast", "tailwind"].includes(theme.id);
-    }
+    if (filter === "dark") return cat.includes("dark");
+    if (filter === "light") return cat.includes("light");
+    if (filter === "dev") return cat.includes("dev");
+    if (filter === "fintech") return cat.includes("fintech");
+    if (filter === "ai") return cat.includes("ai") || cat.includes("creative");
+    if (filter === "luxury") return cat.includes("luxury");
+    if (filter === "editorial") return cat.includes("editorial");
+    if (filter === "lifestyle") return cat.includes("lifestyle");
     return true;
   });
 
@@ -2266,6 +2320,26 @@ function setupEventListeners() {
     el.themesSearchInput.addEventListener("input", (e) => {
       activeThemeSearch = e.target.value.trim().toLowerCase();
       renderThemesGallery(activeThemeFilter, activeThemeSearch);
+    });
+  }
+
+  if (el.modalTabBtnStudio) {
+    el.modalTabBtnStudio.addEventListener("click", () => switchModalTab("studio"));
+  }
+
+  if (el.modalTabBtnMarkdown) {
+    el.modalTabBtnMarkdown.addEventListener("click", () => switchModalTab("markdown"));
+  }
+
+  if (el.modalThemeCopyCss) {
+    el.modalThemeCopyCss.addEventListener("click", () => {
+      const themes = (state.catalog && state.catalog.designSuite && state.catalog.designSuite.themes) || DEFAULT_AWESOME_THEMES;
+      const t = themes.find(x => x.id === modalCurrentThemeId);
+      if (t) {
+        const cssVars = `:root {\n  --canvas: ${t.canvas};\n  --surface: ${t.surface};\n  --border: ${t.border};\n  --accent: ${t.accent};\n  --text-primary: ${t.text};\n  --text-muted: ${t.textMuted || "#8a8f98"};\n  --font-family: ${t.fontFamily || "'Inter', sans-serif"};\n  --radius: ${t.borderRadius || "6px"};\n}`;
+        navigator.clipboard.writeText(cssVars);
+        showToast(`Variabilele CSS :root pentru ${t.name} au fost copiate!`, "success");
+      }
     });
   }
 
