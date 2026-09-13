@@ -851,6 +851,56 @@ window.AWESOME_100_THEMES = [
     "category": "dark fintech"
   },
   {
+    "id": "tradingview",
+    "name": "TradingView Pro",
+    "brand": "TradingView.com",
+    "tag": "Global Charting & Financial Technical Analysis",
+    "stars": "125k+ ⭐",
+    "accent": "#2962ff",
+    "canvas": "#131722",
+    "surface": "#1e222d",
+    "border": "#2a2e39",
+    "text": "#d1d4dc",
+    "textMuted": "#787b86",
+    "font": "Trebuchet MS / Inter",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif",
+    "radius": "4px - 6px precision",
+    "borderRadius": "4px",
+    "description": "Standardul mondial în grafice financiare și analiză tehnică: dark navy #131722, panouri #1e222d, verde lumânare bullish #26a69a, roșu bearish #ef5350 și albastru electric #2962ff.",
+    "principles": [
+      "Verde lumânare bullish (#26a69a) și roșu bearish (#ef5350)",
+      "Borduri chirurgicale 1px #2a2e39 pentru panouri multi-chart",
+      "Crosshair indicator și axe de preț cu densitate mare de date"
+    ],
+    "icon": "trending-up",
+    "category": "dark fintech dev"
+  },
+  {
+    "id": "binance",
+    "name": "Binance Pro",
+    "brand": "Binance.com",
+    "tag": "High-Volume Crypto & Futures Terminal",
+    "stars": "118k+ ⭐",
+    "accent": "#f0b90b",
+    "canvas": "#0b0e11",
+    "surface": "#181a20",
+    "border": "#2b313a",
+    "text": "#eaecef",
+    "textMuted": "#848e9c",
+    "font": "Inter / Binance Sans",
+    "fontFamily": "'Inter', -apple-system, sans-serif",
+    "radius": "4px terminal",
+    "borderRadius": "4px",
+    "description": "Terminalul de tranzacționare crypto spot și futures cu cel mai mare volum: negru adânc #0b0e11, auriu #f0b90b, carnet de ordine (order book) bid/ask verde/roșu și numere tabulare.",
+    "principles": [
+      "Verde bid (#0ecb81) și roșu ask (#f6465d) pentru carnet de ordine live",
+      "Galben auriu #f0b90b pentru execuție de ordin și levier",
+      "Aliniere tabulară numerică fără deformare la tick-uri de preț"
+    ],
+    "icon": "activity",
+    "category": "dark fintech"
+  },
+  {
     "id": "klarna",
     "name": "Klarna",
     "brand": "Klarna.com",
