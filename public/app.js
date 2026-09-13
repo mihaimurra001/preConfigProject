@@ -247,8 +247,13 @@ const el = {
   fsSelectedHint: document.getElementById("fs-selected-hint"),
   fsBtnConfirmSelect: document.getElementById("fs-btn-confirm-select"),
 
+  // Layout Columns
+  configControlsCol: document.getElementById("config-controls-col"),
+  workspaceTabsCol: document.getElementById("workspace-tabs-col"),
+
   // Awesome-Design-MD Themes Gallery Elements
   btnOpenThemesTab: document.getElementById("btn-open-themes-tab"),
+  btnBackToConfig: document.getElementById("btn-back-to-config"),
   themesGridContainer: document.getElementById("themes-grid-container"),
   themesSearchInput: document.getElementById("themes-search-input"),
   galleryActiveThemeBadge: document.getElementById("gallery-active-theme-badge"),
@@ -1792,7 +1797,24 @@ function setupEventListeners() {
       el.tabPanels.forEach(panel => {
         panel.classList.add("hidden");
       });
-      document.getElementById(`tab-${tabId}`).classList.remove("hidden");
+      const targetPanel = document.getElementById(`tab-${tabId}`);
+      if (targetPanel) {
+        targetPanel.classList.remove("hidden");
+      }
+
+      // Responsive layout adjustment: if themes tab is active, expand to full width (dedicated page)
+      if (el.configControlsCol && el.workspaceTabsCol) {
+        if (tabId === "themes") {
+          el.configControlsCol.classList.add("hidden");
+          el.workspaceTabsCol.classList.remove("lg:col-span-7");
+          el.workspaceTabsCol.classList.add("lg:col-span-12");
+          renderThemesGallery();
+        } else {
+          el.configControlsCol.classList.remove("hidden");
+          el.workspaceTabsCol.classList.remove("lg:col-span-12");
+          el.workspaceTabsCol.classList.add("lg:col-span-7");
+        }
+      }
     });
   });
 
@@ -1849,6 +1871,13 @@ function setupEventListeners() {
     el.btnOpenThemesTab.addEventListener("click", () => {
       const themesTabBtn = document.querySelector('.tab-btn[data-tab="themes"]');
       if (themesTabBtn) themesTabBtn.click();
+    });
+  }
+
+  if (el.btnBackToConfig) {
+    el.btnBackToConfig.addEventListener("click", () => {
+      const previewTabBtn = document.querySelector('.tab-btn[data-tab="preview"]');
+      if (previewTabBtn) previewTabBtn.click();
     });
   }
 

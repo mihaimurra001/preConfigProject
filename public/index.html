@@ -10,6 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'><path d='m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z'/></svg>">
+  
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="lucide.min.js"></script>
@@ -164,7 +167,7 @@
   <main class="flex-1 max-w-[1360px] w-full mx-auto p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
 
     <!-- LEFT COLUMN: CONTROLS & MODULES (5 Cols) -->
-    <div class="lg:col-span-5 space-y-5">
+    <div id="config-controls-col" class="lg:col-span-5 space-y-5">
 
       <!-- 1. CLI TARGET & SCOPE -->
       <div class="glass-card rounded-sm p-6 space-y-4">
@@ -641,7 +644,7 @@
     </div>
 
     <!-- RIGHT COLUMN: WORKSPACE, PREVIEW, ACTION CENTER, DOCS (7 Cols) -->
-    <div class="lg:col-span-7 flex flex-col space-y-5">
+    <div id="workspace-tabs-col" class="lg:col-span-7 flex flex-col space-y-5">
 
       <!-- Navigation Tabs & Primary Action (Airy Sharp Bar) -->
       <div class="flex items-center justify-between border-b border-zinc-200 pb-3.5">
@@ -1214,6 +1217,7 @@
           </div>
 
       </div>
+      </div>
 
       <!-- TAB CONTENT 4: AWESOME-DESIGN-MD THEMES GALLERY (3-Row Grid) -->
       <div id="tab-themes" class="tab-panel hidden flex-1 flex flex-col space-y-4">
@@ -1233,14 +1237,26 @@
               </p>
             </div>
 
-            <!-- Active Theme Indicator Pill -->
-            <div class="flex items-center gap-2 px-3.5 py-2.5 rounded-sm bg-zinc-50 border border-zinc-300 shrink-0">
-              <div class="flex flex-col">
-                <span class="text-[9px] uppercase tracking-wider font-bold text-zinc-500">Temă Activă în Proiect:</span>
-                <span id="gallery-active-theme-badge" class="text-xs font-mono font-bold text-zinc-950 flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
-                  Linear (Near-black obsidian)
-                </span>
+            <!-- Top Banner Actions: Back to Configurator & Active Theme Pill -->
+            <div class="flex items-center gap-3 shrink-0">
+              <button 
+                type="button" 
+                id="btn-back-to-config"
+                class="px-3.5 py-2 bg-white hover:bg-zinc-100 text-zinc-900 border border-zinc-300 rounded-sm text-xs font-semibold transition flex items-center gap-2 shadow-2xs cursor-pointer"
+                title="Întoarce-te la panourile de configurare și previzualizare"
+              >
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Înapoi la Configurator</span>
+              </button>
+
+              <div class="flex items-center gap-2 px-3.5 py-2 rounded-sm bg-zinc-50 border border-zinc-300">
+                <div class="flex flex-col">
+                  <span class="text-[9px] uppercase tracking-wider font-bold text-zinc-500">Temă Activă în Proiect:</span>
+                  <span id="gallery-active-theme-badge" class="text-xs font-mono font-bold text-zinc-950 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                    Linear (Near-black obsidian)
+                  </span>
+                </div>
               </div>
             </div>
           </div>

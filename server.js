@@ -75,6 +75,7 @@ const PORT = process.env.PORT || 3030;
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+app.get("/favicon.ico", (req, res) => res.status(204).end());
 
 // 1. Get system environment
 app.get("/api/environment", async (req, res) => {
