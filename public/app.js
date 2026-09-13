@@ -2222,22 +2222,21 @@ function setupEventListeners() {
         targetPanel.classList.remove("hidden");
       }
 
-      // Responsive layout adjustment: if themes tab is active, expand to full width (dedicated page)
+      // Responsive layout adjustment: preview tab has 2-column split (config + file tree); themes, actions & docs are full width
       if (el.configControlsCol && el.workspaceTabsCol) {
-        if (tabId === "themes") {
-          el.configControlsCol.classList.add("hidden");
-          el.workspaceTabsCol.classList.remove("lg:col-span-7");
-          el.workspaceTabsCol.classList.add("lg:col-span-12");
-          renderThemesGallery();
-        } else {
+        if (tabId === "preview") {
           el.configControlsCol.classList.remove("hidden");
           el.workspaceTabsCol.classList.remove("lg:col-span-12");
           el.workspaceTabsCol.classList.add("lg:col-span-7");
+          triggerPreview();
+        } else {
+          el.configControlsCol.classList.add("hidden");
+          el.workspaceTabsCol.classList.remove("lg:col-span-7");
+          el.workspaceTabsCol.classList.add("lg:col-span-12");
+          if (tabId === "themes") {
+            renderThemesGallery();
+          }
         }
-      }
-
-      if (tabId === "preview") {
-        triggerPreview();
       }
     });
   });

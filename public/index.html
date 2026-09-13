@@ -163,11 +163,47 @@
     </div>
   </div>
 
-  <!-- MAIN APP LAYOUT (Airy 2-Column Grid) -->
-  <main class="flex-1 max-w-[1360px] w-full mx-auto p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+  <!-- MAIN APP LAYOUT (Airy Full-Width Flow) -->
+  <main class="flex-1 max-w-[1360px] w-full mx-auto p-6 sm:p-8 flex flex-col space-y-6">
 
-    <!-- LEFT COLUMN: CONTROLS & MODULES (5 Cols) -->
-    <div id="config-controls-col" class="lg:col-span-5 space-y-5">
+    <!-- TOP NAVIGATION TABS & PRIMARY ACTION BAR (Always full-width across entire page) -->
+    <div id="top-nav-bar" class="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 pb-4 shrink-0">
+      <div class="flex flex-wrap items-center gap-2 bg-zinc-100 p-1.5 rounded-sm border border-zinc-200">
+        <button type="button" class="tab-btn active px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2 cursor-pointer" data-tab="preview">
+          <i data-lucide="file-code" class="w-4 h-4"></i>
+          <span>Previzualizare Fișiere</span>
+          <span id="preview-count-badge" class="px-2 py-0.5 rounded-sm bg-zinc-200 text-[10px] font-mono text-zinc-800 font-bold">0</span>
+        </button>
+        <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2 cursor-pointer" data-tab="actions">
+          <i data-lucide="terminal" class="w-4 h-4"></i>
+          <span>Centru de Instalare</span>
+        </button>
+        <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2 cursor-pointer" data-tab="docs">
+          <i data-lucide="book-open" class="w-4 h-4"></i>
+          <span>Documentație</span>
+        </button>
+        <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2 cursor-pointer" data-tab="themes">
+          <i data-lucide="palette" class="w-4 h-4"></i>
+          <span>Galerie Teme DESIGN.md</span>
+          <span class="px-2 py-0.5 rounded-sm bg-zinc-200 text-[10px] font-mono text-zinc-800 font-bold">100 Teme</span>
+        </button>
+      </div>
+
+      <!-- Quick Apply Button -->
+      <button 
+        id="btn-apply-quick" 
+        class="btn-primary-gradient px-5 py-2.5 text-white text-xs font-semibold rounded-sm transition flex items-center gap-2.5 cursor-pointer shadow-md"
+      >
+        <i data-lucide="save" class="w-4 h-4"></i>
+        <span>Aplică în Proiect</span>
+      </button>
+    </div>
+
+    <!-- MAIN WORKSPACE GRID -->
+    <div id="main-content-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-1">
+
+      <!-- LEFT COLUMN: CONTROLS & MODULES (5 Cols) -->
+      <div id="config-controls-col" class="lg:col-span-5 space-y-5">
 
       <!-- 1. CLI TARGET & SCOPE -->
       <div class="glass-card rounded-sm p-6 space-y-4">
@@ -646,39 +682,6 @@
 
     <!-- RIGHT COLUMN: WORKSPACE, PREVIEW, ACTION CENTER, DOCS (7 Cols) -->
     <div id="workspace-tabs-col" class="lg:col-span-7 flex flex-col space-y-5">
-
-      <!-- Navigation Tabs & Primary Action (Airy Sharp Bar) -->
-      <div class="flex items-center justify-between border-b border-zinc-200 pb-3.5">
-        <div class="flex items-center gap-2 bg-zinc-100 p-1.5 rounded-sm border border-zinc-200">
-          <button type="button" class="tab-btn active px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2" data-tab="preview">
-            <i data-lucide="file-code" class="w-4 h-4"></i>
-            <span>Previzualizare Fișiere</span>
-            <span id="preview-count-badge" class="px-2 py-0.5 rounded-sm bg-zinc-200 text-[10px] font-mono text-zinc-800 font-bold">0</span>
-          </button>
-          <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2" data-tab="actions">
-            <i data-lucide="terminal" class="w-4 h-4"></i>
-            <span>Centru de Instalare</span>
-          </button>
-          <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2" data-tab="docs">
-            <i data-lucide="book-open" class="w-4 h-4"></i>
-            <span>Documentație</span>
-          </button>
-          <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2" data-tab="themes">
-            <i data-lucide="palette" class="w-4 h-4"></i>
-            <span>Galerie Teme DESIGN.md</span>
-            <span class="px-2 py-0.5 rounded-sm bg-zinc-200 text-[10px] font-mono text-zinc-800 font-bold">100 Teme</span>
-          </button>
-        </div>
-
-        <!-- Quick Apply Button -->
-        <button 
-          id="btn-apply-quick" 
-          class="btn-primary-gradient px-5 py-2.5 text-white text-xs font-semibold rounded-sm transition flex items-center gap-2.5 cursor-pointer shadow-md"
-        >
-          <i data-lucide="save" class="w-4 h-4"></i>
-          <span>Aplică în Proiect</span>
-        </button>
-      </div>
 
       <!-- TAB CONTENT 1: PREVIEW -->
       <div id="tab-preview" class="tab-panel flex-1 flex flex-col space-y-4">
@@ -1314,6 +1317,7 @@
       </div>
 
     </div>
+  </div>
 
   </main>
 
