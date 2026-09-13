@@ -561,6 +561,7 @@ function openThemeSpecModal(themeId) {
   let mdContent = "";
   if (state.catalog && state.catalog.designSuite && state.catalog.designSuite.presetDocs && state.catalog.designSuite.presetDocs[themeId]) {
     mdContent = state.catalog.designSuite.presetDocs[themeId];
+  } else {
     mdContent = [
       "---",
       "version: 1.0",
@@ -640,17 +641,26 @@ function openThemeSpecModal(themeId) {
   // Switch to studio tab by default
   switchModalTab("studio");
 
-  if (el.modalThemePreview) {
-    el.modalThemePreview.classList.remove("hidden");
+  const modal = el.modalThemePreview || document.getElementById("modal-theme-preview");
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.style.display = "flex";
   }
 
   if (window.lucide) lucide.createIcons();
 }
 
 function closeThemeSpecModal() {
-  if (el.modalThemePreview) {
-    el.modalThemePreview.classList.add("hidden");
+  const modal = el.modalThemePreview || document.getElementById("modal-theme-preview");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.style.display = "none";
   }
+}
+
+if (typeof window !== "undefined") {
+  window.openThemeSpecModal = openThemeSpecModal;
+  window.closeThemeSpecModal = closeThemeSpecModal;
 }
 
 // Binds live copy and toggle interactions inside the large Studio preview modal
@@ -1297,40 +1307,48 @@ function renderThemesGallery(filter = activeThemeFilter, query = activeThemeSear
       <div class="grid grid-cols-2 gap-2 pt-4 mt-3 border-t border-zinc-200">
         <button 
           type="button" 
-          class="btn-card-preview px-2.5 py-1.5 bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300 rounded-sm text-xs font-medium transition flex items-center justify-center gap-1.5 cursor-pointer" 
+          class="btn-card-preview px-2.5 py-1.5 bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300 rounded-sm text-xs font-medium transition flex items-center justify-center gap-1.5 cursor-pointer pointer-events-auto" 
           data-theme-id="${theme.id}"
+          title="Deschide Studio de Previzualizare Complet (${escapeHtml(theme.name)})"
         >
-          <i data-lucide="file-text" class="w-3.5 h-3.5 text-zinc-500"></i>
-          <span>Previzualizează</span>
+          <i data-lucide="file-text" class="w-3.5 h-3.5 text-zinc-500 pointer-events-none"></i>
+          <span class="pointer-events-none">Previzualizează</span>
         </button>
         <button 
           type="button" 
-          class="btn-card-activate px-2.5 py-1.5 ${isActive ? 'bg-emerald-700 text-white font-semibold' : 'bg-zinc-900 hover:bg-black text-white'} rounded-sm text-xs font-medium transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer" 
+          class="btn-card-activate px-2.5 py-1.5 ${isActive ? 'bg-emerald-700 text-white font-semibold' : 'bg-zinc-900 hover:bg-black text-white'} rounded-sm text-xs font-medium transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer pointer-events-auto" 
           data-theme-id="${theme.id}"
+          title="${isActive ? 'Tema este deja configurată în DESIGN.md' : 'Configurează ' + escapeHtml(theme.name) + ' ca DESIGN.md'}"
         >
-          <i data-lucide="${isActive ? 'check-check' : 'check'}" class="w-3.5 h-3.5"></i>
-          <span>${isActive ? 'Temă Activă' : 'Activează'}</span>
+          <i data-lucide="${isActive ? 'check-check' : 'check'}" class="w-3.5 h-3.5 pointer-events-none"></i>
+          <span class="pointer-events-none">${isActive ? 'Temă Activă' : 'Activează'}</span>
         </button>
       </div>
     `;
 
     const previewBtn = card.querySelector(".btn-card-preview");
     if (previewBtn) {
-      previewBtn.addEventListener("click", () => {
+      previewBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         openThemeSpecModal(theme.id);
       });
     }
 
     const mockupFrame = card.querySelector(".theme-mockup-frame");
     if (mockupFrame) {
-      mockupFrame.addEventListener("click", () => {
+      mockupFrame.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         openThemeSpecModal(theme.id);
       });
     }
 
     const activateBtn = card.querySelector(".btn-card-activate");
     if (activateBtn) {
-      activateBtn.addEventListener("click", () => {
+      activateBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         selectThemePreset(theme.id);
       });
     }
@@ -2235,6 +2253,10 @@ function setupEventListeners() {
           el.workspaceTabsCol.classList.add("lg:col-span-7");
         }
       }
+
+      if (tabId === "preview") {
+        triggerPreview();
+      }
     });
   });
 
@@ -2343,15 +2365,63 @@ function setupEventListeners() {
     });
   }
 
+  // Delegated Event Listener on Themes Grid Container (100% reliable across re-renders)
+  if (el.themesGridContainer) {
+    el.themesGridContainer.addEventListener("click", (e) => {
+      // 1. Preview button or mockup frame clicked
+      const previewTarget = e.target.closest(".btn-card-preview") || e.target.closest(".theme-mockup-frame");
+      if (previewTarget) {
+        e.preventDefault();
+        e.stopPropagation();
+        const tid = previewTarget.getAttribute("data-theme-id");
+        if (tid) openThemeSpecModal(tid);
+        return;
+      }
+
+      // 2. Activate button clicked
+      const activateTarget = e.target.closest(".btn-card-activate");
+      if (activateTarget) {
+        e.preventDefault();
+        e.stopPropagation();
+        const tid = activateTarget.getAttribute("data-theme-id");
+        if (tid) selectThemePreset(tid);
+        return;
+      }
+    });
+  }
+
+  // Sidebar Preview Button (Under Brand DESIGN.md in left panel)
+  const btnPreviewCurrent = document.getElementById("btn-preview-current-theme");
+  if (btnPreviewCurrent) {
+    btnPreviewCurrent.addEventListener("click", () => {
+      const currentVal = el.designMdSelect ? el.designMdSelect.value : (state.designSuite.designMdPreset || "linear");
+      if (currentVal && currentVal !== "none") {
+        openThemeSpecModal(currentVal);
+      } else {
+        showToast("Selectați o temă validă pentru previzualizare", "error");
+      }
+    });
+  }
+
   if (el.modalThemeClose) {
     el.modalThemeClose.addEventListener("click", closeThemeSpecModal);
   }
 
-  if (el.modalThemePreview) {
-    el.modalThemePreview.addEventListener("click", (e) => {
-      if (e.target === el.modalThemePreview) closeThemeSpecModal();
+  const modalThemeElem = el.modalThemePreview || document.getElementById("modal-theme-preview");
+  if (modalThemeElem) {
+    modalThemeElem.addEventListener("click", (e) => {
+      if (e.target === modalThemeElem) closeThemeSpecModal();
     });
   }
+
+  // ESC key closes all active modals
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeThemeSpecModal();
+      closeSavedProjectsModal();
+      closeFsBrowser();
+    }
+  });
 
   if (el.modalThemeCopy) {
     el.modalThemeCopy.addEventListener("click", () => {
