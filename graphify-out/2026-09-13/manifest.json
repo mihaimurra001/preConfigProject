@@ -1,0 +1,86 @@
+{
+  ".agents/mcp_config.json": {
+    "mtime": 1789302297.6222885,
+    "seen": 1789303553.692807,
+    "ast_hash": "856cff0630f4d3e0e07a206f34dc8da8",
+    "semantic_hash": "856cff0630f4d3e0e07a206f34dc8da8"
+  },
+  ".claude/settings.json": {
+    "mtime": 1789301752.0337965,
+    "seen": 1789301877.0053303,
+    "ast_hash": "856cff0630f4d3e0e07a206f34dc8da8",
+    "semantic_hash": "856cff0630f4d3e0e07a206f34dc8da8"
+  },
+  "install-global-ai-tools.sh": {
+    "mtime": 1789300089.476063,
+    "seen": 1789301654.8824506,
+    "ast_hash": "d71e09991217a5c9ca72953a928ab5b1",
+    "semantic_hash": "d71e09991217a5c9ca72953a928ab5b1"
+  },
+  "lib/generator.js": {
+    "mtime": 1789301626.113611,
+    "seen": 1789301654.8824513,
+    "ast_hash": "da7596639d7f9f1ded7c4835e4436cce",
+    "semantic_hash": "da7596639d7f9f1ded7c4835e4436cce"
+  },
+  "lib/installer.js": {
+    "mtime": 1789299765.7351184,
+    "seen": 1789301654.8824522,
+    "ast_hash": "3c75b71a748f259d7ecfd180c9889545",
+    "semantic_hash": "3c75b71a748f259d7ecfd180c9889545"
+  },
+  "lib/skills-catalog.js": {
+    "mtime": 1789301434.2112908,
+    "seen": 1789301654.8824532,
+    "ast_hash": "707ab4b1da5c779bd68a01e3d8f93f36",
+    "semantic_hash": "707ab4b1da5c779bd68a01e3d8f93f36"
+  },
+  "package.json": {
+    "mtime": 1789299724.2939208,
+    "seen": 1789301654.8824542,
+    "ast_hash": "c39f95b521dd1b4d3be5d149f6c34c92",
+    "semantic_hash": "c39f95b521dd1b4d3be5d149f6c34c92"
+  },
+  "public/app.js": {
+    "mtime": 1789303543.7392125,
+    "seen": 1789303553.6930192,
+    "ast_hash": "0fb7d2d8beff70603726a13aae9294af",
+    "semantic_hash": "0fb7d2d8beff70603726a13aae9294af"
+  },
+  "server.js": {
+    "mtime": 1789301517.9800906,
+    "seen": 1789301654.882456,
+    "ast_hash": "f60296736303734f6f094e34ce88cb10",
+    "semantic_hash": "f60296736303734f6f094e34ce88cb10"
+  },
+  "setup-ai-environment.sh": {
+    "mtime": 1789302297.6232884,
+    "seen": 1789303553.6930728,
+    "ast_hash": "2a66a9a2808cbaf69e16fae80701882c",
+    "semantic_hash": "2a66a9a2808cbaf69e16fae80701882c"
+  },
+  "public/lucide.min.js": {
+    "mtime": 1789302020.5733917,
+    "seen": 1789302160.691646,
+    "ast_hash": "ded9082b1c55b80578ee45c8d1171f76",
+    "semantic_hash": "ded9082b1c55b80578ee45c8d1171f76"
+  },
+  "scratch/test-project-demo/.agents/mcp_config.json": {
+    "mtime": 1789302368.8089082,
+    "seen": 1789303553.6930473,
+    "ast_hash": "856cff0630f4d3e0e07a206f34dc8da8",
+    "semantic_hash": "856cff0630f4d3e0e07a206f34dc8da8"
+  },
+  "scratch/test-project-demo/.claude/settings.json": {
+    "mtime": 1789302368.8114238,
+    "seen": 1789303553.6930482,
+    "ast_hash": "856cff0630f4d3e0e07a206f34dc8da8",
+    "semantic_hash": "856cff0630f4d3e0e07a206f34dc8da8"
+  },
+  "scratch/test-project-demo/setup-ai-environment.sh": {
+    "mtime": 1789302368.8114238,
+    "seen": 1789303553.6930487,
+    "ast_hash": "ddc2ad2908dd834609a72456409ffe5e",
+    "semantic_hash": "ddc2ad2908dd834609a72456409ffe5e"
+  }
+}

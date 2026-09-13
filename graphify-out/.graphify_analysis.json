@@ -1,0 +1,333 @@
+{
+  "communities": {
+    "0": [
+      "public_app",
+      "public_app_applyconfiguration",
+      "public_app_el",
+      "public_app_inspectdirectory",
+      "public_app_loadcatalog",
+      "public_app_loadenvironment",
+      "public_app_renderfiletree",
+      "public_app_renderskillslist",
+      "public_app_runterminalcommand",
+      "public_app_setdefaulttargetdir",
+      "public_app_setupeventlisteners",
+      "public_app_showtoast",
+      "public_app_state",
+      "public_app_syncselectedskillsfromui",
+      "public_app_triggerpreview",
+      "public_app_updatedirectorybadge",
+      "public_app_updatepresetbuttonui",
+      "public_app_viewfile"
+    ],
+    "1": [
+      "package",
+      "package_author",
+      "package_dependencies",
+      "package_dependencies_cors",
+      "package_dependencies_express",
+      "package_description",
+      "package_keywords",
+      "package_license",
+      "package_main",
+      "package_name",
+      "package_scripts",
+      "package_scripts_dev",
+      "package_scripts_start",
+      "package_type",
+      "package_version",
+      "ref_cors",
+      "ref_express"
+    ],
+    "2": [
+      "lib_generator",
+      "lib_generator_generateconfig",
+      "lib_generator_generateglobalinstallscript",
+      "lib_generator_generatesetupscript",
+      "lib_skills_catalog",
+      "lib_skills_catalog_agent_skills",
+      "lib_skills_catalog_design_md_presets",
+      "lib_skills_catalog_design_skills",
+      "lib_skills_catalog_graphify_templates",
+      "lib_skills_catalog_ponytail_rules",
+      "lib_skills_catalog_ponytail_skills",
+      "lib_skills_catalog_stack_presets",
+      "server",
+      "server_app",
+      "server_dirname",
+      "server_filename"
+    ],
+    "3": [
+      "lib_installer",
+      "lib_installer_checkbinary",
+      "lib_installer_detectenvironment",
+      "lib_installer_execasync",
+      "lib_installer_executecommandstreaming",
+      "lib_installer_inspectprojectpath",
+      "lib_installer_resolveuserpath",
+      "lib_installer_writefilestoproject"
+    ],
+    "4": [
+      "agents",
+      "agents_commit_message_conventions",
+      "agents_graphify_architectural_guidance",
+      "agents_ponytail_lazy_senior_dev_mode",
+      "agents_typescript_node_js_standards",
+      "agents_verification_testing_standard"
+    ],
+    "5": [
+      "claude",
+      "claude_commit_message_conventions",
+      "claude_graphify_architectural_guidance",
+      "claude_ponytail_lazy_senior_dev_mode",
+      "claude_typescript_node_js_standards",
+      "claude_verification_testing_standard"
+    ],
+    "6": [
+      "gemini",
+      "gemini_commit_message_conventions",
+      "gemini_graphify_architectural_guidance",
+      "gemini_ponytail_lazy_senior_dev_mode",
+      "gemini_typescript_node_js_standards",
+      "gemini_verification_testing_standard"
+    ],
+    "7": [
+      "readme",
+      "readme_ai_agent_project_configurator_web_cli",
+      "readme_fișiere_generate_într_un_proiect_țintă",
+      "readme_pornire_rapidă",
+      "readme_structura_aplicației"
+    ],
+    "8": [
+      "agents_skills_graphify_skill",
+      "agents_skills_graphify_skill_best_practices",
+      "agents_skills_graphify_skill_commands",
+      "agents_skills_graphify_skill_graphify_knowledge_graph_skill"
+    ],
+    "9": [
+      "agents_skills_spec_driven_development_skill",
+      "agents_skills_spec_driven_development_skill_1_specification_checklist",
+      "agents_skills_spec_driven_development_skill_2_process",
+      "agents_skills_spec_driven_development_skill_spec_driven_development"
+    ],
+    "10": [
+      "claude_skills_graphify_skill",
+      "claude_skills_graphify_skill_best_practices",
+      "claude_skills_graphify_skill_commands",
+      "claude_skills_graphify_skill_graphify_knowledge_graph_skill"
+    ],
+    "11": [
+      "claude_skills_spec_driven_development_skill",
+      "claude_skills_spec_driven_development_skill_1_specification_checklist",
+      "claude_skills_spec_driven_development_skill_2_process",
+      "claude_skills_spec_driven_development_skill_spec_driven_development"
+    ],
+    "12": [
+      "agents_skills_incremental_implementation_skill",
+      "agents_skills_incremental_implementation_skill_incremental_implementation",
+      "agents_skills_incremental_implementation_skill_workflow"
+    ],
+    "13": [
+      "agents_skills_planning_and_task_breakdown_skill",
+      "agents_skills_planning_and_task_breakdown_skill_planning_task_breakdown",
+      "agents_skills_planning_and_task_breakdown_skill_principles"
+    ],
+    "14": [
+      "claude_skills_incremental_implementation_skill",
+      "claude_skills_incremental_implementation_skill_incremental_implementation",
+      "claude_skills_incremental_implementation_skill_workflow"
+    ],
+    "15": [
+      "claude_skills_planning_and_task_breakdown_skill",
+      "claude_skills_planning_and_task_breakdown_skill_planning_task_breakdown",
+      "claude_skills_planning_and_task_breakdown_skill_principles"
+    ],
+    "16": [
+      "agents_rules_graphify",
+      "agents_rules_graphify_graphify_architectural_guidance"
+    ],
+    "17": [
+      "agents_rules_ponytail",
+      "agents_rules_ponytail_ponytail_lazy_senior_dev_mode"
+    ],
+    "18": [
+      "agents_skills_code_review_and_quality_skill",
+      "agents_skills_code_review_and_quality_skill_5_axis_code_review"
+    ],
+    "19": [
+      "agents_skills_code_simplification_skill",
+      "agents_skills_code_simplification_skill_code_simplification"
+    ],
+    "20": [
+      "agents_skills_ponytail_audit_skill",
+      "agents_skills_ponytail_audit_skill_ponytail_dependency_audit"
+    ],
+    "21": [
+      "agents_skills_ponytail_review_skill",
+      "agents_skills_ponytail_review_skill_ponytail_code_review"
+    ],
+    "22": [
+      "agents_skills_shipping_and_launch_skill",
+      "agents_skills_shipping_and_launch_skill_shipping_production_launch"
+    ],
+    "23": [
+      "agents_skills_test_driven_development_skill",
+      "agents_skills_test_driven_development_skill_test_driven_development_tdd"
+    ],
+    "24": [
+      "agents_workflows_graphify",
+      "agents_workflows_graphify_graphify_workflow"
+    ],
+    "25": [
+      "claude_skills_code_review_and_quality_skill",
+      "claude_skills_code_review_and_quality_skill_5_axis_code_review"
+    ],
+    "26": [
+      "claude_skills_code_simplification_skill",
+      "claude_skills_code_simplification_skill_code_simplification"
+    ],
+    "27": [
+      "claude_skills_ponytail_audit_skill",
+      "claude_skills_ponytail_audit_skill_ponytail_dependency_audit"
+    ],
+    "28": [
+      "claude_skills_ponytail_review_skill",
+      "claude_skills_ponytail_review_skill_ponytail_code_review"
+    ],
+    "29": [
+      "claude_skills_shipping_and_launch_skill",
+      "claude_skills_shipping_and_launch_skill_shipping_production_launch"
+    ],
+    "30": [
+      "claude_skills_test_driven_development_skill",
+      "claude_skills_test_driven_development_skill_test_driven_development_tdd"
+    ],
+    "31": [
+      "install_global_ai_tools",
+      "install_global_ai_tools_sh__entry"
+    ],
+    "32": [
+      "scratch_test_project_demo_setup_ai_environment",
+      "scratch_test_project_demo_setup_ai_environment_sh__entry"
+    ],
+    "33": [
+      "setup_ai_environment",
+      "setup_ai_environment_sh__entry"
+    ],
+    "34": [
+      "public_lucide_min"
+    ]
+  },
+  "cohesion": {
+    "0": 0.24836601307189543,
+    "1": 0.11764705882352941,
+    "2": 0.275,
+    "3": 0.42857142857142855,
+    "4": 0.3333333333333333,
+    "5": 0.3333333333333333,
+    "6": 0.3333333333333333,
+    "7": 0.4,
+    "8": 0.5,
+    "9": 0.5,
+    "10": 0.5,
+    "11": 0.5,
+    "12": 0.6666666666666666,
+    "13": 0.6666666666666666,
+    "14": 0.6666666666666666,
+    "15": 0.6666666666666666,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0
+  },
+  "gods": [
+    {
+      "id": "public_app_setupeventlisteners",
+      "label": "setupEventListeners()",
+      "degree": 9
+    },
+    {
+      "id": "public_app_renderskillslist",
+      "label": "renderSkillsList()",
+      "degree": 6
+    },
+    {
+      "id": "public_app_inspectdirectory",
+      "label": "inspectDirectory()",
+      "degree": 5
+    },
+    {
+      "id": "public_app_renderfiletree",
+      "label": "renderFileTree()",
+      "degree": 5
+    },
+    {
+      "id": "public_app_triggerpreview",
+      "label": "triggerPreview()",
+      "degree": 5
+    },
+    {
+      "id": "lib_installer_resolveuserpath",
+      "label": "resolveUserPath()",
+      "degree": 5
+    },
+    {
+      "id": "public_app_applyconfiguration",
+      "label": "applyConfiguration()",
+      "degree": 4
+    },
+    {
+      "id": "lib_generator_generateconfig",
+      "label": "generateConfig()",
+      "degree": 4
+    },
+    {
+      "id": "readme_ai_agent_project_configurator_web_cli",
+      "label": "AI Agent Project Configurator (Web & CLI)",
+      "degree": 4
+    },
+    {
+      "id": "public_app_runterminalcommand",
+      "label": "runTerminalCommand()",
+      "degree": 3
+    }
+  ],
+  "surprises": [],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `cors` connect `package.json` to `server.js`?",
+      "why": "High betweenness centrality (0.017) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `express` connect `package.json` to `server.js`?",
+      "why": "High betweenness centrality (0.017) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `el`, `state`, `author` to the rest of the system?",
+      "why": "62 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `package.json` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

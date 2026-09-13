@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="ro" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent Configurator | Claude Code & Antigravity CLI</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="lucide.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            charcoal: {
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#09090b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-zinc-900 selection:text-white bg-[#fbfbfd] text-zinc-900">
+
+  <!-- TOP APP BAR (Sharp & Airy Light Header) -->
+  <header class="border-b border-zinc-200 bg-white/90 backdrop-blur-xl sticky top-0 z-40 px-8 py-4 transition">
+    <div class="max-w-[1360px] mx-auto flex flex-wrap items-center justify-between gap-6">
+      
+      <!-- Brand Title & Minimalist Sharp Logo -->
+      <div class="flex items-center gap-4">
+        <div class="h-10 w-10 rounded-sm bg-zinc-900 text-white flex items-center justify-center shadow-sm">
+          <i data-lucide="layers" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h1 class="text-sm font-bold tracking-tight text-zinc-950 flex items-center gap-2">
+              AI Agent Configurator
+            </h1>
+            <span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-sm bg-zinc-100 text-zinc-800 border border-zinc-300">
+              v2.0
+            </span>
+          </div>
+          <p class="text-xs text-zinc-500 font-normal mt-0.5">Pre-configurare & sincronizare de Skills, Reguli și MCP pentru Claude Code & Antigravity</p>
+        </div>
+      </div>
+
+      <!-- System Environment Badges (Sharp pills) -->
+      <div id="env-badges" class="flex items-center gap-2.5 text-xs flex-wrap">
+        <div class="px-3 py-1.5 rounded-sm bg-white border border-zinc-200 flex items-center gap-2 text-zinc-700 text-xs font-mono shadow-sm">
+          <span class="status-dot bg-emerald-600"></span>
+          <i data-lucide="hexagon" class="w-3.5 h-3.5 text-zinc-800"></i>
+          <span id="badge-node">Detectare...</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-sm bg-white border border-zinc-200 flex items-center gap-2 text-zinc-700 text-xs font-mono shadow-sm">
+          <span class="status-dot bg-amber-500"></span>
+          <i data-lucide="binary" class="w-3.5 h-3.5 text-zinc-800"></i>
+          <span id="badge-python">Detectare...</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-sm bg-white border border-zinc-200 flex items-center gap-2 text-zinc-700 text-xs font-mono shadow-sm">
+          <span class="status-dot bg-blue-600"></span>
+          <i data-lucide="sparkle" class="w-3.5 h-3.5 text-zinc-800"></i>
+          <span id="badge-agy">agy: ?</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-sm bg-white border border-zinc-200 flex items-center gap-2 text-zinc-700 text-xs font-mono shadow-sm">
+          <span class="status-dot bg-orange-500"></span>
+          <i data-lucide="bot" class="w-3.5 h-3.5 text-zinc-800"></i>
+          <span id="badge-claude">claude: ?</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- TARGET DIRECTORY OMNIBAR (Sharp & Spacious) -->
+  <div class="border-b border-zinc-200 bg-white/70 backdrop-blur-md px-8 py-3.5">
+    <div class="max-w-[1360px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex-1 w-full flex items-center gap-2.5 flex-wrap md:flex-nowrap">
+        <div class="flex items-center gap-2 text-xs font-semibold text-zinc-700 uppercase tracking-wider whitespace-nowrap">
+          <i data-lucide="folder" class="w-4 h-4 text-zinc-800"></i>
+          <span>Proiect Țintă</span>
+        </div>
+        
+        <div class="relative flex-1 min-w-[260px]">
+          <input 
+            type="text" 
+            id="target-dir-input" 
+            class="omnibar-input w-full rounded-sm px-3.5 py-2 text-xs text-zinc-950 outline-none font-mono"
+            placeholder="/calea/catre/proiectul/tau"
+          />
+        </div>
+
+        <button 
+          id="btn-browse-folder" 
+          class="px-3.5 py-2 bg-zinc-900 hover:bg-black active:scale-95 text-white rounded-sm text-xs font-medium transition flex items-center gap-1.5 shadow-sm whitespace-nowrap"
+          title="Deschide File Explorer nativ (Linux/Windows) sau navigator intern de directoare"
+        >
+          <i data-lucide="folder-search" class="w-3.5 h-3.5"></i>
+          <span>Răsfoiește...</span>
+        </button>
+
+        <button 
+          id="btn-saved-projects-toggle" 
+          class="px-3.5 py-2 bg-white hover:bg-zinc-100 active:scale-95 text-zinc-800 border border-zinc-300 rounded-sm text-xs font-medium transition flex items-center gap-1.5 shadow-sm whitespace-nowrap"
+          title="Gestionează lista de proiecte salvate"
+        >
+          <i data-lucide="bookmark" class="w-3.5 h-3.5 text-zinc-800"></i>
+          <span>Proiecte Salvate</span>
+          <span id="saved-projects-count" class="px-1.5 py-0.5 bg-zinc-100 border border-zinc-200 text-zinc-700 font-mono text-[10px] rounded-sm font-bold">2</span>
+        </button>
+
+        <button 
+          id="btn-bookmark-current" 
+          class="px-3 py-2 bg-white hover:bg-zinc-100 active:scale-95 text-zinc-700 border border-zinc-300 rounded-sm text-xs font-medium transition flex items-center gap-1.5 shadow-sm whitespace-nowrap"
+          title="Adaugă calea curentă în lista de proiecte salvate"
+        >
+          <i data-lucide="bookmark-plus" class="w-3.5 h-3.5"></i>
+          <span>Salvează</span>
+        </button>
+
+        <button 
+          id="btn-inspect" 
+          class="px-3 py-2 bg-white hover:bg-zinc-100 active:scale-95 text-zinc-800 border border-zinc-300 rounded-sm text-xs font-medium transition flex items-center gap-1.5 shadow-sm whitespace-nowrap"
+          title="Verifică starea directorului"
+        >
+          <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+          <span>Inspectează</span>
+        </button>
+
+        <button 
+          id="btn-current-dir" 
+          class="px-3 py-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 border border-zinc-300 rounded-sm text-xs font-medium transition whitespace-nowrap"
+          title="Setează la proiectul curent"
+        >
+          Proiect Curent
+        </button>
+      </div>
+
+      <!-- Directory status badge -->
+      <div id="dir-status-container" class="flex items-center gap-2 text-xs">
+        <span id="dir-status-badge" class="px-3 py-1.5 rounded-sm bg-zinc-100 text-zinc-700 border border-zinc-300 text-xs font-mono">
+          Neverificat
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APP LAYOUT (Airy 2-Column Grid) -->
+  <main class="flex-1 max-w-[1360px] w-full mx-auto p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+    <!-- LEFT COLUMN: CONTROLS & MODULES (5 Cols) -->
+    <div class="lg:col-span-5 space-y-5">
+
+      <!-- 1. CLI TARGET & SCOPE -->
+      <div class="glass-card rounded-sm p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-zinc-800 flex items-center gap-2.5">
+            <span class="w-5 h-5 rounded-sm bg-zinc-900 text-white flex items-center justify-center text-[10px] font-mono font-bold">01</span>
+            Țintă CLI & Anvergură (Scope)
+          </span>
+          <i data-lucide="sliders-horizontal" class="w-4 h-4 text-zinc-400"></i>
+        </div>
+
+        <div>
+          <label class="text-xs text-zinc-600 font-medium block mb-2">CLI Destinație:</label>
+          <div class="grid grid-cols-3 gap-2.5">
+            <button type="button" class="cli-btn active p-3 rounded-sm border text-center transition flex flex-col items-center gap-1.5" data-cli="both">
+              <i data-lucide="combine" class="w-4 h-4 text-zinc-900"></i>
+              <span class="text-xs font-medium">Unified (Ambele)</span>
+            </button>
+            <button type="button" class="cli-btn p-3 rounded-sm border text-center transition flex flex-col items-center gap-1.5" data-cli="antigravity">
+              <i data-lucide="rocket" class="w-4 h-4 text-zinc-700"></i>
+              <span class="text-xs font-medium">Antigravity (agy)</span>
+            </button>
+            <button type="button" class="cli-btn p-3 rounded-sm border text-center transition flex flex-col items-center gap-1.5" data-cli="claude">
+              <i data-lucide="bot" class="w-4 h-4 text-zinc-700"></i>
+              <span class="text-xs font-medium">Claude Code</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs text-zinc-600 font-medium block mb-2">Anvergură (Scope):</label>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button type="button" class="scope-btn active p-2.5 rounded-sm border text-center transition" data-scope="project">
+              <div class="text-xs font-medium">Pe Proiect (Local)</div>
+              <div class="text-[10px] text-zinc-500 font-mono mt-0.5">.agents/ & .claude/</div>
+            </button>
+            <button type="button" class="scope-btn p-2.5 rounded-sm border text-center transition" data-scope="global">
+              <div class="text-xs font-medium">Universal (Global)</div>
+              <div class="text-[10px] text-zinc-500 font-mono mt-0.5">~/.gemini/ & ~/.claude/</div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. ADDY OSMANI AGENT SKILLS -->
+      <div class="glass-card rounded-sm p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="skills-enabled" class="accent-zinc-900 h-4 w-4 rounded-sm cursor-pointer" checked>
+            <label for="skills-enabled" class="text-xs font-bold uppercase tracking-wider text-zinc-800 cursor-pointer flex items-center gap-2">
+              <span class="w-5 h-5 rounded-sm bg-zinc-900 text-white flex items-center justify-center text-[10px] font-mono font-bold">02</span>
+              Addy Osmani Agent Skills
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] text-zinc-700 font-mono font-semibold px-2 py-0.5 rounded-sm bg-zinc-100 border border-zinc-200">42k+ ⭐</span>
+            <a href="https://github.com/addyosmani/agent-skills" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition" title="Deschide GitHub repository">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <p class="text-xs text-zinc-600 leading-relaxed">
+          Standarde de inginerie software senior: ciclu complet spec, plan, build, TDD, code review în 5 axe și release.
+        </p>
+
+        <div id="skills-controls" class="space-y-3 pt-1">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-zinc-600 font-medium">Preset Skills:</span>
+            <div class="flex gap-1.5">
+              <button type="button" class="skill-preset-btn active px-3 py-1.5 text-xs rounded-sm bg-zinc-900 text-white border border-zinc-900 font-medium transition" data-preset="core">
+                Core (7 cheie)
+              </button>
+              <button type="button" class="skill-preset-btn px-3 py-1.5 text-xs rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 font-medium transition" data-preset="all">
+                Toate (12+)
+              </button>
+              <button type="button" class="skill-preset-btn px-3 py-1.5 text-xs rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 font-medium transition" data-preset="custom">
+                Custom
+              </button>
+            </div>
+          </div>
+
+          <!-- Skills list / chips -->
+          <div id="skills-chip-list" class="max-h-48 overflow-y-auto space-y-1.5 p-2.5 bg-zinc-50 rounded-sm border border-zinc-200 text-xs">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. PONYTAIL (LAZY SENIOR DEV) -->
+      <div class="glass-card rounded-sm p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="ponytail-enabled" class="accent-zinc-900 h-4 w-4 rounded-sm cursor-pointer" checked>
+            <label for="ponytail-enabled" class="text-xs font-bold uppercase tracking-wider text-zinc-800 cursor-pointer flex items-center gap-2">
+              <span class="w-5 h-5 rounded-sm bg-zinc-900 text-white flex items-center justify-center text-[10px] font-mono font-bold">03</span>
+              Ponytail (Lazy Senior Dev)
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] text-zinc-700 font-mono font-semibold px-2 py-0.5 rounded-sm bg-zinc-100 border border-zinc-200">24k+ ⭐</span>
+            <a href="https://github.com/DietrichGebert/ponytail" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition" title="Deschide GitHub repository">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <p class="text-xs text-zinc-600 leading-relaxed">
+          Forțează agentul să scrie cel mai puțin cod posibil: YAGNI, refolosire utilitare existente, zero boilerplate.
+        </p>
+
+        <div id="ponytail-controls" class="space-y-3 pt-1">
+          <div>
+            <label class="text-xs text-zinc-600 font-medium block mb-2">Nivel de rigoare:</label>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" class="ponytail-mode-btn p-2 text-xs rounded-sm border text-center transition" data-mode="lite">
+                Lite
+              </button>
+              <button type="button" class="ponytail-mode-btn active p-2 text-xs rounded-sm border text-center transition" data-mode="full">
+                Full (Senior)
+              </button>
+              <button type="button" class="ponytail-mode-btn p-2 text-xs rounded-sm border text-center transition" data-mode="ultra">
+                Ultra Minimal
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-1.5 text-xs pt-1">
+            <label class="flex items-center gap-2.5 cursor-pointer text-zinc-700">
+              <input type="checkbox" id="ponytail-skills-checkbox" class="accent-zinc-900 rounded-sm" checked>
+              <span>Include Ponytail Skills (<code class="text-zinc-900 font-mono font-semibold">/ponytail-review</code>, <code class="text-zinc-900 font-mono font-semibold">/ponytail-audit</code>)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. HEADROOM (CONTEXT & TOKEN COMPRESSION) -->
+      <div class="glass-card rounded-sm p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="headroom-enabled" class="accent-zinc-900 h-4 w-4 rounded-sm cursor-pointer" checked>
+            <label for="headroom-enabled" class="text-xs font-bold uppercase tracking-wider text-zinc-800 cursor-pointer flex items-center gap-2">
+              <span class="w-5 h-5 rounded-sm bg-zinc-900 text-white flex items-center justify-center text-[10px] font-mono font-bold">04</span>
+              Headroom (Context & Token Compression)
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] text-zinc-700 font-mono font-semibold px-2 py-0.5 rounded-sm bg-zinc-100 border border-zinc-200">71.8k+ ⭐</span>
+            <a href="https://github.com/headroomlabs-ai/headroom" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition" title="Deschide Headroom pe GitHub">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <p class="text-xs text-zinc-600 leading-relaxed">
+          Comprimă automat log-urile masive, stdout/stderr, payload-urile JSON mari și codul cu 20–90% înainte de a ajunge la LLM. Economie majoră de context și costuri.
+        </p>
+
+        <div id="headroom-controls" class="space-y-3 pt-1">
+          <div class="space-y-2 text-xs">
+            <label class="flex items-center gap-2.5 cursor-pointer text-zinc-700">
+              <input type="checkbox" id="headroom-mcp-checkbox" class="accent-zinc-900 rounded-sm" checked>
+              <span>Configurare MCP Server (<code class="text-zinc-900 font-mono font-semibold">uvx headroom-ai[all] mcp</code>)</span>
+            </label>
+
+            <label class="flex items-center gap-2.5 cursor-pointer text-zinc-700">
+              <input type="checkbox" id="headroom-skill-checkbox" class="accent-zinc-900 rounded-sm" checked>
+              <span>Skill dedicat (<code class="text-zinc-900 font-mono font-semibold">/compress</code>) pentru sinteza rapidă a tool output-urilor</span>
+            </label>
+
+            <label class="flex items-center gap-2.5 cursor-pointer text-zinc-700">
+              <input type="checkbox" id="headroom-rules-checkbox" class="accent-zinc-900 rounded-sm" checked>
+              <span>Ghid de bugetare a tokenilor & reguli în <code class="text-zinc-900 font-mono font-semibold">AGENTS.md</code></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. GRAPHIFY (KNOWLEDGE GRAPH) -->
+      <div class="glass-card rounded-sm p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="graphify-enabled" class="accent-zinc-900 h-4 w-4 rounded-sm cursor-pointer" checked>
+            <label for="graphify-enabled" class="text-xs font-bold uppercase tracking-wider text-zinc-800 cursor-pointer flex items-center gap-2">
+              <span class="w-5 h-5 rounded-sm bg-zinc-900 text-white flex items-center justify-center text-[10px] font-mono font-bold">05</span>
+              Graphify (Knowledge Graph AST)
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] text-zinc-700 font-mono font-semibold px-2 py-0.5 rounded-sm bg-zinc-100 border border-zinc-200">31k+ ⭐</span>
+            <a href="https://github.com/Graphify-Labs/graphify" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition" title="Deschide GitHub repository">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <p class="text-xs text-zinc-600 leading-relaxed">
+          Transformă codul și arhitectura într-un graf interactiv de cunoștințe deterministic. Economie masivă de tokeni.
+        </p>
+
+        <div id="graphify-controls" class="space-y-3 pt-1">
+          <div class="space-y-1.5 text-xs">
+            <label class="flex items-center gap-2.5 cursor-pointer text-zinc-700">
+              <input type="checkbox" id="graphify-mcp-checkbox" class="accent-zinc-900 rounded-sm" checked>
+              <span>Configurare MCP Server în <code class="text-zinc-900 font-mono font-semibold">mcp_config.json</code></span>
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between text-xs pt-1">
+            <span class="text-xs text-zinc-600 font-medium">Rulare MCP cu:</span>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-2 cursor-pointer text-zinc-700">
+                <input type="radio" name="mcp-runner" value="uv" checked class="accent-zinc-900">
+                <span class="text-xs font-mono">uv run</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer text-zinc-700">
+                <input type="radio" name="mcp-runner" value="python" class="accent-zinc-900">
+                <span class="text-xs font-mono">python3 -m</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. DESIGN & UI ENGINEERING SUITE -->
+      <div class="glass-card rounded-sm p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="design-enabled" class="accent-zinc-900 h-4 w-4 rounded-sm cursor-pointer" checked>
+            <label for="design-enabled" class="text-xs font-bold uppercase tracking-wider text-zinc-800 cursor-pointer flex items-center gap-2">
+              <span class="w-5 h-5 rounded-sm bg-zinc-900 text-white flex items-center justify-center text-[10px] font-mono font-bold">06</span>
+              Design & UI Suite (Anti-Slop & Motion)
+            </label>
+          </div>
+          <span class="text-[10px] font-mono text-zinc-800 px-2.5 py-0.5 rounded-sm bg-zinc-100 border border-zinc-300 font-semibold">
+            Design Craft
+          </span>
+        </div>
+
+        <p class="text-xs text-zinc-600 leading-relaxed">
+          Design frontend de elită: elimină slop-ul generic AI, adaugă 23 comenzi Impeccable, animații tactile și brand tokens.
+        </p>
+
+        <div id="design-controls" class="space-y-4 pt-1">
+          <!-- The 3 Elite Design Skills -->
+          <div class="space-y-2 text-xs">
+            <div class="flex items-center justify-between p-3 rounded-sm bg-zinc-50 border border-zinc-200 text-zinc-800 hover:border-zinc-400 transition">
+              <label class="flex items-center gap-2.5 cursor-pointer flex-1">
+                <input type="checkbox" id="design-taste-checkbox" class="accent-zinc-900 rounded-sm" checked>
+                <span class="font-medium">Taste-Skill (Anti-Slop)</span>
+              </label>
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] text-zinc-600 font-mono font-semibold">86k+ ⭐</span>
+                <a href="https://github.com/Leonxlnx/taste-skill" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide GitHub repository">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-3 rounded-sm bg-zinc-50 border border-zinc-200 text-zinc-800 hover:border-zinc-400 transition">
+              <label class="flex items-center gap-2.5 cursor-pointer flex-1">
+                <input type="checkbox" id="design-impeccable-checkbox" class="accent-zinc-900 rounded-sm" checked>
+                <span class="font-medium">Impeccable (Paul Bakaus)</span>
+              </label>
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] text-zinc-600 font-mono font-semibold">67k+ ⭐</span>
+                <a href="https://github.com/pbakaus/impeccable" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide GitHub repository">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-3 rounded-sm bg-zinc-50 border border-zinc-200 text-zinc-800 hover:border-zinc-400 transition">
+              <label class="flex items-center gap-2.5 cursor-pointer flex-1">
+                <input type="checkbox" id="design-emil-checkbox" class="accent-zinc-900 rounded-sm" checked>
+                <span class="font-medium">Emil Kowalski (Motion & Apple)</span>
+              </label>
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] text-zinc-600 font-mono font-semibold">37k+ ⭐</span>
+                <a href="https://github.com/emilkowalski/skills" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide GitHub repository">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brand DESIGN.md Preset -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs text-zinc-600 font-medium">Brand DESIGN.md (Awesome-Design-MD):</label>
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] text-zinc-700 font-mono font-bold">115k+ ⭐</span>
+                <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition" title="Deschide GitHub repository">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <select id="design-md-select" class="w-full bg-white border border-zinc-300 rounded-sm p-2.5 text-xs text-zinc-900 outline-none focus:border-zinc-900 font-mono">
+              <option value="linear" selected>linear.app (Near-black, lavender, high-density craft)</option>
+              <option value="apple">apple.com (Content-first, SF Pro, fluid clarity)</option>
+              <option value="stripe">stripe.com (High-trust fintech, vibrant indigo)</option>
+              <option value="vercel">vercel.com (Geist typography, stark monochrome)</option>
+              <option value="none">Fără fișier DESIGN.md</option>
+            </select>
+          </div>
+
+          <!-- Taste Three Dials Sliders -->
+          <div class="pt-3 border-t border-zinc-200 space-y-3 text-xs">
+            <div class="flex items-center justify-between text-zinc-600">
+              <span class="font-bold text-zinc-900">The Three Dials (Taste Configuration):</span>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <div class="flex items-center justify-between text-xs text-zinc-600 mb-1.5">
+                  <span>Variance (1=Symmetry, 10=Artsy):</span>
+                  <span id="label-variance" class="font-mono text-zinc-950 font-bold px-2 py-0.5 rounded-sm bg-zinc-100 border border-zinc-300 text-xs">8</span>
+                </div>
+                <input type="range" id="dial-variance" min="1" max="10" value="8" class="w-full">
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between text-xs text-zinc-600 mb-1.5">
+                  <span>Motion (1=Static, 10=Physics):</span>
+                  <span id="label-motion" class="font-mono text-zinc-950 font-bold px-2 py-0.5 rounded-sm bg-zinc-100 border border-zinc-300 text-xs">6</span>
+                </div>
+                <input type="range" id="dial-motion" min="1" max="10" value="6" class="w-full">
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between text-xs text-zinc-600 mb-1.5">
+                  <span>Density (1=Airy, 10=Dense):</span>
+                  <span id="label-density" class="font-mono text-zinc-950 font-bold px-2 py-0.5 rounded-sm bg-zinc-100 border border-zinc-300 text-xs">4</span>
+                </div>
+                <input type="range" id="dial-density" min="1" max="10" value="4" class="w-full">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. CYBERSECURITY & APPSEC SUITE -->
+      <div class="glass-card rounded-sm p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="security-enabled" class="accent-zinc-900 h-4 w-4 rounded-sm cursor-pointer" checked>
+            <label for="security-enabled" class="text-xs font-bold uppercase tracking-wider text-zinc-800 cursor-pointer flex items-center gap-2">
+              <span class="w-5 h-5 rounded-sm bg-zinc-900 text-white flex items-center justify-center text-[10px] font-mono font-bold">07</span>
+              Cybersecurity & AppSec Suite
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] text-zinc-700 font-mono font-semibold px-2 py-0.5 rounded-sm bg-zinc-100 border border-zinc-200">32k+ ⭐</span>
+            <a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition" title="Deschide Anthropic Cybersecurity pe GitHub">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <p class="text-xs text-zinc-600 leading-relaxed">
+          Standarde de securitate defensivă (OWASP & MITRE ATT&CK): audit automat de cod, modelare STRIDE, scanare de secrete și supply-chain.
+        </p>
+
+        <div id="security-controls" class="space-y-2.5 pt-1 text-xs">
+          <!-- Skill 1: AppSec Code Audit -->
+          <div class="flex items-center justify-between p-3 rounded-sm bg-zinc-50 border border-zinc-200 text-zinc-800 hover:border-zinc-400 transition">
+            <label class="flex items-center gap-2.5 cursor-pointer flex-1">
+              <input type="checkbox" id="sec-appsec-checkbox" class="accent-zinc-900 rounded-sm" checked>
+              <span class="font-medium">OWASP & AppSec Audit (<code class="text-zinc-900 font-mono font-semibold">/security-audit</code>)</span>
+            </label>
+            <span class="text-[11px] text-zinc-600 font-mono font-semibold">32k+ ⭐</span>
+          </div>
+
+          <!-- Skill 2: STRIDE Threat Modeling -->
+          <div class="flex items-center justify-between p-3 rounded-sm bg-zinc-50 border border-zinc-200 text-zinc-800 hover:border-zinc-400 transition">
+            <label class="flex items-center gap-2.5 cursor-pointer flex-1">
+              <input type="checkbox" id="sec-threat-checkbox" class="accent-zinc-900 rounded-sm" checked>
+              <span class="font-medium">STRIDE Threat Modeling (<code class="text-zinc-900 font-mono font-semibold">/threat-model</code>)</span>
+            </label>
+            <span class="text-[11px] text-zinc-600 font-mono font-semibold">32k+ ⭐</span>
+          </div>
+
+          <!-- Skill 3: Secret Scanning (NVIDIA SkillSpector) -->
+          <div class="flex items-center justify-between p-3 rounded-sm bg-zinc-50 border border-zinc-200 text-zinc-800 hover:border-zinc-400 transition">
+            <label class="flex items-center gap-2.5 cursor-pointer flex-1">
+              <input type="checkbox" id="sec-secret-checkbox" class="accent-zinc-900 rounded-sm" checked>
+              <span class="font-medium">Secret & Credential Scan (<code class="text-zinc-900 font-mono font-semibold">/secret-scan</code>)</span>
+            </label>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] text-zinc-600 font-mono font-semibold">17k+ ⭐</span>
+              <a href="https://github.com/NVIDIA/SkillSpector" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Vezi NVIDIA SkillSpector pe GitHub">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Skill 4: Dependency Vulnerability Audit (Trail of Bits) -->
+          <div class="flex items-center justify-between p-3 rounded-sm bg-zinc-50 border border-zinc-200 text-zinc-800 hover:border-zinc-400 transition">
+            <label class="flex items-center gap-2.5 cursor-pointer flex-1">
+              <input type="checkbox" id="sec-dep-checkbox" class="accent-zinc-900 rounded-sm" checked>
+              <span class="font-medium">Trail of Bits CVE & Supply Chain (<code class="text-zinc-900 font-mono font-semibold">/dep-audit</code>)</span>
+            </label>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] text-zinc-600 font-mono font-semibold">7k+ ⭐</span>
+              <a href="https://github.com/trailofbits/skills" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Vezi Trail of Bits pe GitHub">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. TECH STACK & CUSTOM RULES -->
+      <div class="glass-card rounded-sm p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-zinc-800 flex items-center gap-2.5">
+            <span class="w-5 h-5 rounded-sm bg-zinc-900 text-white flex items-center justify-center text-[10px] font-mono font-bold">08</span>
+            Stack Tehnologic & Reguli
+          </span>
+          <i data-lucide="code-2" class="w-4 h-4 text-zinc-400"></i>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 text-xs">
+          <div>
+            <label class="text-xs text-zinc-600 font-medium block mb-1.5">Limbaj / Stack:</label>
+            <select id="stack-select" class="w-full bg-white border border-zinc-300 rounded-sm p-2.5 text-xs text-zinc-900 outline-none focus:border-zinc-900 font-mono">
+              <option value="typescript" selected>TypeScript / Node.js</option>
+              <option value="python">Python 3.10+</option>
+              <option value="react">React / Next.js</option>
+              <option value="go">Go (Golang)</option>
+              <option value="rust">Rust</option>
+            </select>
+          </div>
+
+          <div class="space-y-2 pt-5">
+            <label class="flex items-center gap-2 cursor-pointer text-zinc-700">
+              <input type="checkbox" id="rule-tests" class="accent-zinc-900 rounded-sm" checked>
+              <span>Test coverage gate</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer text-zinc-700">
+              <input type="checkbox" id="rule-commits" class="accent-zinc-900 rounded-sm" checked>
+              <span>Conventional commits</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs text-zinc-600 font-medium block mb-1.5">Instrucțiuni / Reguli adiționale (opțional):</label>
+          <textarea 
+            id="custom-rules-text" 
+            rows="2" 
+            class="w-full bg-white border border-zinc-300 rounded-sm p-3 text-xs text-zinc-900 outline-none focus:border-zinc-900 font-mono"
+            placeholder="Ex: Folosește Tailwind CSS, fără Redux, API bazat pe REST..."
+          ></textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: WORKSPACE, PREVIEW, ACTION CENTER, DOCS (7 Cols) -->
+    <div class="lg:col-span-7 flex flex-col space-y-5">
+
+      <!-- Navigation Tabs & Primary Action (Airy Sharp Bar) -->
+      <div class="flex items-center justify-between border-b border-zinc-200 pb-3.5">
+        <div class="flex items-center gap-2 bg-zinc-100 p-1.5 rounded-sm border border-zinc-200">
+          <button type="button" class="tab-btn active px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2" data-tab="preview">
+            <i data-lucide="file-code" class="w-4 h-4"></i>
+            <span>Previzualizare Fișiere</span>
+            <span id="preview-count-badge" class="px-2 py-0.5 rounded-sm bg-zinc-200 text-[10px] font-mono text-zinc-800 font-bold">0</span>
+          </button>
+          <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2" data-tab="actions">
+            <i data-lucide="terminal" class="w-4 h-4"></i>
+            <span>Centru de Instalare</span>
+          </button>
+          <button type="button" class="tab-btn px-4 py-2 text-xs font-semibold rounded-sm transition flex items-center gap-2" data-tab="docs">
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+            <span>Documentație</span>
+          </button>
+        </div>
+
+        <!-- Quick Apply Button -->
+        <button 
+          id="btn-apply-quick" 
+          class="btn-primary-gradient px-5 py-2.5 text-white text-xs font-semibold rounded-sm transition flex items-center gap-2.5 cursor-pointer shadow-md"
+        >
+          <i data-lucide="save" class="w-4 h-4"></i>
+          <span>Aplică în Proiect</span>
+        </button>
+      </div>
+
+      <!-- TAB CONTENT 1: PREVIEW -->
+      <div id="tab-preview" class="tab-panel flex-1 flex flex-col space-y-4">
+        <!-- File list + Active Code View Split -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 min-h-[560px]">
+          
+          <!-- Left: File tree / list -->
+          <div class="md:col-span-4 glass-card rounded-sm p-4 flex flex-col">
+            <div class="text-xs font-bold uppercase tracking-wider text-zinc-800 px-2 py-2 border-b border-zinc-200 mb-3 flex items-center justify-between">
+              <span>Structură fișiere</span>
+              <span id="total-size-label" class="text-[11px] font-mono text-zinc-500 font-semibold">0 KB</span>
+            </div>
+            <div id="files-tree-list" class="flex-1 overflow-y-auto space-y-1.5 text-xs pr-1">
+              <!-- Files injected via JS -->
+            </div>
+
+            <!-- Full Route Indicator Bar -->
+            <div id="tree-hover-route-bar" class="mt-3 pt-2.5 border-t border-zinc-200 bg-zinc-50 p-2.5 rounded-sm border border-zinc-200 text-zinc-600 flex items-start gap-2 text-xs">
+              <i data-lucide="compass" class="w-3.5 h-3.5 text-zinc-900 shrink-0 mt-0.5"></i>
+              <div class="truncate flex-1 min-w-0">
+                <span class="text-zinc-500 block text-[9px] uppercase tracking-wider font-sans font-bold">Ruta locală (hover / activ):</span>
+                <span id="tree-hover-route-text" class="text-zinc-950 font-mono text-[11px] font-semibold break-all block select-all cursor-text" title="Click pentru a selecta">
+                  Plimbă cursorul peste orice fișier din listă...
+                </span>
+              </div>
+              <button id="btn-copy-route" type="button" class="p-1 text-zinc-500 hover:text-zinc-950 rounded-sm hover:bg-zinc-200 transition shrink-0" title="Copiază ruta locală în clipboard">
+                <i data-lucide="copy" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Code editor / viewer -->
+          <div class="md:col-span-8 glass-card rounded-sm flex flex-col overflow-hidden">
+            <div class="bg-zinc-100 px-5 py-3 border-b border-zinc-200 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-3">
+                <!-- Sharp minimal dots -->
+                <div class="flex items-center gap-1.5">
+                  <div class="w-2.5 h-2.5 rounded-sm bg-zinc-300"></div>
+                  <div class="w-2.5 h-2.5 rounded-sm bg-zinc-400"></div>
+                  <div class="w-2.5 h-2.5 rounded-sm bg-zinc-900"></div>
+                </div>
+                <div class="flex items-center gap-2 pl-3 border-l border-zinc-300">
+                  <span id="viewer-file-path" class="font-mono text-zinc-900 font-semibold">Selectează un fișier</span>
+                  <span id="viewer-file-tag" class="px-2 py-0.5 rounded-sm text-[10px] font-mono bg-white text-zinc-700 border border-zinc-300"></span>
+                </div>
+              </div>
+              <button id="btn-copy-code" class="text-zinc-700 hover:text-zinc-950 px-3 py-1.5 rounded-sm bg-white hover:bg-zinc-50 transition text-xs flex items-center gap-1.5 border border-zinc-300 cursor-pointer shadow-sm">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                <span>Copiază</span>
+              </button>
+            </div>
+            <div class="flex-1 bg-[#18181b] p-6 overflow-auto">
+              <pre id="viewer-code-content" class="text-xs font-mono text-zinc-200 leading-relaxed whitespace-pre"></pre>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB CONTENT 2: ACTIONS & TERMINAL RUNNER -->
+      <div id="tab-actions" class="tab-panel hidden flex-1 flex flex-col space-y-5">
+        
+        <!-- Action Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Card 1: Apply to disk -->
+          <div class="glass-card rounded-sm p-6 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center gap-2.5 text-zinc-900 font-bold text-sm mb-1.5">
+                <i data-lucide="file-output" class="w-4 h-4 text-zinc-800"></i>
+                <span>1. Generare & Scriere Fișiere</span>
+              </div>
+              <p class="text-xs text-zinc-600 leading-relaxed">
+                Creează instantaneu directoarele <code class="text-zinc-900 font-mono font-semibold bg-zinc-100 px-1 py-0.5 rounded-sm">.agents/</code>, <code class="text-zinc-900 font-mono font-semibold bg-zinc-100 px-1 py-0.5 rounded-sm">.claude/</code>, fișierele de reguli și scripturile pe disc la calea țintă.
+              </p>
+            </div>
+            <button 
+              id="btn-apply-action" 
+              class="w-full py-3 btn-primary-gradient text-white text-xs font-semibold rounded-sm transition flex items-center justify-center gap-2 cursor-pointer shadow-md"
+            >
+              <i data-lucide="check" class="w-4 h-4"></i>
+              <span>Scrie Toate Fișierele în Proiect</span>
+            </button>
+          </div>
+
+          <!-- Card 2: Run CLI Auto-Install -->
+          <div class="glass-card rounded-sm p-6 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center gap-2.5 text-zinc-900 font-bold text-sm mb-1.5">
+                <i data-lucide="terminal" class="w-4 h-4 text-zinc-800"></i>
+                <span>2. Auto-Install Dependencies</span>
+              </div>
+              <p class="text-xs text-zinc-600 leading-relaxed">
+                Rulează comenzile de instalare automată: <code class="text-zinc-900 font-mono font-semibold bg-zinc-100 px-1 py-0.5 rounded-sm">pip install graphifyy</code>, pluginul Ponytail și sincronizarea skills.
+              </p>
+            </div>
+            <button 
+              id="btn-run-install-script" 
+              class="w-full py-3 bg-zinc-800 hover:bg-zinc-950 text-white text-xs font-semibold rounded-sm transition flex items-center justify-center gap-2 shadow-md cursor-pointer"
+            >
+              <i data-lucide="play" class="w-4 h-4"></i>
+              <span>Execută Scriptul de Instalare</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Terminal Runner -->
+        <div class="glass-card rounded-sm p-6 flex-1 flex flex-col space-y-4">
+          <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5">
+                <div class="w-2.5 h-2.5 rounded-sm bg-zinc-400"></div>
+                <div class="w-2.5 h-2.5 rounded-sm bg-zinc-600"></div>
+                <div class="w-2.5 h-2.5 rounded-sm bg-zinc-900"></div>
+              </div>
+              <span class="text-xs font-bold uppercase tracking-wider text-zinc-800 flex items-center gap-2 pl-3 border-l border-zinc-300">
+                Consolă Execuție Live (Real-Time Output)
+              </span>
+            </div>
+            <button id="btn-clear-terminal" class="text-xs text-zinc-700 hover:text-zinc-950 px-3 py-1 rounded-sm bg-zinc-100 border border-zinc-300 transition flex items-center gap-1.5">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              <span>Curăță</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <input 
+              type="text" 
+              id="custom-cmd-input" 
+              class="omnibar-input flex-1 rounded-sm px-4 py-2 text-xs text-zinc-900 font-mono outline-none"
+              placeholder="Ex: agy plugin list || bash setup-ai-environment.sh"
+            />
+            <button 
+              id="btn-run-cmd" 
+              class="px-5 py-2 bg-zinc-900 hover:bg-zinc-950 text-white text-xs font-semibold rounded-sm transition flex items-center gap-2 shadow-sm cursor-pointer"
+            >
+              <i data-lucide="play" class="w-3.5 h-3.5"></i>
+              <span>Rulează</span>
+            </button>
+          </div>
+
+          <!-- Terminal Output Screen -->
+          <div class="flex-1 min-h-[240px] bg-[#18181b] border border-zinc-300 rounded-sm p-4 font-mono text-xs overflow-auto text-emerald-400 whitespace-pre" id="terminal-screen">
+            <span class="text-zinc-500">Așteaptă comenzi...</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB CONTENT 3: DOCUMENTATION & CHEATSHEET -->
+      <div id="tab-docs" class="tab-panel hidden flex-1 glass-card rounded-sm p-8 overflow-y-auto max-h-[620px] text-xs space-y-6">
+        <div>
+          <h2 class="text-base font-bold text-zinc-900 mb-2 flex items-center gap-2.5">
+            <i data-lucide="book-marked" class="w-5 h-5 text-zinc-800"></i>
+            <span>Ghid Detaliat: Instalare Universală vs Instalare pe Proiect</span>
+          </h2>
+          <p class="text-zinc-600 leading-relaxed text-xs">
+            Diferențele concrete de arhitectură, comenzi și locații de configurare pentru <strong>Claude Code CLI</strong> și <strong>Antigravity CLI</strong>.
+          </p>
+        </div>
+
+        <!-- 1. Universal vs Project comparison -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-2.5">
+            <div class="text-zinc-900 font-bold text-sm flex items-center gap-2">
+              <i data-lucide="globe" class="w-4 h-4"></i>
+              <span>Instalare Universală (Globală)</span>
+            </div>
+            <ul class="space-y-2 text-zinc-700 list-disc list-inside leading-relaxed">
+              <li><strong>Scop:</strong> Se aplică automat în <em>toate</em> sesiunile și proiectele de pe calculator.</li>
+              <li><strong>Claude Code:</strong> <code class="text-zinc-900 bg-zinc-200 font-mono px-1 rounded-sm">~/.claude/CLAUDE.md</code> & <code class="text-zinc-900 bg-zinc-200 font-mono px-1 rounded-sm">~/.claude/skills/</code></li>
+              <li><strong>Antigravity:</strong> <code class="text-zinc-900 bg-zinc-200 font-mono px-1 rounded-sm">~/.gemini/config/GEMINI.md</code> & <code class="text-zinc-900 bg-zinc-200 font-mono px-1 rounded-sm">~/.gemini/config/skills/</code></li>
+              <li><strong>Când se recomandă:</strong> Reguli de conduită generală, identitatea de programator, scurtături preferate globale.</li>
+            </ul>
+          </div>
+
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-2.5">
+            <div class="text-zinc-900 font-bold text-sm flex items-center gap-2">
+              <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+              <span>Instalare pe Proiect (Locală)</span>
+            </div>
+            <ul class="space-y-2 text-zinc-700 list-disc list-inside leading-relaxed">
+              <li><strong>Scop:</strong> Izolată în directorul proiectului; poate fi inclusă în Git pentru toată echipa.</li>
+              <li><strong>Claude Code:</strong> <code class="text-zinc-900 bg-zinc-200 font-mono px-1 rounded-sm">./CLAUDE.md</code> & <code class="text-zinc-900 bg-zinc-200 font-mono px-1 rounded-sm">./.claude/skills/</code></li>
+              <li><strong>Antigravity:</strong> <code class="text-zinc-900 bg-zinc-200 font-mono px-1 rounded-sm">./GEMINI.md</code>, <code class="text-zinc-900 bg-zinc-200 font-mono px-1 rounded-sm">./AGENTS.md</code> & <code class="text-zinc-900 bg-zinc-200 font-mono px-1 rounded-sm">./.agents/skills/</code></li>
+              <li><strong>Prioritate:</strong> În Antigravity, setările din workspace au prioritate maximă (suprascriu setările globale).</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2. The Core Repos Details -->
+        <div class="space-y-5 pt-2">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-2.5">
+            Cele 4 Sisteme / Repositorii Core & Modul de Funcționare:
+          </h3>
+
+          <!-- Repo 1: addyosmani/agent-skills -->
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-zinc-950 flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4 text-zinc-900"></i>
+                <span>addyosmani/agent-skills (Addy Osmani)</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-sm bg-zinc-200 text-zinc-900 border border-zinc-300 font-semibold">42k+ ⭐ Skills & Workflows</span>
+                <a href="https://github.com/addyosmani/agent-skills" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide pe GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <p class="text-zinc-600 leading-relaxed text-xs">
+              <strong>Ce face:</strong> Colecție de 25 de abilități avansate de inginerie software. Folosește <em>Progressive Disclosure</em> (în contextul inițial intră doar numele și descrierea; instrucțiunile complete se activează la cerere sau când introduci o comandă).
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono bg-white p-3.5 rounded-sm border border-zinc-200">
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Comenzi cheie:</span>
+                • <code class="text-zinc-900 font-semibold">/spec</code> - Specificații clare înainte de cod<br>
+                • <code class="text-zinc-900 font-semibold">/plan</code> - Descompunere sarcini atomice<br>
+                • <code class="text-zinc-900 font-semibold">/build</code> - Implementare incrementală<br>
+                • <code class="text-zinc-900 font-semibold">/test</code> - TDD (Red-Green-Refactor)<br>
+                • <code class="text-zinc-900 font-semibold">/review</code> - Verificare pe 5 axe
+              </div>
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Instalare CLI:</span>
+                • Universal: <code class="text-zinc-800">npx skills add addyosmani/agent-skills -g</code><br>
+                • Proiect: <code class="text-zinc-800">npx skills add addyosmani/agent-skills</code><br>
+                • Claude Plugin: <code class="text-zinc-800">/plugin install agent-skills@addy-agent-skills</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Repo 2: DietrichGebert/ponytail -->
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-zinc-950 flex items-center gap-2">
+                <i data-lucide="scissors" class="w-4 h-4 text-zinc-900"></i>
+                <span>DietrichGebert/ponytail</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-sm bg-zinc-200 text-zinc-900 border border-zinc-300 font-semibold">24k+ ⭐ Minimalist Code</span>
+                <a href="https://github.com/DietrichGebert/ponytail" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide pe GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <p class="text-zinc-600 leading-relaxed text-xs">
+              <strong>Ce face:</strong> "The laziest senior dev in the room". Impune scara de priorități în 7 trepte: 1. YAGNI, 2. refolosire utilitar existent, 3. standard library, 4. API nativ de browser, 5. dependență deja instalată, 6. o singură linie, 7. cod minim. Rezultă în medie cu ~54% mai puțin cod generat.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono bg-white p-3.5 rounded-sm border border-zinc-200">
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Antigravity CLI (agy):</span>
+                • Plugin nativ: <code class="text-zinc-800">agy plugin install https://github.com/DietrichGebert/ponytail</code><br>
+                • Pe proiect: regasit în <code class="text-zinc-800 font-semibold">.agents/rules/ponytail.md</code> și <code class="text-zinc-800 font-semibold">AGENTS.md</code><br>
+                • Skills: <code class="text-zinc-800">/ponytail-review</code>, <code class="text-zinc-800">/ponytail-audit</code>
+              </div>
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Claude Code CLI:</span>
+                • Plugin marketplace: <code class="text-zinc-800">/plugin marketplace add DietrichGebert/ponytail</code> apoi <code class="text-zinc-800">/plugin install ponytail@ponytail</code><br>
+                • Local: injectat în <code class="text-zinc-800 font-semibold">CLAUDE.md</code> sau <code class="text-zinc-800 font-semibold">AGENTS.md</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Repo 3: headroomlabs-ai/headroom -->
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-zinc-950 flex items-center gap-2">
+                <i data-lucide="minimize-2" class="w-4 h-4 text-zinc-900"></i>
+                <span>headroomlabs-ai/headroom</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-sm bg-zinc-200 text-zinc-900 border border-zinc-300 font-semibold">71.8k+ ⭐ Context & Token Compression</span>
+                <a href="https://github.com/headroomlabs-ai/headroom" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide Headroom pe GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <p class="text-zinc-600 leading-relaxed text-xs">
+              <strong>Ce face:</strong> Motor avansat de compresie semantică de context creat pentru agenți AI de codare. Comprimă log-uri lungi, ieșiri de consolă (stdout/stderr), diff-uri git gigantice și JSON-uri voluminoase cu 20–90% fără pierdere de informații critice (erori, stack traces). Oferă funcționalitatea CCR (Context Compression Retrieval) pentru restaurarea textului complet la cerere.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono bg-white p-3.5 rounded-sm border border-zinc-200">
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Capabilități Cheie:</span>
+                • <code class="text-zinc-900 font-semibold">SmartCrusher</code>: compactare JSON & tabele fără pierdere de chei<br>
+                • <code class="text-zinc-900 font-semibold">CodeCompressor</code>: minimizare AST cod repetitiv<br>
+                • <code class="text-zinc-900 font-semibold">Kompress-v2</code>: compresie log-uri cu păstrarea erorilor fatale<br>
+                • <code class="text-zinc-900 font-semibold">CCR</code>: cache local & recuperare via <code class="text-zinc-900">headroom_retrieve</code>
+              </div>
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Instalare & MCP Server:</span>
+                • CLI Tool: <code class="text-zinc-800">uv tool install headroom-ai[all]</code><br>
+                • MCP Server: <code class="text-zinc-800">uvx headroom-ai[all] mcp</code><br>
+                • Comandă Skill: <code class="text-zinc-800 font-semibold">/compress</code><br>
+                • Reguli: integrat în <code class="text-zinc-800 font-semibold">AGENTS.md</code> & <code class="text-zinc-800 font-semibold">.agents/rules/headroom.md</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Repo 4: Graphify-Labs/graphify -->
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-zinc-950 flex items-center gap-2">
+                <i data-lucide="network" class="w-4 h-4 text-zinc-900"></i>
+                <span>Graphify-Labs/graphify</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-sm bg-zinc-200 text-zinc-900 border border-zinc-300 font-semibold">31k+ ⭐ Knowledge Graph & MCP</span>
+                <a href="https://github.com/Graphify-Labs/graphify" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide pe GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <p class="text-zinc-600 leading-relaxed text-xs">
+              <strong>Ce face:</strong> Construiește un graf de cunoștințe deterministic folosind parsare AST cu Tree-sitter și clustering Leiden. Generează fișierul <code class="text-zinc-900 font-mono font-semibold">graphify-out/graph.json</code> și vizualizator interactiv HTML. Rulează ca MCP Server pentru ca agentul să știe arhitectura fără să citească sute de fișiere brute.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono bg-white p-3.5 rounded-sm border border-zinc-200">
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Instalare & Rulare:</span>
+                • CLI: <code class="text-zinc-800">pip install graphifyy && graphify install</code><br>
+                • Generare graf: <code class="text-zinc-800">/graphify .</code> sau <code class="text-zinc-800">graphify .</code><br>
+                • Interogare: <code class="text-zinc-800">graphify query "ce leagă auth de db?"</code>
+              </div>
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Configurare MCP Server:</span>
+                • Antigravity: <code class="text-zinc-800 font-semibold">.agents/mcp_config.json</code><br>
+                • Claude Code: <code class="text-zinc-800 font-semibold">.claude/settings.json</code><br>
+                • Server command: <code class="text-zinc-800">uv run --with graphifyy --with mcp -m graphify.serve</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- DESIGN SUITE HEADER -->
+          <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-2.5 pt-4 flex items-center gap-2">
+            <i data-lucide="palette" class="w-4 h-4 text-zinc-900"></i>
+            <span>Suita de Design & UI Engineering (4 Proiecte de Top):</span>
+          </h3>
+
+          <!-- Repo 4: Leonxlnx/taste-skill -->
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-zinc-950 flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4 text-zinc-900"></i>
+                <span>Leonxlnx/taste-skill</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-sm bg-zinc-200 text-zinc-900 border border-zinc-300 font-semibold">86k+ ⭐ Anti-Slop Discipline</span>
+                <a href="https://github.com/Leonxlnx/taste-skill" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide pe GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <p class="text-zinc-600 leading-relaxed text-xs">
+              <strong>Ce face:</strong> Previne "AI visual slop" (gradienturile generice violet/cyan, layout-urile monotone cu carduri centrate, lipsa de contrast real). Obligă AI-ul să definească o direcție vizuală puternică înainte de primul rând de CSS și introduce conceptul celor <em>Three Dials</em> (Variance, Motion, Density).
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono bg-white p-3.5 rounded-sm border border-zinc-200">
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">The Three Dials:</span>
+                • <code class="text-zinc-800 font-semibold">DESIGN_VARIANCE (1-10)</code>: de la simetrie corporatistă la layout editorial îndrăzneț<br>
+                • <code class="text-zinc-800 font-semibold">MOTION_INTENSITY (1-10)</code>: de la tranziții statice la fizică de resorturi (springs)<br>
+                • <code class="text-zinc-800 font-semibold">VISUAL_DENSITY (1-10)</code>: de la pagină aerisită (Apple) la densitate B2B (Linear)
+              </div>
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Instalare:</span>
+                • Universal: <code class="text-zinc-800">npx skills add Leonxlnx/taste-skill -g</code><br>
+                • Pe proiect: <code class="text-zinc-800">npx skills add Leonxlnx/taste-skill</code><br>
+                • Antigravity Rule: integrat în <code class="text-zinc-800 font-semibold">.agents/rules/taste.md</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Repo 5: pbakaus/impeccable -->
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-zinc-950 flex items-center gap-2">
+                <i data-lucide="gem" class="w-4 h-4 text-zinc-900"></i>
+                <span>pbakaus/impeccable (Paul Bakaus)</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-sm bg-zinc-200 text-zinc-900 border border-zinc-300 font-semibold">67k+ ⭐ 23 Craft Commands</span>
+                <a href="https://github.com/pbakaus/impeccable" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide pe GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <p class="text-zinc-600 leading-relaxed text-xs">
+              <strong>Ce face:</strong> Suită completă creată de Paul Bakaus (ex-Google, jQuery UI creator) oferind 23 de comenzi specializate pentru finisarea UI, plus conceptul de <code class="text-zinc-900 font-mono font-semibold">PRODUCT.md</code> ca sursă durabilă de adevăr pentru design și experiența utilizatorului.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono bg-white p-3.5 rounded-sm border border-zinc-200">
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Comenzi Impeccable cheie:</span>
+                • <code class="text-zinc-900 font-semibold">/impeccable craft</code> - Construiește UI impecabil de la zero<br>
+                • <code class="text-zinc-900 font-semibold">/impeccable audit</code> - Analiză accesibilitate WCAG, spacing & ritm<br>
+                • <code class="text-zinc-900 font-semibold">/impeccable polish</code> - Detalii de micro-tipografie & contrast<br>
+                • <code class="text-zinc-900 font-semibold">/impeccable bolder</code> / <code class="text-zinc-900 font-semibold">quieter</code> - Ajustare dramă vizuală
+              </div>
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Instalare:</span>
+                • Claude Code: <code class="text-zinc-800">/plugin install pbakaus/impeccable</code><br>
+                • Universal npx: <code class="text-zinc-800">npx skills add pbakaus/impeccable -g</code><br>
+                • Proiect: copiere comenzi în <code class="text-zinc-800 font-semibold">.agents/skills/impeccable/</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Repo 6: emilkowalski/skills -->
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-zinc-950 flex items-center gap-2">
+                <i data-lucide="clapperboard" class="w-4 h-4 text-zinc-900"></i>
+                <span>emilkowalski/skills (Emil Kowalski)</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-sm bg-zinc-200 text-zinc-900 border border-zinc-300 font-semibold">37k+ ⭐ Motion & Apple Interaction</span>
+                <a href="https://github.com/emilkowalski/skills" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide pe GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <p class="text-zinc-600 leading-relaxed text-xs">
+              <strong>Ce face:</strong> Ghidul autoritar de animații UI și micro-interacțiuni creat de Emil Kowalski (autorul Sonner & Animations on the Web). Stabilește reguli stricte de performanță 60fps, curbe de decelerare spring și interacțiuni tactile fără lag.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono bg-white p-3.5 rounded-sm border border-zinc-200">
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Reguli de Aur Motion:</span>
+                • Niciodată <code class="text-zinc-900 font-semibold">ease-in</code> la apariție (doar decelerare <code class="text-zinc-900 font-semibold">ease-out</code>)<br>
+                • Doar proprietăți accelerate GPU: <code class="text-zinc-900 font-semibold">transform</code> și <code class="text-zinc-900 font-semibold">opacity</code><br>
+                • Micro-interacțiuni sub 250ms cu feedback imediat
+              </div>
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Instalare:</span>
+                • Universal: <code class="text-zinc-800">npx skills add emilkowalski/skills -g</code><br>
+                • Proiect: <code class="text-zinc-800">npx skills add emilkowalski/skills</code><br>
+                • Rule Antigravity: injectat în <code class="text-zinc-800 font-semibold">.agents/rules/motion.md</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Repo 7: VoltAgent/awesome-design-md -->
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-zinc-950 flex items-center gap-2">
+                <i data-lucide="book-type" class="w-4 h-4 text-zinc-900"></i>
+                <span>VoltAgent/awesome-design-md</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-sm bg-zinc-200 text-zinc-900 border border-zinc-300 font-semibold">115k+ ⭐ Brand DESIGN.md Tokens</span>
+                <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide pe GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <p class="text-zinc-600 leading-relaxed text-xs">
+              <strong>Ce face:</strong> Separă <em>Design-ul</em> de <em>Cod</em> prin standardul universal <code class="text-zinc-900 font-mono font-semibold bg-zinc-200 px-1 rounded-sm">DESIGN.md</code>. În timp ce <code class="text-zinc-900 font-mono font-semibold bg-zinc-200 px-1 rounded-sm">AGENTS.md</code> dictează cum scrie agentul cod, <code class="text-zinc-900 font-mono font-semibold bg-zinc-200 px-1 rounded-sm">DESIGN.md</code> dictează paleta de culori, fonturile, bordurile, spațierile și atmosfera vizuală a celor mai mari branduri tech (Linear, Apple, Stripe, Vercel etc.).
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono bg-white p-3.5 rounded-sm border border-zinc-200">
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Preseturile Suportate:</span>
+                • <code class="text-zinc-900 font-semibold">Linear</code>: Dark mode obsidian, accente violet/lavender, precizie extremă<br>
+                • <code class="text-zinc-900 font-semibold">Apple</code>: Sf Pro, claritate minimalistă, fundaluri pure, contrast perfect<br>
+                • <code class="text-zinc-900 font-semibold">Stripe</code>: Indigo vibrant, gradiente subtile de încredere, carduri elegante<br>
+                • <code class="text-zinc-900 font-semibold">Vercel</code>: Monocrom pur (alb-negru), tipografie Geist, grid tehnic
+              </div>
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Cum se aplică:</span>
+                • Fișierul <code class="text-zinc-900 font-semibold">DESIGN.md</code> este generat direct în rădăcina proiectului.<br>
+                • Agentul (Claude Code sau Antigravity) îl citește automat ca referință de styling pentru orice componentă UI creată.
+              </div>
+            </div>
+          </div>
+
+          <!-- Repo 8: mukul975/Anthropic-Cybersecurity-Skills -->
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-zinc-950 flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-zinc-900"></i>
+                <span>mukul975/Anthropic-Cybersecurity-Skills</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-sm bg-zinc-200 text-zinc-900 border border-zinc-300 font-semibold">32.7k+ ⭐ 817 Defensive Skills</span>
+                <a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Deschide pe GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <p class="text-zinc-600 leading-relaxed text-xs">
+              <strong>Ce face:</strong> Cea mai amplă suită open-source de cybersecurity pentru AI Coding Agents. Include mapare pe MITRE ATT&CK Enterprise Matrix, controale defensive NIST CSF 2.0, audit de cod AppSec (OWASP Top 10) și modelare de amenințări STRIDE.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono bg-white p-3.5 rounded-sm border border-zinc-200">
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Capabilități & Comenzi:</span>
+                • <code class="text-zinc-900 font-semibold">/security-audit</code> - Audit AppSec complet (SQLi, XSS, SSRF, IDOR, auth flaw)<br>
+                • <code class="text-zinc-900 font-semibold">/threat-model</code> - Analiză arhitecturală STRIDE pe endpoint-uri & fluxuri de date<br>
+                • Verificare conformitate OWASP ASVS & SANS Top 25
+              </div>
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Integrare Duală:</span>
+                • Antigravity: <code class="text-zinc-800 font-semibold">.agents/skills/appsec-code-review/</code> & <code class="text-zinc-800 font-semibold">threat-modeling/</code><br>
+                • Claude Code: <code class="text-zinc-800 font-semibold">.claude/skills/appsec-code-review/</code> & <code class="text-zinc-800 font-semibold">threat-modeling/</code><br>
+                • Reguli active: consolidate în <code class="text-zinc-800 font-semibold">AGENTS.md</code>, <code class="text-zinc-800 font-semibold">GEMINI.md</code>, <code class="text-zinc-800 font-semibold">CLAUDE.md</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Repo 9: trailofbits/skills & NVIDIA/SkillSpector -->
+          <div class="bg-zinc-50 border border-zinc-200 p-5 rounded-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-zinc-950 flex items-center gap-2">
+                <i data-lucide="shield-lock" class="w-4 h-4 text-zinc-900"></i>
+                <span>trailofbits/skills & NVIDIA/SkillSpector</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-sm bg-zinc-200 text-zinc-900 border border-zinc-300 font-semibold">24k+ ⭐ Combined AppSec</span>
+                <a href="https://github.com/trailofbits/skills" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="Trail of Bits GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+                <a href="https://github.com/NVIDIA/SkillSpector" target="_blank" class="p-1 rounded-sm text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 transition" title="NVIDIA SkillSpector GitHub">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+            <p class="text-zinc-600 leading-relaxed text-xs">
+              <strong>Ce face:</strong> Standarde de securitate din ecosistemul Trail of Bits (fuzzing, supply-chain, audit criptografic) combinate cu NVIDIA SkillSpector (detectare automată de scurgeri de chei API, token-uri secrete și prevenire prompt injection).
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono bg-white p-3.5 rounded-sm border border-zinc-200">
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Comenzi Cheie:</span>
+                • <code class="text-zinc-900 font-semibold">/secret-scan</code> - Detectare chei private, token-uri, parole, conexiuni DB<br>
+                • <code class="text-zinc-900 font-semibold">/dep-audit</code> - Audit supply chain, CVE-uri de dependențe, advisory-uri NPM/PyPI<br>
+                • Pre-commit hook validation & sanitizare automată
+              </div>
+              <div>
+                <span class="text-zinc-900 font-bold block mb-1">Integrare Duală:</span>
+                • Antigravity: <code class="text-zinc-800 font-semibold">.agents/skills/secret-scanning/</code> & <code class="text-zinc-800 font-semibold">dependency-vulnerability-audit/</code><br>
+                • Claude Code: <code class="text-zinc-800 font-semibold">.claude/skills/secret-scanning/</code> & <code class="text-zinc-800 font-semibold">dependency-vulnerability-audit/</code><br>
+                • Directivă defensivă în <code class="text-zinc-800 font-semibold">.agents/rules/security.md</code>
+              </div>
+            </div>
+          </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL: PROIECTE SALVATE (Editable List) -->
+  <div id="modal-saved-projects" class="fixed inset-0 z-50 bg-zinc-950/40 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-200 hidden">
+    <div class="bg-white border border-zinc-300 rounded-sm shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden animate-fadeIn">
+      <!-- Header -->
+      <div class="px-6 py-4 border-b border-zinc-200 flex items-center justify-between bg-zinc-50">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="book-marked" class="w-4 h-4 text-zinc-900"></i>
+          <div>
+            <h3 class="text-sm font-bold text-zinc-950">Proiecte Salvate & Favorite</h3>
+            <p class="text-[11px] text-zinc-500">Gestionează lista de proiecte pentru comutare rapidă</p>
+          </div>
+        </div>
+        <button id="modal-sp-close" class="p-1 text-zinc-400 hover:text-zinc-800 rounded-sm transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Add/Edit Form -->
+      <div class="p-6 border-b border-zinc-200 bg-zinc-50/50 space-y-3">
+        <span id="sp-form-title" class="text-xs font-bold text-zinc-800 uppercase tracking-wider block">Adaugă / Editează Proiect</span>
+        <input type="hidden" id="sp-id-input" value="">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <label class="text-[11px] text-zinc-600 font-medium block mb-1">Nume Proiect:</label>
+            <input 
+              type="text" 
+              id="sp-name-input" 
+              class="w-full bg-white border border-zinc-300 rounded-sm px-3 py-1.5 text-xs text-zinc-950 outline-none focus:border-zinc-900"
+              placeholder="Ex: API Backend, Landing Page..."
+            />
+          </div>
+          <div>
+            <label class="text-[11px] text-zinc-600 font-medium block mb-1">Cale Director:</label>
+            <input 
+              type="text" 
+              id="sp-path-input" 
+              class="w-full bg-white border border-zinc-300 rounded-sm px-3 py-1.5 text-xs text-zinc-950 outline-none focus:border-zinc-900 font-mono"
+              placeholder="/calea/catre/proiect"
+            />
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-2 pt-1">
+          <button 
+            type="button" 
+            id="sp-btn-cancel-edit" 
+            class="px-3 py-1.5 bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300 rounded-sm text-xs font-medium transition hidden"
+          >
+            Anulează Editarea
+          </button>
+          <button 
+            type="button" 
+            id="sp-btn-save" 
+            class="px-4 py-1.5 bg-zinc-900 hover:bg-black text-white rounded-sm text-xs font-medium transition flex items-center gap-1.5 shadow-sm"
+          >
+            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            <span id="sp-btn-save-label">Salvează în Listă</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Saved Projects List -->
+      <div class="p-6 overflow-y-auto flex-1 space-y-2.5 max-h-[360px]" id="saved-projects-list-container">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+      <!-- Footer -->
+      <div class="px-6 py-3 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between text-xs">
+        <span class="text-zinc-500">Apasă pe <strong class="text-zinc-800">Încarcă</strong> pentru a activa proiectul în Omnibar.</span>
+        <button id="modal-sp-btn-dismiss" class="px-4 py-1.5 bg-white border border-zinc-300 hover:bg-zinc-100 text-zinc-800 rounded-sm text-xs font-medium transition">
+          Închide
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: FILE SYSTEM BROWSER (In-App Directory Picker) -->
+  <div id="modal-fs-browser" class="fixed inset-0 z-50 bg-zinc-950/40 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-200 hidden">
+    <div class="bg-white border border-zinc-300 rounded-sm shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden animate-fadeIn">
+      <!-- Header -->
+      <div class="px-6 py-4 border-b border-zinc-200 flex items-center justify-between bg-zinc-50">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="folder-tree" class="w-4 h-4 text-zinc-900"></i>
+          <div>
+            <h3 class="text-sm font-bold text-zinc-950">Explorator Directoare (File System)</h3>
+            <p class="text-[11px] text-zinc-500">Selectează folderul proiectului de pe disc</p>
+          </div>
+        </div>
+        <button id="modal-fs-close" class="p-1 text-zinc-400 hover:text-zinc-800 rounded-sm transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Navigation & Breadcrumb -->
+      <div class="p-4 border-b border-zinc-200 bg-zinc-100/50 flex items-center gap-2">
+        <button 
+          id="fs-btn-parent" 
+          class="px-2.5 py-1.5 bg-white border border-zinc-300 hover:bg-zinc-100 rounded-sm text-xs font-medium text-zinc-800 flex items-center gap-1 transition shrink-0"
+          title="Mergi în directorul părinte"
+        >
+          <i data-lucide="corner-left-up" class="w-3.5 h-3.5"></i>
+          <span>Părinte</span>
+        </button>
+        <div class="flex-1 min-w-0">
+          <input 
+            type="text" 
+            id="fs-current-path-input" 
+            class="w-full bg-white border border-zinc-300 rounded-sm px-3 py-1.5 text-xs text-zinc-950 font-mono outline-none focus:border-zinc-900"
+            placeholder="/cale/director"
+          />
+        </div>
+        <button 
+          id="fs-btn-go" 
+          class="px-3 py-1.5 bg-zinc-900 hover:bg-black text-white rounded-sm text-xs font-medium transition shrink-0"
+        >
+          Deschide
+        </button>
+      </div>
+
+      <!-- Directories List -->
+      <div class="p-4 overflow-y-auto flex-1 space-y-1 max-h-[360px]" id="fs-dirs-container">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+      <!-- Footer -->
+      <div class="px-6 py-3 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between text-xs">
+        <span class="text-zinc-600 font-mono text-[11px] truncate max-w-[340px]" id="fs-selected-hint">Cale selectată: ...</span>
+        <div class="flex items-center gap-2">
+          <button id="modal-fs-btn-cancel" class="px-3.5 py-1.5 bg-white border border-zinc-300 hover:bg-zinc-100 text-zinc-800 rounded-sm text-xs font-medium transition">
+            Anulează
+          </button>
+          <button id="fs-btn-confirm-select" class="px-4 py-1.5 bg-zinc-900 hover:bg-black text-white rounded-sm text-xs font-medium transition flex items-center gap-1.5 shadow-sm">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            <span>Selectează Acest Folder</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING FULL ROUTE TOOLTIP -->
+  <div 
+    id="floating-route-tooltip" 
+    class="fixed z-50 pointer-events-none opacity-0 transition-opacity duration-150 bg-zinc-950 text-white border border-zinc-800 shadow-2xl p-2.5 rounded-sm max-w-xl hidden"
+    style="left: 0; top: 0;"
+  >
+    <div class="flex items-center gap-2 mb-1">
+      <i data-lucide="map-pin" class="w-3 h-3 text-emerald-400 shrink-0"></i>
+      <span class="text-[10px] font-sans font-bold uppercase tracking-wider text-zinc-400">Ruta locală în proiect</span>
+      <span id="tooltip-route-cat" class="ml-auto text-[9px] font-mono px-1.5 py-0.5 bg-zinc-800 text-zinc-300 rounded-sm uppercase font-semibold"></span>
+    </div>
+    <div id="tooltip-route-path" class="font-mono text-xs text-emerald-300 font-semibold break-all leading-tight"></div>
+  </div>
+
+  <!-- NOTIFICATION TOAST (Sharp & Architectural) -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div id="toast-content" class="px-4 py-3 rounded-sm shadow-xl border text-xs flex items-center gap-3 bg-white border-zinc-300 text-zinc-950 font-medium">
+      <div id="toast-icon-container">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
+      </div>
+      <span id="toast-msg">Notificare</span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

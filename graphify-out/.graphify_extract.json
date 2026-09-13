@@ -1,0 +1,3090 @@
+{
+  "nodes": [
+    {
+      "id": "install_global_ai_tools",
+      "label": "install-global-ai-tools.sh",
+      "file_type": "code",
+      "source_file": "install-global-ai-tools.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "install_global_ai_tools_sh__entry",
+      "label": "install-global-ai-tools.sh script",
+      "file_type": "code",
+      "source_file": "install-global-ai-tools.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_generator",
+      "label": "generator.js",
+      "file_type": "code",
+      "source_file": "lib/generator.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_generator_generateconfig",
+      "label": "generateConfig()",
+      "file_type": "code",
+      "source_file": "lib/generator.js",
+      "source_location": "L16",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_generator_generatesetupscript",
+      "label": "generateSetupScript()",
+      "file_type": "code",
+      "source_file": "lib/generator.js",
+      "source_location": "L361",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_generator_generateglobalinstallscript",
+      "label": "generateGlobalInstallScript()",
+      "file_type": "code",
+      "source_file": "lib/generator.js",
+      "source_location": "L426",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_installer",
+      "label": "installer.js",
+      "file_type": "code",
+      "source_file": "lib/installer.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_installer_execasync",
+      "label": "execAsync",
+      "file_type": "code",
+      "source_file": "lib/installer.js",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_installer_resolveuserpath",
+      "label": "resolveUserPath()",
+      "file_type": "code",
+      "source_file": "lib/installer.js",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_installer_checkbinary",
+      "label": "checkBinary()",
+      "file_type": "code",
+      "source_file": "lib/installer.js",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_installer_detectenvironment",
+      "label": "detectEnvironment()",
+      "file_type": "code",
+      "source_file": "lib/installer.js",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_installer_inspectprojectpath",
+      "label": "inspectProjectPath()",
+      "file_type": "code",
+      "source_file": "lib/installer.js",
+      "source_location": "L102",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_installer_writefilestoproject",
+      "label": "writeFilesToProject()",
+      "file_type": "code",
+      "source_file": "lib/installer.js",
+      "source_location": "L186",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_installer_executecommandstreaming",
+      "label": "executeCommandStreaming()",
+      "file_type": "code",
+      "source_file": "lib/installer.js",
+      "source_location": "L230",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_skills_catalog",
+      "label": "skills-catalog.js",
+      "file_type": "code",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_skills_catalog_agent_skills",
+      "label": "AGENT_SKILLS",
+      "file_type": "code",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_skills_catalog_ponytail_rules",
+      "label": "PONYTAIL_RULES",
+      "file_type": "code",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L251",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_skills_catalog_ponytail_skills",
+      "label": "PONYTAIL_SKILLS",
+      "file_type": "code",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L297",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_skills_catalog_graphify_templates",
+      "label": "GRAPHIFY_TEMPLATES",
+      "file_type": "code",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L332",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_skills_catalog_stack_presets",
+      "label": "STACK_PRESETS",
+      "file_type": "code",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L384",
+      "_origin": "ast"
+    },
+    {
+      "id": "package",
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_name",
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_version",
+      "label": "version",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_description",
+      "label": "description",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_main",
+      "label": "main",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_type",
+      "label": "type",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_scripts_start",
+      "label": "start",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_keywords",
+      "label": "keywords",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_author",
+      "label": "author",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_license",
+      "label": "license",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_dependencies",
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_dependencies_cors",
+      "label": "cors",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_cors",
+      "label": "cors",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_dependencies_express",
+      "label": "express",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_express",
+      "label": "express",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app",
+      "label": "app.js",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_state",
+      "label": "state",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_el",
+      "label": "el",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L35",
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_loadenvironment",
+      "label": "loadEnvironment()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L93",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_loadcatalog",
+      "label": "loadCatalog()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L124",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_setdefaulttargetdir",
+      "label": "setDefaultTargetDir()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L138",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_renderskillslist",
+      "label": "renderSkillsList()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L157",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_syncselectedskillsfromui",
+      "label": "syncSelectedSkillsFromUI()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L206",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_updatepresetbuttonui",
+      "label": "updatePresetButtonUI()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L211",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_triggerpreview",
+      "label": "triggerPreview()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L225",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_renderfiletree",
+      "label": "renderFileTree()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L270",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_viewfile",
+      "label": "viewFile()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L318",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_inspectdirectory",
+      "label": "inspectDirectory()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L328",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_updatedirectorybadge",
+      "label": "updateDirectoryBadge()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L346",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_applyconfiguration",
+      "label": "applyConfiguration()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L371",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_runterminalcommand",
+      "label": "runTerminalCommand()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L405",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_showtoast",
+      "label": "showToast()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L435",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_app_setupeventlisteners",
+      "label": "setupEventListeners()",
+      "file_type": "code",
+      "source_file": "public/app.js",
+      "source_location": "L453",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "server",
+      "label": "server.js",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "server_filename",
+      "label": "__filename",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "server_dirname",
+      "label": "__dirname",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "server_app",
+      "label": "app",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L26",
+      "_origin": "ast"
+    },
+    {
+      "id": "setup_ai_environment",
+      "label": "setup-ai-environment.sh",
+      "file_type": "code",
+      "source_file": "setup-ai-environment.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "setup_ai_environment_sh__entry",
+      "label": "setup-ai-environment.sh script",
+      "file_type": "code",
+      "source_file": "setup-ai-environment.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_rules_graphify",
+      "label": "graphify.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/rules/graphify.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_rules_graphify_graphify_architectural_guidance",
+      "label": "Graphify Architectural Guidance",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/rules/graphify.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_rules_ponytail",
+      "label": "ponytail.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/rules/ponytail.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_rules_ponytail_ponytail_lazy_senior_dev_mode",
+      "label": "Ponytail, lazy senior dev mode",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/rules/ponytail.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_code_review_and_quality_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/skills/code-review-and-quality/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "code-review-and-quality",
+        "description": "Use before merging, committing, or closing a task. Performs an objective 5-axis review of changes."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_code_review_and_quality_skill_5_axis_code_review",
+      "label": "5-Axis Code Review",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/code-review-and-quality/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_code_simplification_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/skills/code-simplification/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "code-simplification",
+        "description": "Use to refactor overly complex code, remove dead code, and reduce cognitive load."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_code_simplification_skill_code_simplification",
+      "label": "Code Simplification",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/code-simplification/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_graphify_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "graphify",
+        "description": "Turn any codebase, with docs, SQL schemas, and configs, into a queryable knowledge graph. Query architecture and cross-file connections with minimal token consumption."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_graphify_skill_graphify_knowledge_graph_skill",
+      "label": "Graphify Knowledge Graph Skill",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_graphify_skill_commands",
+      "label": "Commands",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_graphify_skill_best_practices",
+      "label": "Best Practices",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_incremental_implementation_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/skills/incremental-implementation/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "incremental-implementation",
+        "description": "Use during active code construction. Implements features slice-by-slice, verifying each step."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_incremental_implementation_skill_incremental_implementation",
+      "label": "Incremental Implementation",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/incremental-implementation/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_incremental_implementation_skill_workflow",
+      "label": "Workflow",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/incremental-implementation/SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_planning_and_task_breakdown_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/skills/planning-and-task-breakdown/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "planning-and-task-breakdown",
+        "description": "Use when planning an implementation from a specification. Breaks work into small, atomic, verifiable steps."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_planning_and_task_breakdown_skill_planning_task_breakdown",
+      "label": "Planning & Task Breakdown",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/planning-and-task-breakdown/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_planning_and_task_breakdown_skill_principles",
+      "label": "Principles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/planning-and-task-breakdown/SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_ponytail_audit_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/skills/ponytail-audit/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "ponytail-audit",
+        "description": "Audits project dependencies and code bloat, recommending native replacements and removals."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_ponytail_audit_skill_ponytail_dependency_audit",
+      "label": "Ponytail Dependency Audit",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/ponytail-audit/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_ponytail_review_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/skills/ponytail-review/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "ponytail-review",
+        "description": "Review changes like a lazy senior dev. Flags over-engineering, unneeded abstractions, new dependencies, and boilerplate."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_ponytail_review_skill_ponytail_code_review",
+      "label": "Ponytail Code Review",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/ponytail-review/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_shipping_and_launch_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/skills/shipping-and-launch/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "shipping-and-launch",
+        "description": "Use when preparing a release, merging to main branch, or deploying to production."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_shipping_and_launch_skill_shipping_production_launch",
+      "label": "Shipping & Production Launch",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/shipping-and-launch/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_spec_driven_development_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/skills/spec-driven-development/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "spec-driven-development",
+        "description": "Use when defining new features or user requests before writing code. Enforces specification, interface boundaries, and explicit acceptance criteria."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_spec_driven_development_skill_spec_driven_development",
+      "label": "Spec-Driven Development",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/spec-driven-development/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_spec_driven_development_skill_1_specification_checklist",
+      "label": "1. Specification Checklist",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/spec-driven-development/SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_spec_driven_development_skill_2_process",
+      "label": "2. Process",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/spec-driven-development/SKILL.md",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_test_driven_development_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/skills/test-driven-development/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "test-driven-development",
+        "description": "Use when implementing logic, bug fixes, or new endpoints. Enforces the Red-Green-Refactor loop."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_skills_test_driven_development_skill_test_driven_development_tdd",
+      "label": "Test-Driven Development (TDD)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/skills/test-driven-development/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_workflows_graphify",
+      "label": "graphify.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".agents/workflows/graphify.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "graphify-workflow",
+        "description": "Automated workflow to index and inspect codebase architecture."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_workflows_graphify_graphify_workflow",
+      "label": "Graphify Workflow",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".agents/workflows/graphify.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_code_review_and_quality_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".claude/skills/code-review-and-quality/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "code-review-and-quality",
+        "description": "Use before merging, committing, or closing a task. Performs an objective 5-axis review of changes."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_code_review_and_quality_skill_5_axis_code_review",
+      "label": "5-Axis Code Review",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/code-review-and-quality/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_code_simplification_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".claude/skills/code-simplification/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "code-simplification",
+        "description": "Use to refactor overly complex code, remove dead code, and reduce cognitive load."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_code_simplification_skill_code_simplification",
+      "label": "Code Simplification",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/code-simplification/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_graphify_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "graphify",
+        "description": "Turn any codebase, with docs, SQL schemas, and configs, into a queryable knowledge graph. Query architecture and cross-file connections with minimal token consumption."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_graphify_skill_graphify_knowledge_graph_skill",
+      "label": "Graphify Knowledge Graph Skill",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_graphify_skill_commands",
+      "label": "Commands",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_graphify_skill_best_practices",
+      "label": "Best Practices",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_incremental_implementation_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".claude/skills/incremental-implementation/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "incremental-implementation",
+        "description": "Use during active code construction. Implements features slice-by-slice, verifying each step."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_incremental_implementation_skill_incremental_implementation",
+      "label": "Incremental Implementation",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/incremental-implementation/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_incremental_implementation_skill_workflow",
+      "label": "Workflow",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/incremental-implementation/SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_planning_and_task_breakdown_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".claude/skills/planning-and-task-breakdown/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "planning-and-task-breakdown",
+        "description": "Use when planning an implementation from a specification. Breaks work into small, atomic, verifiable steps."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_planning_and_task_breakdown_skill_planning_task_breakdown",
+      "label": "Planning & Task Breakdown",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/planning-and-task-breakdown/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_planning_and_task_breakdown_skill_principles",
+      "label": "Principles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/planning-and-task-breakdown/SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_ponytail_audit_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".claude/skills/ponytail-audit/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "ponytail-audit",
+        "description": "Audits project dependencies and code bloat, recommending native replacements and removals."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_ponytail_audit_skill_ponytail_dependency_audit",
+      "label": "Ponytail Dependency Audit",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/ponytail-audit/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_ponytail_review_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".claude/skills/ponytail-review/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "ponytail-review",
+        "description": "Review changes like a lazy senior dev. Flags over-engineering, unneeded abstractions, new dependencies, and boilerplate."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_ponytail_review_skill_ponytail_code_review",
+      "label": "Ponytail Code Review",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/ponytail-review/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_shipping_and_launch_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".claude/skills/shipping-and-launch/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "shipping-and-launch",
+        "description": "Use when preparing a release, merging to main branch, or deploying to production."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_shipping_and_launch_skill_shipping_production_launch",
+      "label": "Shipping & Production Launch",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/shipping-and-launch/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_spec_driven_development_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".claude/skills/spec-driven-development/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "spec-driven-development",
+        "description": "Use when defining new features or user requests before writing code. Enforces specification, interface boundaries, and explicit acceptance criteria."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_spec_driven_development_skill_spec_driven_development",
+      "label": "Spec-Driven Development",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/spec-driven-development/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_spec_driven_development_skill_1_specification_checklist",
+      "label": "1. Specification Checklist",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/spec-driven-development/SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_spec_driven_development_skill_2_process",
+      "label": "2. Process",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/spec-driven-development/SKILL.md",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_test_driven_development_skill",
+      "label": "SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": ".claude/skills/test-driven-development/SKILL.md",
+      "source_location": "L1",
+      "frontmatter": {
+        "name": "test-driven-development",
+        "description": "Use when implementing logic, bug fixes, or new endpoints. Enforces the Red-Green-Refactor loop."
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_skills_test_driven_development_skill_test_driven_development_tdd",
+      "label": "Test-Driven Development (TDD)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": ".claude/skills/test-driven-development/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents",
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_typescript_node_js_standards",
+      "label": "TypeScript & Node.js Standards",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_verification_testing_standard",
+      "label": "Verification & Testing Standard",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "AGENTS.md",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_commit_message_conventions",
+      "label": "Commit Message Conventions",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "AGENTS.md",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_ponytail_lazy_senior_dev_mode",
+      "label": "Ponytail, lazy senior dev mode",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "AGENTS.md",
+      "source_location": "L22",
+      "_origin": "ast"
+    },
+    {
+      "id": "agents_graphify_architectural_guidance",
+      "label": "Graphify Architectural Guidance",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "AGENTS.md",
+      "source_location": "L51",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude",
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_typescript_node_js_standards",
+      "label": "TypeScript & Node.js Standards",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_verification_testing_standard",
+      "label": "Verification & Testing Standard",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "CLAUDE.md",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_commit_message_conventions",
+      "label": "Commit Message Conventions",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "CLAUDE.md",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_ponytail_lazy_senior_dev_mode",
+      "label": "Ponytail, lazy senior dev mode",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "CLAUDE.md",
+      "source_location": "L22",
+      "_origin": "ast"
+    },
+    {
+      "id": "claude_graphify_architectural_guidance",
+      "label": "Graphify Architectural Guidance",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "CLAUDE.md",
+      "source_location": "L51",
+      "_origin": "ast"
+    },
+    {
+      "id": "gemini",
+      "label": "GEMINI.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": "GEMINI.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "gemini_typescript_node_js_standards",
+      "label": "TypeScript & Node.js Standards",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "GEMINI.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "gemini_verification_testing_standard",
+      "label": "Verification & Testing Standard",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "GEMINI.md",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "gemini_commit_message_conventions",
+      "label": "Commit Message Conventions",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "GEMINI.md",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "gemini_ponytail_lazy_senior_dev_mode",
+      "label": "Ponytail, lazy senior dev mode",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "GEMINI.md",
+      "source_location": "L22",
+      "_origin": "ast"
+    },
+    {
+      "id": "gemini_graphify_architectural_guidance",
+      "label": "Graphify Architectural Guidance",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "GEMINI.md",
+      "source_location": "L51",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme",
+      "label": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_ai_agent_project_configurator_web_cli",
+      "label": "AI Agent Project Configurator (Web & CLI)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_pornire_rapidă",
+      "label": "🚀 Pornire Rapidă",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_structura_aplicației",
+      "label": "⚙️ Structura Aplicației",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L29",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_fișiere_generate_într_un_proiect_țintă",
+      "label": "📁 Fișiere Generate într-un Proiect Țintă",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L39",
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "install_global_ai_tools",
+      "target": "install_global_ai_tools_sh__entry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "install-global-ai-tools.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator",
+      "target": "lib_skills_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator",
+      "target": "lib_skills_catalog_agent_skills",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator",
+      "target": "lib_skills_catalog_ponytail_rules",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator",
+      "target": "lib_skills_catalog_ponytail_skills",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator",
+      "target": "lib_skills_catalog_graphify_templates",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator",
+      "target": "lib_skills_catalog_stack_presets",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator",
+      "target": "lib_generator_generateconfig",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator",
+      "target": "lib_generator_generatesetupscript",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L361",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator",
+      "target": "lib_generator_generateglobalinstallscript",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L426",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator_generateconfig",
+      "target": "lib_generator_generatesetupscript",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L258",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_generator_generateconfig",
+      "target": "lib_generator_generateglobalinstallscript",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/generator.js",
+      "source_location": "L343",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "ref_node_fs_promises",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "ref_node_path",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "ref_node_os",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "ref_node_child_process",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "ref_node_util",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "lib_installer_execasync",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "lib_installer_resolveuserpath",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "lib_installer_checkbinary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "lib_installer_detectenvironment",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "lib_installer_inspectprojectpath",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "lib_installer_writefilestoproject",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L186",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer",
+      "target": "lib_installer_executecommandstreaming",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L230",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer_checkbinary",
+      "target": "lib_installer_execasync",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer_detectenvironment",
+      "target": "lib_installer_checkbinary",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer_inspectprojectpath",
+      "target": "lib_installer_resolveuserpath",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer_writefilestoproject",
+      "target": "lib_installer_resolveuserpath",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L187",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_installer_executecommandstreaming",
+      "target": "lib_installer_resolveuserpath",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/installer.js",
+      "source_location": "L232",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_skills_catalog",
+      "target": "lib_skills_catalog_agent_skills",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_skills_catalog",
+      "target": "lib_skills_catalog_ponytail_rules",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L251",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_skills_catalog",
+      "target": "lib_skills_catalog_ponytail_skills",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L297",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_skills_catalog",
+      "target": "lib_skills_catalog_graphify_templates",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L332",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_skills_catalog",
+      "target": "lib_skills_catalog_stack_presets",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/skills-catalog.js",
+      "source_location": "L384",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_name",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_version",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_description",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_type",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_scripts",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_start",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_dev",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_keywords",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_author",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_license",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_dependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_cors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "ref_cors",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_express",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "ref_express",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_state",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_el",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_loadenvironment",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_loadcatalog",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_setdefaulttargetdir",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_renderskillslist",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L157",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_syncselectedskillsfromui",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L206",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_updatepresetbuttonui",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L211",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_triggerpreview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L225",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_renderfiletree",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L270",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_viewfile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L318",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_inspectdirectory",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L328",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_updatedirectorybadge",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L346",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_applyconfiguration",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L371",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_runterminalcommand",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L405",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_showtoast",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L435",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app",
+      "target": "public_app_setupeventlisteners",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L453",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_loadcatalog",
+      "target": "public_app_renderskillslist",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L130",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_setdefaulttargetdir",
+      "target": "public_app_updatedirectorybadge",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_renderskillslist",
+      "target": "public_app_updatepresetbuttonui",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L197",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_renderskillslist",
+      "target": "public_app_syncselectedskillsfromui",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L198",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_renderskillslist",
+      "target": "public_app_triggerpreview",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L199",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_triggerpreview",
+      "target": "public_app_renderfiletree",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L247",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_triggerpreview",
+      "target": "public_app_viewfile",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L257",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_renderfiletree",
+      "target": "public_app_renderfiletree",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L309",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_renderfiletree",
+      "target": "public_app_viewfile",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L310",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_inspectdirectory",
+      "target": "public_app_updatedirectorybadge",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L338",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_applyconfiguration",
+      "target": "public_app_showtoast",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L374",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_applyconfiguration",
+      "target": "public_app_inspectdirectory",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L395",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_runterminalcommand",
+      "target": "public_app_inspectdirectory",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L425",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_setupeventlisteners",
+      "target": "public_app_inspectdirectory",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L457",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_setupeventlisteners",
+      "target": "public_app_setdefaulttargetdir",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L461",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_setupeventlisteners",
+      "target": "public_app_triggerpreview",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L475",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_setupeventlisteners",
+      "target": "public_app_updatepresetbuttonui",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L502",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_setupeventlisteners",
+      "target": "public_app_renderskillslist",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L503",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_setupeventlisteners",
+      "target": "public_app_showtoast",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L592",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_setupeventlisteners",
+      "target": "public_app_applyconfiguration",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "public/app.js",
+      "source_location": "L597",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_app_setupeventlisteners",
+      "target": "public_app_runterminalcommand",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/app.js",
+      "source_location": "L604",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "ref_express",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "ref_cors",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "ref_node_path",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "ref_node_url",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_installer",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_installer_detectenvironment",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_installer_inspectprojectpath",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_installer_writefilestoproject",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_installer_executecommandstreaming",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_installer_resolveuserpath",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_generator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_generator_generateconfig",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_skills_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_skills_catalog_agent_skills",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_skills_catalog_ponytail_rules",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_skills_catalog_ponytail_skills",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_skills_catalog_graphify_templates",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "lib_skills_catalog_stack_presets",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "server_filename",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "server_dirname",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "server",
+      "target": "server_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "setup_ai_environment",
+      "target": "setup_ai_environment_sh__entry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "setup-ai-environment.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_rules_graphify",
+      "target": "agents_rules_graphify_graphify_architectural_guidance",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/graphify.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_rules_ponytail",
+      "target": "agents_rules_ponytail_ponytail_lazy_senior_dev_mode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/ponytail.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_code_review_and_quality_skill",
+      "target": "agents_skills_code_review_and_quality_skill_5_axis_code_review",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/code-review-and-quality/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_code_simplification_skill",
+      "target": "agents_skills_code_simplification_skill_code_simplification",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/code-simplification/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_graphify_skill",
+      "target": "agents_skills_graphify_skill_graphify_knowledge_graph_skill",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_graphify_skill_graphify_knowledge_graph_skill",
+      "target": "agents_skills_graphify_skill_commands",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_graphify_skill_graphify_knowledge_graph_skill",
+      "target": "agents_skills_graphify_skill_best_practices",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_incremental_implementation_skill",
+      "target": "agents_skills_incremental_implementation_skill_incremental_implementation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/incremental-implementation/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_incremental_implementation_skill_incremental_implementation",
+      "target": "agents_skills_incremental_implementation_skill_workflow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/incremental-implementation/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_planning_and_task_breakdown_skill",
+      "target": "agents_skills_planning_and_task_breakdown_skill_planning_task_breakdown",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/planning-and-task-breakdown/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_planning_and_task_breakdown_skill_planning_task_breakdown",
+      "target": "agents_skills_planning_and_task_breakdown_skill_principles",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/planning-and-task-breakdown/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_ponytail_audit_skill",
+      "target": "agents_skills_ponytail_audit_skill_ponytail_dependency_audit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/ponytail-audit/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_ponytail_review_skill",
+      "target": "agents_skills_ponytail_review_skill_ponytail_code_review",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/ponytail-review/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_shipping_and_launch_skill",
+      "target": "agents_skills_shipping_and_launch_skill_shipping_production_launch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/shipping-and-launch/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_spec_driven_development_skill",
+      "target": "agents_skills_spec_driven_development_skill_spec_driven_development",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/spec-driven-development/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_spec_driven_development_skill_spec_driven_development",
+      "target": "agents_skills_spec_driven_development_skill_1_specification_checklist",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/spec-driven-development/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_spec_driven_development_skill_spec_driven_development",
+      "target": "agents_skills_spec_driven_development_skill_2_process",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/spec-driven-development/SKILL.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_skills_test_driven_development_skill",
+      "target": "agents_skills_test_driven_development_skill_test_driven_development_tdd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/test-driven-development/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_workflows_graphify",
+      "target": "agents_workflows_graphify_graphify_workflow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/workflows/graphify.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_code_review_and_quality_skill",
+      "target": "claude_skills_code_review_and_quality_skill_5_axis_code_review",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/code-review-and-quality/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_code_simplification_skill",
+      "target": "claude_skills_code_simplification_skill_code_simplification",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/code-simplification/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_graphify_skill",
+      "target": "claude_skills_graphify_skill_graphify_knowledge_graph_skill",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_graphify_skill_graphify_knowledge_graph_skill",
+      "target": "claude_skills_graphify_skill_commands",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_graphify_skill_graphify_knowledge_graph_skill",
+      "target": "claude_skills_graphify_skill_best_practices",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_incremental_implementation_skill",
+      "target": "claude_skills_incremental_implementation_skill_incremental_implementation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/incremental-implementation/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_incremental_implementation_skill_incremental_implementation",
+      "target": "claude_skills_incremental_implementation_skill_workflow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/incremental-implementation/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_planning_and_task_breakdown_skill",
+      "target": "claude_skills_planning_and_task_breakdown_skill_planning_task_breakdown",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/planning-and-task-breakdown/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_planning_and_task_breakdown_skill_planning_task_breakdown",
+      "target": "claude_skills_planning_and_task_breakdown_skill_principles",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/planning-and-task-breakdown/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_ponytail_audit_skill",
+      "target": "claude_skills_ponytail_audit_skill_ponytail_dependency_audit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/ponytail-audit/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_ponytail_review_skill",
+      "target": "claude_skills_ponytail_review_skill_ponytail_code_review",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/ponytail-review/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_shipping_and_launch_skill",
+      "target": "claude_skills_shipping_and_launch_skill_shipping_production_launch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/shipping-and-launch/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_spec_driven_development_skill",
+      "target": "claude_skills_spec_driven_development_skill_spec_driven_development",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/spec-driven-development/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_spec_driven_development_skill_spec_driven_development",
+      "target": "claude_skills_spec_driven_development_skill_1_specification_checklist",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/spec-driven-development/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_spec_driven_development_skill_spec_driven_development",
+      "target": "claude_skills_spec_driven_development_skill_2_process",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/spec-driven-development/SKILL.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_skills_test_driven_development_skill",
+      "target": "claude_skills_test_driven_development_skill_test_driven_development_tdd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/test-driven-development/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents",
+      "target": "agents_typescript_node_js_standards",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_typescript_node_js_standards",
+      "target": "agents_verification_testing_standard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents_typescript_node_js_standards",
+      "target": "agents_commit_message_conventions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents",
+      "target": "agents_ponytail_lazy_senior_dev_mode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "agents",
+      "target": "agents_graphify_architectural_guidance",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude",
+      "target": "claude_typescript_node_js_standards",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_typescript_node_js_standards",
+      "target": "claude_verification_testing_standard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude_typescript_node_js_standards",
+      "target": "claude_commit_message_conventions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude",
+      "target": "claude_ponytail_lazy_senior_dev_mode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "claude",
+      "target": "claude_graphify_architectural_guidance",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "gemini",
+      "target": "gemini_typescript_node_js_standards",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "GEMINI.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "gemini_typescript_node_js_standards",
+      "target": "gemini_verification_testing_standard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "GEMINI.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "gemini_typescript_node_js_standards",
+      "target": "gemini_commit_message_conventions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "GEMINI.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "gemini",
+      "target": "gemini_ponytail_lazy_senior_dev_mode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "GEMINI.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "gemini",
+      "target": "gemini_graphify_architectural_guidance",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "GEMINI.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "readme_ai_agent_project_configurator_web_cli",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_ai_agent_project_configurator_web_cli",
+      "target": "readme_pornire_rapidă",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_ai_agent_project_configurator_web_cli",
+      "target": "readme_structura_aplicației",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_ai_agent_project_configurator_web_cli",
+      "target": "readme_fișiere_generate_într_un_proiect_țintă",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "failed_sources": [],
+  "extracted_sources": [
+    "/home/oem/proiecte/preConfigProject/.agents/mcp_config.json",
+    "/home/oem/proiecte/preConfigProject/.claude/settings.json",
+    "/home/oem/proiecte/preConfigProject/install-global-ai-tools.sh",
+    "/home/oem/proiecte/preConfigProject/lib/generator.js",
+    "/home/oem/proiecte/preConfigProject/lib/installer.js",
+    "/home/oem/proiecte/preConfigProject/lib/skills-catalog.js",
+    "/home/oem/proiecte/preConfigProject/package.json",
+    "/home/oem/proiecte/preConfigProject/public/app.js",
+    "/home/oem/proiecte/preConfigProject/server.js",
+    "/home/oem/proiecte/preConfigProject/setup-ai-environment.sh",
+    "/home/oem/proiecte/preConfigProject/.agents/rules/graphify.md",
+    "/home/oem/proiecte/preConfigProject/.agents/rules/ponytail.md",
+    "/home/oem/proiecte/preConfigProject/.agents/skills/code-review-and-quality/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.agents/skills/code-simplification/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.agents/skills/graphify/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.agents/skills/incremental-implementation/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.agents/skills/planning-and-task-breakdown/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.agents/skills/ponytail-audit/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.agents/skills/ponytail-review/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.agents/skills/shipping-and-launch/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.agents/skills/spec-driven-development/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.agents/skills/test-driven-development/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.agents/workflows/graphify.md",
+    "/home/oem/proiecte/preConfigProject/.claude/skills/code-review-and-quality/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.claude/skills/code-simplification/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.claude/skills/graphify/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.claude/skills/incremental-implementation/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.claude/skills/planning-and-task-breakdown/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.claude/skills/ponytail-audit/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.claude/skills/ponytail-review/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.claude/skills/shipping-and-launch/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.claude/skills/spec-driven-development/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/.claude/skills/test-driven-development/SKILL.md",
+    "/home/oem/proiecte/preConfigProject/AGENTS.md",
+    "/home/oem/proiecte/preConfigProject/CLAUDE.md",
+    "/home/oem/proiecte/preConfigProject/GEMINI.md",
+    "/home/oem/proiecte/preConfigProject/README.md",
+    "/home/oem/proiecte/preConfigProject/public/index.html"
+  ]
+}

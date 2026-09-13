@@ -1,0 +1,14 @@
+[
+  {
+    "id": "preconfig-project",
+    "name": "PreConfigurator (Proiect Curent)",
+    "path": "/home/oem/proiecte/preConfigProject",
+    "updatedAt": "2026-09-13T12:55:14.745Z"
+  },
+  {
+    "id": "proiecte-root",
+    "name": "Workspace Proiecte",
+    "path": "/home/oem/proiecte",
+    "updatedAt": "2026-09-13T12:55:14.745Z"
+  }
+]
