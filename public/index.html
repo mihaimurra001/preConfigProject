@@ -271,23 +271,26 @@
         </p>
 
         <div id="skills-controls" class="space-y-3 pt-1">
-          <div class="flex items-center justify-between">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <span class="text-xs text-zinc-600 font-medium">Preset Skills:</span>
-            <div class="flex gap-1.5">
-              <button type="button" class="skill-preset-btn active px-3 py-1.5 text-xs rounded-sm bg-zinc-900 text-white border border-zinc-900 font-medium transition" data-preset="core">
-                Core (7 cheie)
+            <div class="flex flex-wrap gap-1">
+              <button type="button" class="skill-preset-btn px-2.5 py-1 text-xs rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 font-medium transition" data-preset="core">
+                Core (7)
               </button>
-              <button type="button" class="skill-preset-btn px-3 py-1.5 text-xs rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 font-medium transition" data-preset="all">
-                Toate (12+)
+              <button type="button" class="skill-preset-btn active px-2.5 py-1 text-xs rounded-sm bg-zinc-900 text-white border border-zinc-900 font-semibold transition" data-preset="pro">
+                Pro Senior (15 ⭐)
               </button>
-              <button type="button" class="skill-preset-btn px-3 py-1.5 text-xs rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 font-medium transition" data-preset="custom">
+              <button type="button" class="skill-preset-btn px-2.5 py-1 text-xs rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 font-medium transition" data-preset="all">
+                Toate (20)
+              </button>
+              <button type="button" class="skill-preset-btn px-2.5 py-1 text-xs rounded-sm bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-100 font-medium transition" data-preset="custom">
                 Custom
               </button>
             </div>
           </div>
 
           <!-- Skills list / chips -->
-          <div id="skills-chip-list" class="max-h-48 overflow-y-auto space-y-1.5 p-2.5 bg-zinc-50 rounded-sm border border-zinc-200 text-xs">
+          <div id="skills-chip-list" class="max-h-56 overflow-y-auto space-y-1.5 p-2.5 bg-zinc-50 rounded-sm border border-zinc-200 text-xs">
             <!-- Rendered by JS -->
           </div>
         </div>

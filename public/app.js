@@ -7,7 +7,7 @@ const state = {
   scope: "project",
   agentSkills: {
     enabled: true,
-    mode: "core",
+    mode: "pro",
     selectedSkills: []
   },
   ponytail: {
@@ -370,11 +370,25 @@ function renderSkillsList() {
     "shipping-and-launch"
   ];
 
+  const proIds = [
+    ...coreIds,
+    "database-and-migrations-architect",
+    "root-cause-analysis-and-postmortem",
+    "api-contracts-and-backward-compat",
+    "concurrency-and-race-conditions",
+    "observability-and-structured-logging",
+    "architecture-decision-records",
+    "accessibility-and-inclusive-design",
+    "refactoring-legacy-code"
+  ];
+
   state.catalog.agentSkills.forEach(skill => {
     const isCore = coreIds.includes(skill.id);
+    const isPro = proIds.includes(skill.id);
     let isChecked = false;
 
     if (state.agentSkills.mode === "all") isChecked = true;
+    else if (state.agentSkills.mode === "pro") isChecked = isPro;
     else if (state.agentSkills.mode === "core") isChecked = isCore;
     else if (state.agentSkills.mode === "custom") {
       isChecked = state.agentSkills.selectedSkills.includes(skill.id);
