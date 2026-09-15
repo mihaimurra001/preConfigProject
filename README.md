@@ -196,7 +196,7 @@ Suita completă pentru interfețe impecabile, respingând „AI Slop-ul” gener
 
 ## 🎨 Galerie Teme DESIGN.md (102 Teme Curate)
 
-Aplicația include o galerie cu **102 specificații complete de Design System**. La selectarea oricărei teme, este generat în rădăcina proiectului un fișier [`DESIGN.md`](file:///home/oem/proiecte/preConfigProject/DESIGN.md) ce conține paleta completă de culori, variabilele CSS `:root`, tipografia și principiile de identitate vizuală.
+Aplicația include o galerie cu **102 specificații complete de Design System**. La selectarea oricărei teme, este generat în rădăcina proiectului un fișier [`DESIGN.md`](./DESIGN.md) ce conține paleta completă de culori, variabilele CSS `:root`, tipografia și principiile de identitate vizuală.
 
 ### Exemple de Teme Populare:
 
