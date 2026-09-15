@@ -47,24 +47,7 @@ async function loadSavedProjects() {
   } catch (err) {
     console.error("Error reading saved projects:", err);
   }
-  const currentDir = path.resolve(__dirname);
-  const parentDir = path.dirname(currentDir);
-  const defaults = [
-    {
-      id: "preconfig-project",
-      name: "PreConfigurator (Proiect Curent)",
-      path: currentDir,
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: "workspace-root",
-      name: "Workspace Proiecte",
-      path: parentDir,
-      updatedAt: new Date().toISOString()
-    }
-  ];
-  await fs.writeFile(SAVED_PROJECTS_FILE, JSON.stringify(defaults, null, 2), "utf-8");
-  return defaults;
+  return [];
 }
 
 async function saveSavedProjects(list) {

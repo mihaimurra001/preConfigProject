@@ -838,7 +838,7 @@ function renderThemeStudio(theme) {
           <!-- Omnibar -->
           <div class="flex-1 max-w-md hidden sm:flex items-center gap-2 px-3 py-1 rounded border text-xs font-mono" style="background-color: ${canvas}; border-color: ${border}; color: ${muted}; border-radius: ${bRadius}">
             <i data-lucide="search" class="w-3.5 h-3.5 opacity-60"></i>
-            <span class="truncate">/home/oem/proiecte/preConfigProject</span>
+            <span class="truncate">~/projects/my-app</span>
             <span class="ml-auto text-[9px] px-1.5 py-0.2 rounded font-bold" style="background-color: ${surface}; border: 1px solid ${border};">⌘K</span>
           </div>
 

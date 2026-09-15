@@ -15,6 +15,7 @@ yarn-error.log*
 # Temporary directories & cache
 scratch/
 graphify-out/cache/
+graphify-out/.*
 
 # Local user configurations
-saved_projects.json
+saved_projects*.json
